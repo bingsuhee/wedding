@@ -4,7 +4,7 @@ import { Heart } from 'lucide-react';
 
 const Main = () => {
   return (
-    <section className="relative flex flex-col items-center justify-center min-h-screen py-20 px-6 text-center bg-white overflow-hidden">
+    <section className="relative flex flex-col items-center justify-center h-screen py-20 px-6 text-center bg-white overflow-hidden">
       <div className="z-10 animate-fade-in">
         <h2 className="text-sm tracking-[0.4em] uppercase text-wedding-accent mb-10 font-serif font-bold">Wedding Invitation</h2>
         <h1 className="text-4xl font-serif mb-8 text-gray-800 tracking-tight">

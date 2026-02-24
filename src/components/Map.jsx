@@ -19,8 +19,8 @@ const Map = () => {
   };
 
   return (
-    <section className="py-24 px-6 text-center">
-      <div {...animatedItem} className={animatedItem.className}>
+    <section className="h-screen flex items-center justify-center py-24 px-6 text-center">
+      <div {...animatedItem} className={`${animatedItem.className} w-full max-w-sm`}>
         <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
         <div className="mb-10">
           <p className="font-serif font-bold text-xl mb-3">{name}</p>

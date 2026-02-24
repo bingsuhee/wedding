@@ -56,25 +56,25 @@ const Guestbook = () => {
   };
 
   return (
-    <section className="py-24 px-6 bg-gray-50/10">
-      <div {...animatedItem} className={animatedItem.className}>
-        <h3 className="text-xl font-serif mb-12 text-wedding-accent text-center font-bold">방명록</h3>
+    <section className="h-screen flex flex-col items-center justify-center py-24 px-6 bg-gray-50/10">
+      <div {...animatedItem} className={`${animatedItem.className} w-full max-w-sm flex flex-col h-full max-h-[80vh]`}>
+        <h3 className="text-xl font-serif mb-8 text-wedding-accent text-center font-bold">방명록</h3>
 
-        <form onSubmit={handleSubmit} className="mb-12 bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
-          <div className="mb-5">
+        <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 shrink-0">
+          <div className="mb-4">
             <input
               type="text"
               placeholder="이름"
-              className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-sm font-serif"
+              className="w-full px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-xs font-serif"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-4">
             <textarea
               placeholder="축하 메시지를 남겨주세요"
-              className="w-full h-28 px-4 py-3 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-sm font-serif resize-none"
+              className="w-full h-20 px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-xs font-serif resize-none"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               required
@@ -83,36 +83,36 @@ const Guestbook = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full flex items-center justify-center gap-2 py-4 bg-wedding-accent text-white rounded-xl text-sm font-bold transition hover:opacity-90 disabled:bg-gray-200 shadow-md shadow-wedding-accent/10"
+            className="w-full flex items-center justify-center gap-2 py-3 bg-wedding-accent text-white rounded-xl text-xs font-bold transition hover:opacity-90 disabled:bg-gray-200 shadow-md shadow-wedding-accent/10"
           >
-            <Send size={16} /> {loading ? '보내는 중...' : '축하메시지 보내기'}
+            <Send size={14} /> {loading ? '보내는 중...' : '축하메시지 보내기'}
           </button>
         </form>
 
-        <div className="space-y-6">
+        <div className="flex-1 overflow-y-auto space-y-4 pr-1 guestbook-list">
           {fetching ? (
-            <div className="text-center py-10 text-gray-300 text-xs font-serif">로딩 중...</div>
+            <div className="text-center py-10 text-gray-300 text-[10px] font-serif">로딩 중...</div>
           ) : messages.length > 0 ? (
             messages.map((msg) => (
-              <div key={msg.id} className="bg-white p-6 rounded-2xl border border-gray-50 flex gap-5 shadow-sm">
-                <div className="flex-shrink-0 w-12 h-12 bg-wedding-accent/5 rounded-full flex items-center justify-center text-wedding-accent/30">
-                  <User size={24} />
+              <div key={msg.id} className="bg-white p-4 rounded-xl border border-gray-50 flex gap-4 shadow-sm">
+                <div className="flex-shrink-0 w-10 h-10 bg-wedding-accent/5 rounded-full flex items-center justify-center text-wedding-accent/30">
+                  <User size={20} />
                 </div>
                 <div className="flex-1 text-left">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="font-bold text-sm text-gray-700 font-serif">{msg.name}</span>
-                    <span className="text-[10px] text-gray-300 font-serif">
+                  <div className="flex justify-between items-center mb-1">
+                    <span className="font-bold text-xs text-gray-700 font-serif">{msg.name}</span>
+                    <span className="text-[9px] text-gray-300 font-serif">
                       {new Date(msg.created_at).toLocaleDateString()}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-500 leading-relaxed font-serif whitespace-pre-wrap">{msg.content}</p>
+                  <p className="text-xs text-gray-500 leading-relaxed font-serif whitespace-pre-wrap">{msg.content}</p>
                 </div>
               </div>
             ))
           ) : (
-            <div className="text-center py-16 text-gray-300">
-              <MessageSquare size={40} className="mx-auto mb-4 opacity-10" />
-              <p className="text-xs font-serif italic">첫 번째 축하 메시지를 남겨주세요.</p>
+            <div className="text-center py-10 text-gray-300">
+              <MessageSquare size={32} className="mx-auto mb-4 opacity-10" />
+              <p className="text-[10px] font-serif italic">첫 번째 축하 메시지를 남겨주세요.</p>
             </div>
           )}
         </div>

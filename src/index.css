@@ -27,15 +27,34 @@
 @layer base {
   body {
     @apply bg-wedding-bg text-gray-800 font-sans break-keep;
+    overflow: hidden; /* Prevent body scroll, use #root scroll for snap */
   }
 
   #root {
     max-width: 480px;
     margin: 0 auto;
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
     box-shadow: 0 0 30px rgba(0,0,0,0.03);
     background: white;
   }
+
+  /* Hide scrollbar for cleaner app-like feel */
+  #root::-webkit-scrollbar {
+    display: none;
+  }
+  #root {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Scroll Snap for sections */
+section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 /* Scroll Fade In Animation Classes */
