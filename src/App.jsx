@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Main from './components/Main';
 import Invitation from './components/Invitation';
 import Gallery from './components/Gallery';
@@ -9,39 +9,63 @@ import ProgressBar from './components/ProgressBar';
 import Petals from './components/Petals';
 import { Heart } from 'lucide-react';
 
-const SectionWrapper = ({ children, index, totalSections }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
+const Section = ({ children, index, total, scrollYProgress }) => {
+  const step = 1 / total;
+  const start = index * step;
+  const prevStart = (index - 1) * step;
+  const nextStart = (index + 1) * step;
 
-  // Animation for the current section as it exits (scrolling up)
-  // When this section is at the top, it should scale down and fade out
-  // The next section will be unveiling from underneath.
+  // Stacking & Unveiling:
+  // When active (at 'start'), scale=1, opacity=1.
+  // When exiting (towards 'nextStart'), scale decreases, opacity decreases.
+  // When entrance (from 'prevStart' to 'start'), scale increases, opacity increases.
 
-  // Use scrollYProgress of the section itself
-  // 0: section starts entering from bottom
-  // 0.5: section is fully in view
-  // 1: section starts leaving at top
+  const scale = useTransform(scrollYProgress,
+    [prevStart, start, nextStart],
+    [0.9, 1, 0.85]
+  );
 
-  const scale = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0.9, 1, 1, 0.9]);
-  const opacity = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], [0, 1, 1, 0]);
-  const blur = useTransform(scrollYProgress, [0, 0.4, 0.6, 1], ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"]);
+  const opacity = useTransform(scrollYProgress,
+    [prevStart, start, nextStart],
+    [0, 1, 0]
+  );
+
+  const blurValue = useTransform(scrollYProgress,
+    [prevStart, start, nextStart],
+    [10, 0, 10]
+  );
+  const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
+
+  const y = useTransform(scrollYProgress,
+    [start, nextStart],
+    [0, -100]
+  );
 
   return (
-    <div ref={ref} className="relative h-[150vh] w-full">
-      <motion.div
-        style={{ scale, opacity, filter: blur }}
-        className="sticky-section bg-white"
-      >
+    <motion.div
+      style={{
+        scale,
+        opacity,
+        filter,
+        y,
+        zIndex: total - index,
+      }}
+      className="sticky-section flex items-center justify-center border-x border-gray-100"
+    >
+      <div className="w-full h-full flex items-center justify-center p-6">
         {children}
-      </motion.div>
-    </div>
+      </div>
+    </motion.div>
   );
 };
 
 function App() {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
   const sections = [
     <Main />,
     <Invitation />,
@@ -51,24 +75,32 @@ function App() {
   ];
 
   return (
-    <>
-      <Petals count={15} />
+    <div className="bg-wedding-bg">
+      <Petals count={20} />
       <ProgressBar />
-      <main className="relative">
-        {sections.map((section, idx) => (
-          <SectionWrapper key={idx} index={idx} totalSections={sections.length}>
-            {section}
-          </SectionWrapper>
-        ))}
 
-        <section className="h-screen flex flex-col items-center justify-center bg-gray-50/50 sticky top-0 z-10">
-          <Heart size={24} className="mx-auto text-wedding-accent mb-4 opacity-30" />
-          <p className="text-sm text-gray-400 font-serif">
-            © 2024. All rights reserved.
-          </p>
-        </section>
-      </main>
-    </>
+      {/* Scrollable area */}
+      <div ref={containerRef} className="relative" style={{ height: `${sections.length * 200}vh` }}>
+        {sections.map((section, idx) => (
+          <Section
+            key={idx}
+            index={idx}
+            total={sections.length}
+            scrollYProgress={scrollYProgress}
+          >
+            {section}
+          </Section>
+        ))}
+      </div>
+
+      {/* Footer is NOT sticky, it comes after the long scrollable div */}
+      <footer className="h-screen flex flex-col items-center justify-center bg-white relative z-[100] shadow-2xl">
+        <Heart size={24} className="mx-auto text-wedding-accent mb-4 opacity-30" />
+        <p className="text-sm text-gray-400 font-serif">
+          © 2024. All rights reserved.
+        </p>
+      </footer>
+    </div>
   );
 }
 
