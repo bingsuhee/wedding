@@ -61,6 +61,10 @@ const Section = ({ children, index, total, scrollYProgress }) => {
 
 function App() {
   const containerRef = useRef(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const isLocked = useRef(false);
+  const lastTouchY = useRef(0);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
@@ -73,6 +77,109 @@ function App() {
     <Map />,
     <Guestbook />
   ];
+
+  const totalSnapPoints = sections.length; // 0 to 4 are sections, 5 is footer
+
+  const handleSnap = (direction) => {
+    if (isLocked.current) return;
+
+    // Boundary check for Guestbook (index 4)
+    if (currentIndex === 4) {
+      const gbList = document.querySelector('.guestbook-list');
+      if (gbList) {
+        const isAtTop = gbList.scrollTop <= 0;
+        const isAtBottom = gbList.scrollTop + gbList.clientHeight >= gbList.scrollHeight - 1;
+
+        if (direction === 'down' && !isAtBottom) return; // Let internal scroll happen
+        if (direction === 'up' && !isAtTop) return; // Let internal scroll happen
+      }
+    }
+
+    let nextIndex = currentIndex;
+    if (direction === 'down' && currentIndex < totalSnapPoints) {
+      nextIndex = currentIndex + 1;
+    } else if (direction === 'up' && currentIndex > 0) {
+      nextIndex = currentIndex - 1;
+    }
+
+    if (nextIndex !== currentIndex) {
+      isLocked.current = true;
+      setCurrentIndex(nextIndex);
+
+      const targetY = nextIndex * (2 * window.innerHeight);
+      window.scrollTo({
+        top: targetY,
+        behavior: 'smooth'
+      });
+
+      // Unlock after animation/transition time
+      setTimeout(() => {
+        isLocked.current = false;
+      }, 800);
+    }
+  };
+
+  useEffect(() => {
+    const onWheel = (e) => {
+      // Don't prevent default if we're inside Guestbook and it needs to scroll
+      if (currentIndex === 4) {
+        const gbList = document.querySelector('.guestbook-list');
+        if (gbList) {
+          const isAtTop = gbList.scrollTop <= 0;
+          const isAtBottom = gbList.scrollTop + gbList.clientHeight >= gbList.scrollHeight - 1;
+          if (e.deltaY > 0 && !isAtBottom) return;
+          if (e.deltaY < 0 && !isAtTop) return;
+        }
+      }
+
+      e.preventDefault();
+      handleSnap(e.deltaY > 0 ? 'down' : 'up');
+    };
+
+    const onTouchStart = (e) => {
+      lastTouchY.current = e.touches[0].clientY;
+    };
+
+    const onTouchMove = (e) => {
+      if (isLocked.current) {
+        e.preventDefault();
+        return;
+      }
+
+      // Guestbook internal scroll check for touch
+      if (currentIndex === 4) {
+        const gbList = document.querySelector('.guestbook-list');
+        if (gbList) {
+          const isAtTop = gbList.scrollTop <= 0;
+          const isAtBottom = gbList.scrollTop + gbList.clientHeight >= gbList.scrollHeight - 1;
+          const deltaY = lastTouchY.current - e.touches[0].clientY;
+          if (deltaY > 0 && !isAtBottom) return;
+          if (deltaY < 0 && !isAtTop) return;
+        }
+      }
+
+      e.preventDefault();
+    };
+
+    const onTouchEnd = (e) => {
+      const deltaY = lastTouchY.current - e.changedTouches[0].clientY;
+      if (Math.abs(deltaY) > 50) {
+        handleSnap(deltaY > 0 ? 'down' : 'up');
+      }
+    };
+
+    window.addEventListener('wheel', onWheel, { passive: false });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.addEventListener('touchend', onTouchEnd, { passive: true });
+
+    return () => {
+      window.removeEventListener('wheel', onWheel);
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove', onTouchMove);
+      window.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [currentIndex]);
 
   return (
     <div className="bg-wedding-bg">
