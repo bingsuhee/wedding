@@ -1,16 +1,17 @@
 import React from 'react';
 import { weddingInfo } from '../data/info';
 import { Phone, Mail } from 'lucide-react';
-import useScrollFadeIn from '../hooks/useScrollFadeIn';
+import { motion } from 'framer-motion';
 
 const Invitation = () => {
-  const animatedItem = useScrollFadeIn();
-
   return (
-    <section className="h-screen flex items-center justify-center py-24 px-6 bg-gray-50/30">
-      <div
-        {...animatedItem}
-        className={`${animatedItem.className} max-w-sm mx-auto bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-center`}
+    <section className="flex items-center justify-center py-24 px-6 bg-gray-50/30">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        viewport={{ once: false }}
+        className="max-w-sm mx-auto bg-white p-10 rounded-2xl shadow-sm border border-gray-100 text-center"
       >
         <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold">소중한 분들을 초대합니다</h3>
         <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line font-serif text-sm">
@@ -44,7 +45,7 @@ const Invitation = () => {
             <Mail size={12} /> 축하메시지
           </button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
