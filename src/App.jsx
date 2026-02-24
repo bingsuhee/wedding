@@ -9,30 +9,40 @@ import ProgressBar from './components/ProgressBar';
 import Petals from './components/Petals';
 import { Heart } from 'lucide-react';
 
-const Section = ({ children, index, total, scrollYProgress }) => {
+const Section = ({ children, index, total, scrollYProgress, activeIndex }) => {
   const step = 1 / total;
   const start = index * step;
   const prevStart = (index - 1) * step;
   const nextStart = (index + 1) * step;
 
+  // Thresholds: Stay at 1 from 10% to 90% of the active range
+  const enteringThreshold = prevStart + step * 0.9;
+  const exitingThreshold = start + step * 0.9;
+
   // Stacking & Unveiling:
-  // When active (at 'start'), scale=1, opacity=1.
-  // When exiting (towards 'nextStart'), scale decreases, opacity decreases.
-  // When entrance (from 'prevStart' to 'start'), scale increases, opacity increases.
-
+  // We want the section to be fully visible earlier and stay visible longer.
   const scale = useTransform(scrollYProgress,
-    [prevStart, start, nextStart],
-    [0.9, 1, 0.85]
+    [prevStart, enteringThreshold, start, exitingThreshold, nextStart],
+    [0.9, 1, 1, 1, 0.85]
   );
 
-  const opacity = useTransform(scrollYProgress,
-    [prevStart, start, nextStart],
-    [0, 1, 0]
+  const opacityTransform = useTransform(scrollYProgress,
+    [prevStart, enteringThreshold, start, exitingThreshold, nextStart],
+    [0, 1, 1, 1, 0]
   );
+
+  // Explicitly force opacity based on active index to avoid hanging states
+  const isActive = activeIndex === index;
+  const opacity = useTransform(opacityTransform, (v) => {
+    if (isActive) return 1;
+    // If it's a past section, it should be fading/faded
+    // If it's a future section, it should be hidden
+    return v;
+  });
 
   const blurValue = useTransform(scrollYProgress,
-    [prevStart, start, nextStart],
-    [10, 0, 10]
+    [prevStart, enteringThreshold, start, exitingThreshold, nextStart],
+    [10, 0, 0, 0, 10]
   );
   const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
 
@@ -106,16 +116,19 @@ function App() {
       isLocked.current = true;
       setCurrentIndex(nextIndex);
 
-      const targetY = nextIndex * (2 * window.innerHeight);
+      // Calculate target using dvh if possible, or consistent window.innerHeight
+      const vh = window.innerHeight;
+      const targetY = nextIndex * (2 * vh);
+
       window.scrollTo({
         top: targetY,
         behavior: 'smooth'
       });
 
-      // Unlock after animation/transition time
+      // Unlock after animation/transition time - increased for authoritative snap
       setTimeout(() => {
         isLocked.current = false;
-      }, 800);
+      }, 1000);
     }
   };
 
@@ -187,13 +200,14 @@ function App() {
       <ProgressBar />
 
       {/* Scrollable area */}
-      <div ref={containerRef} className="relative" style={{ height: `${sections.length * 200}vh` }}>
+      <div ref={containerRef} className="relative" style={{ height: `${sections.length * 200}dvh` }}>
         {sections.map((section, idx) => (
           <Section
             key={idx}
             index={idx}
             total={sections.length}
             scrollYProgress={scrollYProgress}
+            activeIndex={currentIndex}
           >
             {section}
           </Section>
@@ -201,7 +215,7 @@ function App() {
       </div>
 
       {/* Footer is NOT sticky, it comes after the long scrollable div */}
-      <footer className="h-screen flex flex-col items-center justify-center bg-white relative z-[100] shadow-2xl">
+      <footer className="min-h-dvh flex flex-col items-center justify-center bg-white relative z-[100] shadow-2xl">
         <Heart size={24} className="mx-auto text-wedding-accent mb-4 opacity-30" />
         <p className="text-sm text-gray-400 font-serif">
           © 2024. All rights reserved.
