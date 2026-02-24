@@ -4,7 +4,7 @@ import { Heart } from 'lucide-react';
 
 const Main = () => {
   return (
-    <div className="flex flex-col items-center justify-center text-center p-6 bg-white">
+    <div className="flex flex-col items-center justify-center text-center pt-10 px-6 pb-6 bg-white">
       <h2 className="text-sm tracking-[0.4em] uppercase text-wedding-accent mb-10 font-serif font-bold">Wedding Invitation</h2>
       <h1 className="text-4xl font-serif mb-8 text-gray-800 tracking-tight">
         {weddingInfo.groom.name} <span className="text-2xl text-wedding-accent/60 mx-1">&</span> {weddingInfo.bride.name}

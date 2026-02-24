@@ -3,7 +3,7 @@ import { weddingInfo } from '../data/info';
 
 const Gallery = () => {
   return (
-    <section className="py-24 px-6 bg-white text-center">
+    <section className="pt-20 pb-24 px-6 bg-white text-center">
       <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold italic">갤러리</h3>
       <div className="grid grid-cols-2 gap-3">
         {weddingInfo.gallery.map((img, idx) => (

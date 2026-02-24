@@ -17,7 +17,7 @@ const Map = () => {
   };
 
   return (
-    <div className="w-full max-w-sm text-center">
+    <div className="w-full max-w-sm text-center pt-12">
       <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
       <div className="mb-10">
         <p className="font-serif font-bold text-xl mb-3">{name}</p>

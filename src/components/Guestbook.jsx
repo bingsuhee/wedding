@@ -54,7 +54,7 @@ const Guestbook = () => {
   };
 
   return (
-    <div className="w-full max-w-sm flex flex-col h-full max-h-[85vh] p-2">
+    <div className="w-full max-w-sm flex flex-col h-full max-h-[85dvh] pt-16 pb-4 px-2">
       <h3 className="text-xl font-serif mb-6 text-wedding-accent text-center font-bold">방명록</h3>
 
       <form onSubmit={handleSubmit} className="mb-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 shrink-0">
