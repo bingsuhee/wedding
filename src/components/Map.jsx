@@ -1,10 +1,9 @@
 import React from 'react';
 import { weddingInfo } from '../data/info';
 import { MapPin, Navigation } from 'lucide-react';
-import useScrollFadeIn from '../hooks/useScrollFadeIn';
+import { motion } from 'framer-motion';
 
 const Map = () => {
-  const animatedItem = useScrollFadeIn();
   const { lat, lng, name, address } = weddingInfo.location;
   const clientId = import.meta.env.VITE_NAVER_CLIENT_ID;
 
@@ -19,8 +18,14 @@ const Map = () => {
   };
 
   return (
-    <section className="h-screen flex items-center justify-center py-24 px-6 text-center">
-      <div {...animatedItem} className={`${animatedItem.className} w-full max-w-sm`}>
+    <section className="flex items-center justify-center py-24 px-6 text-center">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        viewport={{ once: false }}
+        className="w-full max-w-sm"
+      >
         <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
         <div className="mb-10">
           <p className="font-serif font-bold text-xl mb-3">{name}</p>
@@ -60,7 +65,7 @@ const Map = () => {
             <Navigation size={14} className="text-wedding-accent" /> 카카오 맵
           </button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

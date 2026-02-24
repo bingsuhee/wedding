@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { Send, User, MessageSquare } from 'lucide-react';
-import useScrollFadeIn from '../hooks/useScrollFadeIn';
+import { motion } from 'framer-motion';
 
 const Guestbook = () => {
-  const animatedItem = useScrollFadeIn();
   const [messages, setMessages] = useState([]);
   const [name, setName] = useState('');
   const [content, setContent] = useState('');
@@ -56,8 +55,14 @@ const Guestbook = () => {
   };
 
   return (
-    <section className="h-screen flex flex-col items-center justify-center py-24 px-6 bg-gray-50/10">
-      <div {...animatedItem} className={`${animatedItem.className} w-full max-w-sm flex flex-col h-full max-h-[80vh]`}>
+    <section className="flex flex-col items-center justify-center py-24 px-6 bg-gray-50/10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        viewport={{ once: false }}
+        className="w-full max-w-sm flex flex-col h-full max-h-[85vh]"
+      >
         <h3 className="text-xl font-serif mb-8 text-wedding-accent text-center font-bold">방명록</h3>
 
         <form onSubmit={handleSubmit} className="mb-8 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 shrink-0">
@@ -89,7 +94,9 @@ const Guestbook = () => {
           </button>
         </form>
 
-        <div className="flex-1 overflow-y-auto space-y-4 pr-1 guestbook-list">
+        <div
+          className="flex-1 overflow-y-auto space-y-4 pr-1 guestbook-list overscroll-contain scrollbar-hide"
+        >
           {fetching ? (
             <div className="text-center py-10 text-gray-300 text-[10px] font-serif">로딩 중...</div>
           ) : messages.length > 0 ? (
@@ -116,7 +123,7 @@ const Guestbook = () => {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
