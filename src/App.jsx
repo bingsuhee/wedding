@@ -13,12 +13,12 @@ function App() {
       <Map />
       <Guestbook />
 
-      <footer className="py-20 text-center bg-gray-50/50">
+      <section className="h-screen flex flex-col items-center justify-center bg-gray-50/50">
         <Heart size={24} className="mx-auto text-wedding-accent mb-4 opacity-30" />
         <p className="text-sm text-gray-400 font-serif">
           © 2024. All rights reserved.
         </p>
-      </footer>
+      </section>
     </div>
   );
 }
