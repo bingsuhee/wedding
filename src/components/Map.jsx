@@ -1,6 +1,6 @@
 import React from 'react';
 import { weddingInfo } from '../data/info';
-import { MapPin, Navigation } from 'lucide-react';
+import { MapPin, Navigation, Info } from 'lucide-react';
 
 const Map = () => {
   const { lat, lng, name, address } = weddingInfo.location;
@@ -43,33 +43,43 @@ const Map = () => {
         )}
       </div>
 
-      <div className="bg-gray-50/50 p-4 rounded-xl text-left border border-gray-100 inline-block w-full max-w-[280px] mb-8">
-        <div className="flex items-start gap-3 mb-2">
-          <span className="text-[11px] text-gray-800 font-bold mt-0.5 whitespace-nowrap">지하철</span>
-          <p className="text-[11px] text-gray-600 leading-normal">
-            <strong>2호선 문래역 4번 출구</strong> (뒷쪽)
-          </p>
-        </div>
-        <div className="flex items-start gap-3">
-          <span className="text-[11px] text-gray-800 font-bold mt-0.5 whitespace-nowrap">셔틀버스</span>
-          <p className="text-[11px] text-gray-600 leading-normal">
-            상시(5분 주기) 운행
-          </p>
-        </div>
+      <div className="bg-gray-50/30 p-5 rounded-2xl text-left border border-gray-100/50 w-full max-w-[320px] mb-8 mx-auto">
+        <ul className="space-y-3">
+          <li className="flex items-start gap-2 text-[11px] text-gray-600 leading-relaxed">
+            <span className="w-1 h-1 rounded-full bg-wedding-accent mt-1.5 shrink-0" />
+            <span>영등포역 타임스퀘어에서 <strong>도보 7분</strong></span>
+          </li>
+          <li className="flex items-start gap-2 text-[11px] text-gray-600 leading-relaxed">
+            <span className="w-1 h-1 rounded-full bg-wedding-accent mt-1.5 shrink-0" />
+            <span>문래역에서 <strong>도보 7분</strong></span>
+          </li>
+          <li className="flex items-start gap-2 text-[11px] text-gray-600 leading-relaxed">
+            <span className="w-1 h-1 rounded-full bg-wedding-accent mt-1.5 shrink-0" />
+            <span>문래역 4번 출구 뒤쪽에서 <strong>셔틀버스 상시(5분 주기) 운행</strong></span>
+          </li>
+        </ul>
       </div>
 
-      <div className="flex justify-center gap-3">
+      <div className="grid grid-cols-1 gap-2 w-full max-w-[320px] mx-auto">
+        <div className="flex gap-2">
+          <button
+            onClick={openNaverMap}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-white border border-gray-100 rounded-xl text-[11px] font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
+          >
+            <Navigation size={12} className="text-wedding-accent" /> 네이버 지도
+          </button>
+          <button
+            onClick={openKakaoMap}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-white border border-gray-100 rounded-xl text-[11px] font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
+          >
+            <Navigation size={12} className="text-wedding-accent" /> 카카오 맵
+          </button>
+        </div>
         <button
-          onClick={openNaverMap}
-          className="flex flex-1 items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-100 rounded-xl text-xs font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
+          onClick={() => window.open('http://www.jkart.co.kr/location/#request', '_blank')}
+          className="w-full flex items-center justify-center gap-2 px-3 py-3 bg-wedding-accent/5 text-wedding-accent border border-wedding-accent/10 rounded-xl text-[11px] font-bold hover:bg-wedding-accent/10 transition shadow-sm"
         >
-          <Navigation size={14} className="text-wedding-accent" /> 네이버 지도
-        </button>
-        <button
-          onClick={openKakaoMap}
-          className="flex flex-1 items-center justify-center gap-2 px-4 py-3 bg-white border border-gray-100 rounded-xl text-xs font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
-        >
-          <Navigation size={14} className="text-wedding-accent" /> 카카오 맵
+          <Info size={12} /> 약도 및 상세 안내
         </button>
       </div>
     </div>
