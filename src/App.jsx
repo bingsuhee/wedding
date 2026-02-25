@@ -154,7 +154,17 @@ function App() {
     updateMeta('twitter:title', document.title);
     updateMeta('twitter:description', desc);
 
+    const isInsideInteractive = (target) => {
+      if (!target) return false;
+      const interactiveTags = ['INPUT', 'TEXTAREA', 'BUTTON', 'A'];
+      if (interactiveTags.includes(target.tagName)) return true;
+      if (target.closest('form') || target.closest('.guestbook-list')) return true;
+      return false;
+    };
+
     const onWheel = (e) => {
+      if (isInsideInteractive(e.target)) return;
+
       // Sensitivity threshold for wheel
       if (Math.abs(e.deltaY) < 10) return;
 
@@ -178,6 +188,8 @@ function App() {
     };
 
     const onTouchMove = (e) => {
+      if (isInsideInteractive(e.target)) return;
+
       if (isLocked.current) {
         e.preventDefault();
         return;
@@ -199,6 +211,8 @@ function App() {
     };
 
     const onTouchEnd = (e) => {
+      if (isInsideInteractive(e.target)) return;
+
       const deltaY = lastTouchY.current - e.changedTouches[0].clientY;
       // Increased sensitivity (threshold 20 instead of 50)
       if (Math.abs(deltaY) > 20) {
