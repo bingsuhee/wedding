@@ -46,9 +46,9 @@ export const weddingInfo = {
     },
     {
       date: "2023.12.24",
-      title: "프로포즈",
-      content: "눈 내리는 크리스마스 이브, 평생을 약속했습니다.",
-      icon: "Gem",
+      title: "1000일",
+      content: "서로를 알아온 지 1000일째 되는 날, 소중한 추억을 남겼습니다.",
+      icon: "Heart",
       image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=200&h=200&fit=crop",
     },
     {

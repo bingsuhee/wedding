@@ -26,6 +26,7 @@ test('verify wedding invitation sections', async ({ page }) => {
   await page.waitForTimeout(1000);
   await page.screenshot({ path: 'screenshots/03_timeline_mobile.png' });
   await expect(page.locator('text=첫 만남')).toBeVisible();
+  await expect(page.locator('h4').filter({ hasText: '1000일' })).toBeVisible();
 
   // 4. Map Section
   const mapSection = page.locator('section').filter({ hasText: '오시는 길' });
