@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { weddingInfo } from '../data/info';
-import { Phone, Mail, ChevronDown, ChevronUp, Copy, Check } from 'lucide-react';
+import { Phone, ChevronDown, ChevronUp, Copy, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AccountItem = ({ name, account, relation }) => {
