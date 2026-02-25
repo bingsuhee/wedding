@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Main from './components/Main';
 import Invitation from './components/Invitation';
 import Timeline from './components/Timeline';
+import Gallery from './components/Gallery';
 import Map from './components/Map';
 import Guestbook from './components/Guestbook';
 import ProgressBar from './components/ProgressBar';
@@ -43,6 +44,7 @@ function App() {
         <Main />
         <Invitation />
         <Timeline />
+        <Gallery />
         <Map />
         <Guestbook />
       </main>
