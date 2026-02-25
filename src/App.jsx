@@ -42,7 +42,7 @@ const Section = ({ children, index, total, scrollYProgress, activeIndex }) => {
 
   const y = useTransform(scrollYProgress,
     [start, nextStart],
-    [0, -100]
+    [0, "-100vh"]
   );
 
   return (

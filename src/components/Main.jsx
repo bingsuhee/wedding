@@ -1,24 +1,147 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { weddingInfo } from '../data/info';
-import { Heart } from 'lucide-react';
+import { Star, Heart } from 'lucide-react';
 
 const Main = () => {
+  const draw = {
+    hidden: { pathLength: 0, opacity: 0 },
+    visible: (i) => {
+      const delay = 0.5 + i * 0.3;
+      return {
+        pathLength: 1,
+        opacity: 1,
+        transition: {
+          pathLength: { delay, type: "spring", duration: 1.5, bounce: 0 },
+          opacity: { delay, duration: 0.01 }
+        }
+      };
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center text-center pt-10 px-6 pb-6 bg-white">
-      <h2 className="text-sm tracking-[0.4em] uppercase text-wedding-accent mb-10 font-serif font-bold">Wedding Invitation</h2>
-      <h1 className="text-4xl font-serif mb-8 text-gray-800 tracking-tight">
-        {weddingInfo.groom.name} <span className="text-2xl text-wedding-accent/60 mx-1">&</span> {weddingInfo.bride.name}
-      </h1>
-      <div className="w-12 h-px bg-wedding-accent mx-auto mb-8 opacity-40"></div>
-      <p className="text-lg text-gray-600 font-serif mb-12">
-        {weddingInfo.date}
-      </p>
-      <p className="text-gray-400 tracking-[0.2em] text-xs uppercase">
-        {weddingInfo.location.name}
-      </p>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.01] -z-10">
-        <Heart size={400} fill="currentColor" className="text-wedding-accent" />
+    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden paper-texture">
+      {/* Watercolor bleed effect */}
+      <div className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-pink-100/30 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-pink-50/40 to-transparent blur-3xl pointer-events-none" />
+
+      {/* Title Area */}
+      <div className="mb-8 relative z-10 flex flex-col items-center">
+        <div className="relative h-20 w-64 flex items-center justify-center">
+          {/* Sketchy SVG strokes */}
+          <svg width="200" height="60" viewBox="0 0 200 60" className="absolute">
+            <motion.path
+              d="M30,40 Q50,10 70,40 T110,40"
+              fill="transparent"
+              strokeWidth="1.5"
+              stroke="#D4AF37"
+              variants={draw}
+              custom={0}
+              initial="hidden"
+              animate="visible"
+            />
+            <motion.path
+              d="M120,40 C140,10 160,50 180,30"
+              fill="transparent"
+              strokeWidth="1.5"
+              stroke="#D4AF37"
+              variants={draw}
+              custom={1}
+              initial="hidden"
+              animate="visible"
+            />
+          </svg>
+
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2, duration: 1.5 }}
+            className="font-sketch text-4xl text-wedding-primary"
+          >
+            Our Wedding
+          </motion.h2>
+        </div>
       </div>
+
+      {/* Main Illustration */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 2, delay: 0.2 }}
+        className="relative w-80 h-80 mb-10 flex items-center justify-center"
+      >
+        <div className="relative w-full h-full p-4">
+          <img
+            src="/images/main_hero.png"
+            alt="Wedding Hero"
+            className="w-full h-full object-contain"
+            style={{
+              maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)',
+              WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)'
+            }}
+          />
+        </div>
+
+        {/* Floating Icons with 'drawn' feel */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
+          transition={{
+            scale: { delay: 1.5 },
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="absolute top-10 right-6 text-wedding-accent/50"
+        >
+          <Star size={28} className="animate-wobble" />
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1, y: [0, 10, 0] }}
+          transition={{
+            scale: { delay: 2 },
+            y: { duration: 5, repeat: Infinity, ease: "easeInOut" }
+          }}
+          className="absolute bottom-12 left-4 text-pink-300/40"
+        >
+          <Heart size={22} fill="currentColor" className="animate-wobble" />
+        </motion.div>
+      </motion.div>
+
+      {/* Names & Date */}
+      <div className="text-center z-10 px-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 1 }}
+        >
+          <h1 className="font-sketch text-5xl mb-6 text-gray-800 tracking-wide">
+            {weddingInfo.groom.name} <span className="text-3xl text-wedding-accent/70">&</span> {weddingInfo.bride.name}
+          </h1>
+          <p className="font-sketch text-2xl text-gray-500/80 leading-relaxed">
+            {weddingInfo.date}
+          </p>
+        </motion.div>
+      </div>
+
+      {/* Scroll Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 3 }}
+        className="absolute bottom-8 flex flex-col items-center"
+      >
+        <span className="font-sketch text-xl text-gray-400 mb-1">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 5, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="text-gray-300">
+            <path d="M7 13l5 5 5-5" />
+            <path d="M7 7l5 5 5-5" opacity="0.5" />
+          </svg>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
