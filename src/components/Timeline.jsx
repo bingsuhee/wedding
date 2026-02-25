@@ -52,7 +52,7 @@ const TimelineItem = ({ event, index }) => {
               <div className="mb-3 inline-block">
                 <div className="bg-white p-2 shadow-md rotate-2 hover:rotate-0 transition-transform duration-300">
                   <img
-                    src={event.image}
+                    src={`${import.meta.env.BASE_URL}${event.image}`}
                     alt={event.title}
                     className="w-24 h-24 object-cover grayscale-[20%] sepia-[10%]"
                   />

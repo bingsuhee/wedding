@@ -12,31 +12,40 @@ test('verify wedding invitation sections', async ({ page }) => {
 
   // 1. Hero Section
   await expect(page.locator('h1')).toContainText('김철수');
-  await page.screenshot({ path: 'screenshots/01_hero_mobile.png' });
 
-  // 2. Invitation Section
-  const invitationSection = page.locator('section').filter({ hasText: '소중한 분들을 초대합니다' });
-  await invitationSection.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(1000);
-  await page.screenshot({ path: 'screenshots/02_invitation_mobile.png' });
-
-  // 3. Timeline Section
+  // 2. Timeline Section
   const timelineSection = page.locator('section').filter({ hasText: 'Love Story' });
   await timelineSection.scrollIntoViewIfNeeded();
   await page.waitForTimeout(1000);
-  await page.screenshot({ path: 'screenshots/03_timeline_mobile.png' });
-  await expect(page.locator('text=첫 만남')).toBeVisible();
   await expect(page.locator('h4').filter({ hasText: '1000일' })).toBeVisible();
+  await page.screenshot({ path: 'screenshots/02_timeline_mobile.png' });
+
+  // 3. Gallery Section
+  const gallerySection = page.locator('section').filter({ hasText: 'Gallery' });
+  await gallerySection.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1000);
+
+  // Check initial count (should be 6)
+  const initialImages = await page.locator('section:has-text("Gallery") img').count();
+  expect(initialImages).toBe(6);
+  await page.screenshot({ path: 'screenshots/03_gallery_initial.png' });
+
+  // Click Load More
+  const loadMoreBtn = page.locator('button:has-text("더보기")');
+  await loadMoreBtn.click();
+  await page.waitForTimeout(1000);
+
+  // Check new count (should be 12)
+  const expandedImages = await page.locator('section:has-text("Gallery") img').count();
+  expect(expandedImages).toBe(12);
+
+  // Button should be gone now
+  await expect(loadMoreBtn).not.toBeVisible();
+  await page.screenshot({ path: 'screenshots/03_gallery_expanded.png' });
 
   // 4. Map Section
   const mapSection = page.locator('section').filter({ hasText: '오시는 길' });
   await mapSection.scrollIntoViewIfNeeded();
   await page.waitForTimeout(1000);
   await page.screenshot({ path: 'screenshots/04_map_mobile.png' });
-
-  // 5. Guestbook Section
-  const guestbookSection = page.locator('section').filter({ hasText: '방명록' });
-  await guestbookSection.scrollIntoViewIfNeeded();
-  await page.waitForTimeout(1000);
-  await page.screenshot({ path: 'screenshots/05_guestbook_mobile.png' });
 });

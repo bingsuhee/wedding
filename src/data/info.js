@@ -22,12 +22,18 @@ export const weddingInfo = {
   },
   message: "저희 두 사람이 사랑으로 만나\n하나의 가정을 이루게 되었습니다.\n저희의 새로운 출발을 축복해 주시면 감사하겠습니다.",
   gallery: [
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc",
-    "https://images.unsplash.com/photo-1519741497674-611481863552",
-    "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8",
-    "https://images.unsplash.com/photo-1583939003579-730e3918a45a",
-    "https://images.unsplash.com/photo-1519225421980-715cb0215aed",
-    "https://images.unsplash.com/photo-1520854221256-17451cc331bf",
+    { src: "images/gallery/g1.jpg", width: 800, height: 1000, caption: "우리의 시작" },
+    { src: "images/gallery/g2.jpg", width: 800, height: 1000, caption: "햇살 좋은 날" },
+    { src: "images/gallery/g3.jpg", width: 800, height: 1000, caption: "함께 걷는 길" },
+    { src: "images/gallery/g4.jpg", width: 800, height: 1000, caption: "제주도 여행" },
+    { src: "images/gallery/g5.jpg", width: 800, height: 1000, caption: "가을 산책" },
+    { src: "images/gallery/g6.jpg", width: 800, height: 1000, caption: "겨울 바다" },
+    { src: "images/gallery/g7.jpg", width: 800, height: 1000, caption: "봄날의 약속" },
+    { src: "images/gallery/g8.jpg", width: 800, height: 1000, caption: "행복한 순간" },
+    { src: "images/gallery/g9.jpg", width: 800, height: 1000, caption: "우리 둘이" },
+    { src: "images/gallery/g10.jpg", width: 800, height: 1000, caption: "함께 웃는 날" },
+    { src: "images/gallery/g11.jpg", width: 800, height: 1000, caption: "소중한 기억" },
+    { src: "images/gallery/g12.jpg", width: 800, height: 1000, caption: "영원히 함께" },
   ],
   timeline: [
     {
@@ -35,7 +41,7 @@ export const weddingInfo = {
       title: "첫 만남",
       content: "햇살 가득한 오후, 카페에서 처음 만났습니다.",
       icon: "Heart",
-      image: "https://images.unsplash.com/photo-1516589174184-c6848463d467?w=200&h=200&fit=crop",
+      image: "images/timeline/meeting.jpg",
     },
     {
       date: "2021.08.15",
@@ -49,7 +55,7 @@ export const weddingInfo = {
       title: "1000일",
       content: "서로를 알아온 지 1000일째 되는 날, 소중한 추억을 남겼습니다.",
       icon: "Heart",
-      image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=200&h=200&fit=crop",
+      image: "images/timeline/anniversary.jpg",
     },
     {
       date: "2024.10.12",
