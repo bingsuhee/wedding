@@ -56,8 +56,6 @@ const Section = ({ children, index, total, scrollYProgress, activeIndex }) => {
         filter,
         y,
         zIndex: isActive ? 50 : total - index,
-        pointerEvents: isActive ? 'auto' : 'none',
-        visibility
       }}
       className="sticky-section flex items-center justify-center border-x border-gray-100"
     >
@@ -156,28 +154,18 @@ function App() {
 
     const isInsideInteractive = (target) => {
       if (!target) return false;
-      const interactiveTags = ['INPUT', 'TEXTAREA', 'BUTTON', 'A'];
-      if (interactiveTags.includes(target.tagName)) return true;
-      if (target.closest('form') || target.closest('.guestbook-list')) return true;
+      // We only want to skip our snap logic for elements that handle their own scroll
+      if (target.closest('.guestbook-list')) return true;
+      if (target.tagName === 'TEXTAREA') return true;
       return false;
     };
 
     const onWheel = (e) => {
+      // If we are scrolling inside a scrollable interactive element, let it happen
       if (isInsideInteractive(e.target)) return;
 
       // Sensitivity threshold for wheel
       if (Math.abs(e.deltaY) < 10) return;
-
-      // Don't prevent default if we're inside Guestbook and it needs to scroll
-      if (currentIndex === 3) {
-        const gbList = document.querySelector('.guestbook-list');
-        if (gbList) {
-          const isAtTop = gbList.scrollTop <= 0;
-          const isAtBottom = gbList.scrollTop + gbList.clientHeight >= gbList.scrollHeight - 1;
-          if (e.deltaY > 0 && !isAtBottom) return;
-          if (e.deltaY < 0 && !isAtTop) return;
-        }
-      }
 
       e.preventDefault();
       handleSnap(e.deltaY > 0 ? 'down' : 'up');
@@ -193,18 +181,6 @@ function App() {
       if (isLocked.current) {
         e.preventDefault();
         return;
-      }
-
-      // Guestbook internal scroll check for touch
-      if (currentIndex === 3) {
-        const gbList = document.querySelector('.guestbook-list');
-        if (gbList) {
-          const isAtTop = gbList.scrollTop <= 0;
-          const isAtBottom = gbList.scrollTop + gbList.clientHeight >= gbList.scrollHeight - 1;
-          const deltaY = lastTouchY.current - e.touches[0].clientY;
-          if (deltaY > 0 && !isAtBottom) return;
-          if (deltaY < 0 && !isAtTop) return;
-        }
       }
 
       e.preventDefault();
@@ -238,8 +214,12 @@ function App() {
       <Petals count={20} />
       <ProgressBar />
 
-      {/* Scrollable area */}
-      <div ref={containerRef} className="relative" style={{ height: `${sections.length * 100}dvh` }}>
+      {/* Scrollable area - explicitly set height for useScroll calculation */}
+      <div
+        ref={containerRef}
+        className="relative overflow-visible"
+        style={{ height: `${sections.length * 100}dvh` }}
+      >
         {sections.map((section, idx) => (
           <Section
             key={idx}

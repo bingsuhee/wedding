@@ -68,12 +68,23 @@
   will-change: transform, opacity, filter;
   overflow: hidden;
   background: white;
+  pointer-events: none; /* Allow scroll events to pass through to the container */
+}
+
+/* Enable pointer events only for interactive elements within sections */
+.sticky-section button,
+.sticky-section input,
+.sticky-section textarea,
+.sticky-section a,
+.sticky-section .interactive {
+  pointer-events: auto;
 }
 
 .guestbook-list {
   scrollbar-width: none;
   -ms-overflow-style: none;
   overscroll-behavior: contain;
+  pointer-events: auto; /* Ensure guestbook list is scrollable */
 }
 .guestbook-list::-webkit-scrollbar {
   display: none;
