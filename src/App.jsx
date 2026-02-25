@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import Main from './components/Main';
 import Invitation from './components/Invitation';
-import Gallery from './components/Gallery';
 import Map from './components/Map';
 import Guestbook from './components/Guestbook';
 import ProgressBar from './components/ProgressBar';
@@ -77,7 +76,6 @@ function App() {
   const sections = [
     <Main />,
     <Invitation />,
-    <Gallery />,
     <Map />,
     <Guestbook />
   ];
@@ -87,8 +85,8 @@ function App() {
   const handleSnap = (direction) => {
     if (isLocked.current) return;
 
-    // Boundary check for Guestbook (index 4)
-    if (currentIndex === 4) {
+    // Boundary check for Guestbook (index 3)
+    if (currentIndex === 3) {
       const gbList = document.querySelector('.guestbook-list');
       if (gbList) {
         const isAtTop = gbList.scrollTop <= 0;
@@ -132,7 +130,7 @@ function App() {
       if (Math.abs(e.deltaY) < 10) return;
 
       // Don't prevent default if we're inside Guestbook and it needs to scroll
-      if (currentIndex === 4) {
+      if (currentIndex === 3) {
         const gbList = document.querySelector('.guestbook-list');
         if (gbList) {
           const isAtTop = gbList.scrollTop <= 0;
@@ -157,7 +155,7 @@ function App() {
       }
 
       // Guestbook internal scroll check for touch
-      if (currentIndex === 4) {
+      if (currentIndex === 3) {
         const gbList = document.querySelector('.guestbook-list');
         if (gbList) {
           const isAtTop = gbList.scrollTop <= 0;
