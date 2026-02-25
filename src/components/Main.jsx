@@ -71,15 +71,29 @@ const Main = () => {
         transition={{ duration: 2, delay: 0.2 }}
         className="relative w-80 h-80 mb-10 flex items-center justify-center"
       >
-        <div className="relative w-full h-full p-4">
+        {/* Watercolor Blobs */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-wedding-primary/20 blur-3xl rounded-full mix-blend-multiply animate-pulse-slow" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/3 -translate-y-1/3 w-64 h-64 bg-pink-100/40 blur-3xl rounded-full mix-blend-multiply" />
+
+        {/* Hand-drawn sketch circle */}
+        <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
+          <motion.path
+            d="M 50, 50 m -45, 0 a 45,45 0 1,0 90,0 a 45,45 0 1,0 -90,0"
+            fill="none"
+            stroke="#D4AF37"
+            strokeWidth="0.5"
+            strokeDasharray="2,2"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 3, ease: "easeInOut" }}
+          />
+        </svg>
+
+        <div className="relative w-full h-full p-4 z-10">
           <img
-            src={`${import.meta.env.BASE_URL}images/main_hero.png`}
+            src={`${import.meta.env.BASE_URL}images/main_hero_transparent.png`}
             alt="Wedding Hero"
             className="w-full h-full object-contain"
-            style={{
-              maskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)',
-              WebkitMaskImage: 'radial-gradient(circle, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 90%)'
-            }}
           />
         </div>
 
@@ -116,9 +130,20 @@ const Main = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1 }}
         >
-          <h1 className="font-sketch text-4xl sm:text-5xl mb-4 text-gray-800 tracking-wide">
+          <h1 className="font-sketch text-4xl sm:text-5xl mb-1 text-gray-800 tracking-wide">
             {weddingInfo.groom.name} <span className="text-2xl sm:text-3xl text-wedding-accent/70">&</span> {weddingInfo.bride.name}
           </h1>
+          <svg width="150" height="10" viewBox="0 0 150 10" className="mx-auto mb-4 opacity-30">
+            <motion.path
+              d="M 10 5 Q 75 8 140 5"
+              fill="transparent"
+              stroke="#D4AF37"
+              strokeWidth="2"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ delay: 2.5, duration: 1 }}
+            />
+          </svg>
           <p className="font-sketch text-xl sm:text-2xl text-gray-500/80 leading-relaxed">
             {weddingInfo.date}
           </p>
