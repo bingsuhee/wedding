@@ -1,17 +1,19 @@
-import React, { useMemo } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const Petals = ({ count = 20 }) => {
-  const petals = useMemo(() => {
+  const [petals] = useState(() => {
     return Array.from({ length: count }).map((_, i) => ({
       id: i,
-      left: `${Math.random() * 100}%`,
+      left: Math.random() * 100,
       size: Math.random() * 10 + 10,
       duration: Math.random() * 10 + 10,
       delay: Math.random() * 10,
       rotate: Math.random() * 360,
+      drift: Math.random() * 20 - 10
     }));
-  }, [count]);
+  });
 
   return (
     <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
@@ -20,14 +22,14 @@ const Petals = ({ count = 20 }) => {
           key={petal.id}
           initial={{
             top: '-5%',
-            left: petal.left,
+            left: `${petal.left}%`,
             opacity: 0,
             rotate: petal.rotate,
             scale: 0.5
           }}
           animate={{
             top: '105%',
-            left: `calc(${petal.left} + ${Math.random() * 20 - 10}%)`,
+            left: `${petal.left + petal.drift}%`,
             opacity: [0, 0.7, 0.7, 0],
             rotate: petal.rotate + 360,
             scale: 1

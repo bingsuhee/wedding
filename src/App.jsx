@@ -1,4 +1,5 @@
-import React, { useRef, useEffect, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Main from './components/Main';
 import Invitation from './components/Invitation';
@@ -7,6 +8,7 @@ import Guestbook from './components/Guestbook';
 import ProgressBar from './components/ProgressBar';
 import Petals from './components/Petals';
 import { Heart } from 'lucide-react';
+import { weddingInfo } from './data/info';
 
 const Section = ({ children, index, total, scrollYProgress, activeIndex }) => {
   const step = 1 / (total - 1);
@@ -39,6 +41,8 @@ const Section = ({ children, index, total, scrollYProgress, activeIndex }) => {
   );
   const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
 
+  const visibility = useTransform(opacityTransform, (v) => v > 0 ? 'visible' : 'hidden');
+
   const y = useTransform(scrollYProgress,
     [start, nextStart],
     [0, "-100vh"]
@@ -51,7 +55,9 @@ const Section = ({ children, index, total, scrollYProgress, activeIndex }) => {
         opacity,
         filter,
         y,
-        zIndex: total - index,
+        zIndex: isActive ? 50 : total - index,
+        pointerEvents: isActive ? 'auto' : 'none',
+        visibility
       }}
       className="sticky-section flex items-center justify-center border-x border-gray-100"
     >
@@ -82,7 +88,7 @@ function App() {
 
   const totalSnapPoints = sections.length; // 0 to 4 are sections, 5 is footer
 
-  const handleSnap = (direction) => {
+  const handleSnap = useCallback((direction) => {
     if (isLocked.current) return;
 
     // Boundary check for Guestbook (index 3)
@@ -98,7 +104,7 @@ function App() {
     }
 
     let nextIndex = currentIndex;
-    if (direction === 'down' && currentIndex < totalSnapPoints) {
+    if (direction === 'down' && currentIndex < sections.length) {
       nextIndex = currentIndex + 1;
     } else if (direction === 'up' && currentIndex > 0) {
       nextIndex = currentIndex - 1;
@@ -122,9 +128,32 @@ function App() {
         isLocked.current = false;
       }, 800);
     }
-  };
+  }, [currentIndex, sections.length]);
 
   useEffect(() => {
+    // Dynamic Title
+    document.title = `${weddingInfo.groom.name} ♥ ${weddingInfo.bride.name} 저희 결혼합니다`;
+
+    // Attempt to update meta tags (note: some scrapers may not see this)
+    const updateMeta = (name, content, property = false) => {
+      const selector = property ? `meta[property="${name}"]` : `meta[name="${name}"]`;
+      let el = document.querySelector(selector);
+      if (!el) {
+        el = document.createElement('meta');
+        if (property) el.setAttribute('property', name);
+        else el.setAttribute('name', name);
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', content);
+    };
+
+    const desc = `${weddingInfo.date}, ${weddingInfo.location}`;
+    updateMeta('description', desc);
+    updateMeta('og:title', document.title, true);
+    updateMeta('og:description', desc, true);
+    updateMeta('twitter:title', document.title);
+    updateMeta('twitter:description', desc);
+
     const onWheel = (e) => {
       // Sensitivity threshold for wheel
       if (Math.abs(e.deltaY) < 10) return;
@@ -188,7 +217,7 @@ function App() {
       window.removeEventListener('touchmove', onTouchMove);
       window.removeEventListener('touchend', onTouchEnd);
     };
-  }, [currentIndex]);
+  }, [currentIndex, handleSnap]);
 
   return (
     <div className="bg-wedding-bg">
