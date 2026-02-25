@@ -75,7 +75,8 @@ const AccountSection = ({ title, person, father, mother }) => {
 
 const Invitation = () => {
   return (
-    <div className="max-w-sm mx-auto bg-white pt-10 px-10 pb-10 rounded-2xl shadow-sm border border-gray-100 text-center">
+    <div className="w-full min-h-dvh flex items-center justify-center py-20">
+      <div className="max-w-sm mx-auto bg-white pt-10 px-10 pb-10 rounded-2xl shadow-sm border border-gray-100 text-center">
       <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold">소중한 분들을 초대합니다</h3>
       <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line font-serif text-sm px-2">
         {weddingInfo.message}
@@ -130,6 +131,7 @@ const Invitation = () => {
         </a>
       </div>
     </div>
+  </div>
   );
 };
 
