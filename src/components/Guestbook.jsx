@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { Send, User, MessageSquare } from 'lucide-react';
+import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
 const Guestbook = () => {
   const [messages, setMessages] = useState([]);
@@ -54,8 +55,9 @@ const Guestbook = () => {
   };
 
   return (
-    <div className="w-full min-h-dvh flex flex-col items-center py-20 px-6">
-      <div className="w-full max-w-sm flex flex-col">
+    <section className="w-full min-h-dvh flex flex-col items-center py-20 px-6 overflow-hidden">
+      <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm">
+      <div className="flex flex-col">
       <h3 className="text-xl font-serif mb-12 text-wedding-accent text-center font-bold">방명록</h3>
 
       <form onSubmit={handleSubmit} className="mb-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 shrink-0">
@@ -115,7 +117,8 @@ const Guestbook = () => {
         )}
       </div>
     </div>
-  </div>
+    </ScrollAnimationWrapper>
+  </section>
   );
 };
 

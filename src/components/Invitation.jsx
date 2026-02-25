@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { weddingInfo } from '../data/info';
 import { Phone, ChevronDown, ChevronUp, Copy, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
 const AccountItem = ({ name, account, relation }) => {
   const [copied, setCopied] = useState(false);
@@ -75,63 +76,65 @@ const AccountSection = ({ title, person, father, mother }) => {
 
 const Invitation = () => {
   return (
-    <div className="w-full min-h-dvh flex items-center justify-center py-20">
-      <div className="max-w-sm mx-auto bg-white pt-10 px-10 pb-10 rounded-2xl shadow-sm border border-gray-100 text-center">
-      <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold">소중한 분들을 초대합니다</h3>
-      <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line font-serif text-sm px-2">
-        {weddingInfo.message}
-      </p>
+    <section className="w-full min-h-dvh flex items-center justify-center py-20 overflow-hidden">
+      <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm">
+        <div className="mx-auto bg-white pt-10 px-10 pb-10 rounded-2xl shadow-sm border border-gray-100 text-center">
+          <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold">소중한 분들을 초대합니다</h3>
+          <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line font-serif text-sm px-2">
+            {weddingInfo.message}
+          </p>
 
-      <div className="space-y-8 text-gray-700 font-serif mb-16">
-        <div className="flex flex-col gap-2">
-          <span className="text-[10px] text-wedding-accent/70 uppercase tracking-widest">Groom</span>
-          <div className="flex items-center justify-center gap-3">
-            <span className="text-sm text-gray-500">{weddingInfo.groom.father.name} · {weddingInfo.groom.mother.name}</span>
-            <span className="text-xs text-gray-300">의 장남</span>
-            <span className="text-base font-bold">{weddingInfo.groom.name}</span>
+          <div className="space-y-8 text-gray-700 font-serif mb-16">
+            <div className="flex flex-col gap-2">
+              <span className="text-[10px] text-wedding-accent/70 uppercase tracking-widest">Groom</span>
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-sm text-gray-500">{weddingInfo.groom.father.name} · {weddingInfo.groom.mother.name}</span>
+                <span className="text-xs text-gray-300">의 장남</span>
+                <span className="text-base font-bold">{weddingInfo.groom.name}</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="text-[10px] text-wedding-accent/70 uppercase tracking-widest">Bride</span>
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-sm text-gray-500">{weddingInfo.bride.father.name} · {weddingInfo.bride.mother.name}</span>
+                <span className="text-xs text-gray-300">의 장녀</span>
+                <span className="text-base font-bold">{weddingInfo.bride.name}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            <AccountSection
+              title="신랑측"
+              person={weddingInfo.groom}
+              father={weddingInfo.groom.father}
+              mother={weddingInfo.groom.mother}
+            />
+            <AccountSection
+              title="신부측"
+              person={weddingInfo.bride}
+              father={weddingInfo.bride.father}
+              mother={weddingInfo.bride.mother}
+            />
+          </div>
+
+          <div className="mt-16 flex justify-center gap-3">
+            <a
+              href={`tel:${weddingInfo.groom.contact}`}
+              className="flex flex-1 items-center justify-center gap-2 px-4 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-[10px] font-bold transition hover:bg-wedding-accent hover:text-white uppercase tracking-tighter"
+            >
+              <Phone size={12} /> 신랑 연락하기
+            </a>
+            <a
+              href={`tel:${weddingInfo.bride.contact}`}
+              className="flex flex-1 items-center justify-center gap-2 px-4 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-[10px] font-bold transition hover:bg-wedding-accent hover:text-white uppercase tracking-tighter"
+            >
+              <Phone size={12} /> 신부 연락하기
+            </a>
           </div>
         </div>
-        <div className="flex flex-col gap-2">
-          <span className="text-[10px] text-wedding-accent/70 uppercase tracking-widest">Bride</span>
-          <div className="flex items-center justify-center gap-3">
-            <span className="text-sm text-gray-500">{weddingInfo.bride.father.name} · {weddingInfo.bride.mother.name}</span>
-            <span className="text-xs text-gray-300">의 장녀</span>
-            <span className="text-base font-bold">{weddingInfo.bride.name}</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="space-y-3">
-        <AccountSection
-          title="신랑측"
-          person={weddingInfo.groom}
-          father={weddingInfo.groom.father}
-          mother={weddingInfo.groom.mother}
-        />
-        <AccountSection
-          title="신부측"
-          person={weddingInfo.bride}
-          father={weddingInfo.bride.father}
-          mother={weddingInfo.bride.mother}
-        />
-      </div>
-
-      <div className="mt-16 flex justify-center gap-3">
-        <a
-          href={`tel:${weddingInfo.groom.contact}`}
-          className="flex flex-1 items-center justify-center gap-2 px-4 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-[10px] font-bold transition hover:bg-wedding-accent hover:text-white uppercase tracking-tighter"
-        >
-          <Phone size={12} /> 신랑 연락하기
-        </a>
-        <a
-          href={`tel:${weddingInfo.bride.contact}`}
-          className="flex flex-1 items-center justify-center gap-2 px-4 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-[10px] font-bold transition hover:bg-wedding-accent hover:text-white uppercase tracking-tighter"
-        >
-          <Phone size={12} /> 신부 연락하기
-        </a>
-      </div>
-    </div>
-  </div>
+      </ScrollAnimationWrapper>
+    </section>
   );
 };
 
