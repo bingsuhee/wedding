@@ -21,7 +21,22 @@ const Map = () => {
       <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
       <div className="mb-10">
         <p className="font-serif font-bold text-xl mb-3">{name}</p>
-        <p className="text-gray-400 text-sm leading-relaxed max-w-[240px] mx-auto">{address}</p>
+        <p className="text-gray-400 text-xs leading-relaxed max-w-[240px] mx-auto mb-6">{address}</p>
+
+        <div className="bg-gray-50/50 p-4 rounded-xl text-left border border-gray-100 inline-block max-w-[280px]">
+          <div className="flex items-start gap-2 mb-2">
+            <span className="bg-green-500 text-white text-[9px] px-1.5 py-0.5 rounded font-bold mt-0.5 whitespace-nowrap">지하철</span>
+            <p className="text-[11px] text-gray-600 leading-normal">
+              <strong>2호선 문래역 4번 출구</strong> (뒷쪽)
+            </p>
+          </div>
+          <div className="flex items-start gap-2">
+            <span className="bg-blue-500 text-white text-[9px] px-1.5 py-0.5 rounded font-bold mt-0.5 whitespace-nowrap">셔틀버스</span>
+            <p className="text-[11px] text-gray-600 leading-normal">
+              상시(5분 주기) 운행
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="w-full aspect-[4/3] bg-gray-50 rounded-2xl mb-10 flex items-center justify-center text-gray-300 overflow-hidden shadow-sm border border-gray-100">

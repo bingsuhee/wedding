@@ -1,15 +1,15 @@
 export const weddingInfo = {
   groom: {
     name: "김철수",
-    father: "김아빠",
-    mother: "이엄마",
+    father: { name: "김아빠", account: "국민은행 111-222-333" },
+    mother: { name: "이엄마", account: "우리은행 444-555-666" },
     account: "국민은행 123-456-789",
     contact: "010-1234-5678",
   },
   bride: {
     name: "이영희",
-    father: "박아빠",
-    mother: "최엄마",
+    father: { name: "박아빠", account: "신한은행 777-888-999" },
+    mother: { name: "최엄마", account: "하나은행 000-111-222" },
     account: "신한은행 987-654-321",
     contact: "010-5678-1234",
   },
