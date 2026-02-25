@@ -17,7 +17,8 @@ const Map = () => {
   };
 
   return (
-    <div className="w-full max-w-sm text-center pt-12">
+    <div className="w-full min-h-dvh flex flex-col items-center justify-center py-20 px-6">
+      <div className="w-full max-w-sm text-center">
       <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
       <div className="mb-8">
         <p className="font-serif font-bold text-xl mb-3">{name}</p>
@@ -83,6 +84,7 @@ const Map = () => {
         </button>
       </div>
     </div>
+  </div>
   );
 };
 

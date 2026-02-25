@@ -21,7 +21,7 @@ const Main = () => {
   };
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden paper-texture">
+    <div className="relative w-full min-h-dvh flex flex-col items-center justify-center overflow-hidden paper-texture py-20">
       {/* Watercolor bleed effect */}
       <div className="absolute top-0 left-0 w-full h-[30%] bg-gradient-to-b from-pink-100/30 to-transparent blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-full h-[30%] bg-gradient-to-t from-pink-50/40 to-transparent blur-3xl pointer-events-none" />
@@ -155,7 +155,7 @@ const Main = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3 }}
-        className="absolute bottom-4 flex flex-col items-center"
+        className="mt-12 flex flex-col items-center"
       >
         <span className="font-sketch text-lg text-gray-400 mb-0">Scroll</span>
         <motion.div

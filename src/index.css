@@ -33,7 +33,7 @@
   }
 }
 
-/* scrollbar-hide utility */
+/* scrollbar-hide utility - keeping just in case but we want scrollbars now */
 @utility scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -43,11 +43,32 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-wedding-bg text-gray-800 font-sans break-keep scrollbar-hide;
-    /* Use window scroll */
+    @apply bg-wedding-bg text-gray-800 font-sans break-keep;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+
+  /* Custom Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(212, 175, 55, 0.3); /* wedding-accent with opacity */
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(212, 175, 55, 0.5);
   }
 
   #root {
@@ -60,31 +81,10 @@
   }
 }
 
-.sticky-section {
-  position: sticky;
-  top: 0;
-  height: 100dvh;
-  width: 100%;
-  will-change: transform, opacity, filter;
-  overflow: hidden;
-  background: white;
-  pointer-events: none; /* Allow scroll events to pass through to the container */
-}
-
-/* Enable pointer events only for interactive elements within sections */
-.sticky-section button,
-.sticky-section input,
-.sticky-section textarea,
-.sticky-section a,
-.sticky-section .interactive {
-  pointer-events: auto;
-}
-
 .guestbook-list {
   scrollbar-width: none;
   -ms-overflow-style: none;
   overscroll-behavior: contain;
-  pointer-events: auto; /* Ensure guestbook list is scrollable */
 }
 .guestbook-list::-webkit-scrollbar {
   display: none;
@@ -109,4 +109,13 @@
 
 .animate-wobble {
   animation: wobble 0.5s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.7; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
 }
