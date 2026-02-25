@@ -29,4 +29,34 @@ export const weddingInfo = {
     "https://images.unsplash.com/photo-1519225421980-715cb0215aed",
     "https://images.unsplash.com/photo-1520854221256-17451cc331bf",
   ],
+  timeline: [
+    {
+      date: "2020.05.20",
+      title: "첫 만남",
+      content: "햇살 가득한 오후, 카페에서 처음 만났습니다.",
+      icon: "Heart",
+      image: "https://images.unsplash.com/photo-1516589174184-c6848463d467?w=200&h=200&fit=crop",
+    },
+    {
+      date: "2021.08.15",
+      title: "첫 여행",
+      content: "푸른 바다 제주도에서의 잊지 못할 추억",
+      icon: "Plane",
+      image: null,
+    },
+    {
+      date: "2023.12.24",
+      title: "프로포즈",
+      content: "눈 내리는 크리스마스 이브, 평생을 약속했습니다.",
+      icon: "Gem",
+      image: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=200&h=200&fit=crop",
+    },
+    {
+      date: "2024.10.12",
+      title: "우리 결혼해요",
+      content: "새로운 시작을 함께합니다.",
+      icon: "Sparkles",
+      image: null,
+    },
+  ],
 };
