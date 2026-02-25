@@ -72,7 +72,7 @@ const Main = () => {
       >
         <div className="relative w-full h-full p-4">
           <img
-            src="/images/main_hero.png"
+            src={`${import.meta.env.BASE_URL}images/main_hero.png`}
             alt="Wedding Hero"
             className="w-full h-full object-contain"
             style={{
