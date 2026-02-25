@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import { motion } from 'framer-motion';
 import { weddingInfo } from '../data/info';
@@ -115,10 +116,10 @@ const Main = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1 }}
         >
-          <h1 className="font-sketch text-5xl mb-6 text-gray-800 tracking-wide">
-            {weddingInfo.groom.name} <span className="text-3xl text-wedding-accent/70">&</span> {weddingInfo.bride.name}
+          <h1 className="font-sketch text-4xl sm:text-5xl mb-4 text-gray-800 tracking-wide">
+            {weddingInfo.groom.name} <span className="text-2xl sm:text-3xl text-wedding-accent/70">&</span> {weddingInfo.bride.name}
           </h1>
-          <p className="font-sketch text-2xl text-gray-500/80 leading-relaxed">
+          <p className="font-sketch text-xl sm:text-2xl text-gray-500/80 leading-relaxed">
             {weddingInfo.date}
           </p>
         </motion.div>
@@ -129,9 +130,9 @@ const Main = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3 }}
-        className="absolute bottom-8 flex flex-col items-center"
+        className="absolute bottom-4 flex flex-col items-center"
       >
-        <span className="font-sketch text-xl text-gray-400 mb-1">Scroll</span>
+        <span className="font-sketch text-lg text-gray-400 mb-0">Scroll</span>
         <motion.div
           animate={{ y: [0, 5, 0] }}
           transition={{ duration: 2, repeat: Infinity }}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { weddingInfo } from '../data/info';
 import { Phone, ChevronDown, ChevronUp, Copy, Check } from 'lucide-react';

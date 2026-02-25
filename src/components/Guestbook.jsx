@@ -65,6 +65,8 @@ const Guestbook = () => {
             className="w-full px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-xs font-serif"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            onWheel={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
             required
           />
         </div>
@@ -74,6 +76,8 @@ const Guestbook = () => {
             className="w-full h-16 px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-xs font-serif resize-none"
             value={content}
             onChange={(e) => setContent(e.target.value)}
+            onWheel={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
             required
           />
         </div>
@@ -81,6 +85,8 @@ const Guestbook = () => {
           type="submit"
           disabled={loading}
           className="w-full flex items-center justify-center gap-2 py-3 bg-wedding-accent text-white rounded-xl text-xs font-bold transition hover:opacity-90 disabled:bg-gray-200 shadow-md shadow-wedding-accent/10"
+          onWheel={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
         >
           <Send size={14} /> {loading ? '보내는 중...' : '축하메시지 보내기'}
         </button>
@@ -88,6 +94,8 @@ const Guestbook = () => {
 
       <div
         className="flex-1 overflow-y-auto space-y-4 pr-1 guestbook-list overscroll-contain pb-10"
+        onWheel={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
       >
         {fetching ? (
           <div className="text-center py-10 text-gray-300 text-[10px] font-serif">로딩 중...</div>
