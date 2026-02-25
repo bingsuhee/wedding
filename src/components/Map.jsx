@@ -1,6 +1,7 @@
 import React from 'react';
 import { weddingInfo } from '../data/info';
 import { MapPin, Navigation, Info } from 'lucide-react';
+import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
 const Map = () => {
   const { lat, lng, name, address } = weddingInfo.location;
@@ -17,8 +18,9 @@ const Map = () => {
   };
 
   return (
-    <div className="w-full min-h-dvh flex flex-col items-center justify-center py-20 px-6">
-      <div className="w-full max-w-sm text-center">
+    <section className="w-full min-h-dvh flex flex-col items-center justify-center py-20 px-6 overflow-hidden">
+      <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm">
+        <div className="text-center">
       <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
       <div className="mb-8">
         <p className="font-serif font-bold text-xl mb-3">{name}</p>
@@ -84,7 +86,8 @@ const Map = () => {
         </button>
       </div>
     </div>
-  </div>
+    </ScrollAnimationWrapper>
+  </section>
   );
 };
 
