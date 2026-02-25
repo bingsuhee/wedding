@@ -10,39 +10,33 @@ import Petals from './components/Petals';
 import { Heart } from 'lucide-react';
 
 const Section = ({ children, index, total, scrollYProgress, activeIndex }) => {
-  const step = 1 / total;
+  const step = 1 / (total - 1);
   const start = index * step;
   const prevStart = (index - 1) * step;
   const nextStart = (index + 1) * step;
 
-  // Thresholds: Stay at 1 from 10% to 90% of the active range
-  const enteringThreshold = prevStart + step * 0.9;
-  const exitingThreshold = start + step * 0.9;
-
-  // Stacking & Unveiling:
-  // We want the section to be fully visible earlier and stay visible longer.
+  // Symmetric & Linear Animations:
+  // Section scales and fades in as it becomes active, and scales/fades out as it exits.
   const scale = useTransform(scrollYProgress,
-    [prevStart, enteringThreshold, start, exitingThreshold, nextStart],
-    [0.9, 1, 1, 1, 0.85]
+    [prevStart, start, nextStart],
+    [0.9, 1, 0.9]
   );
 
   const opacityTransform = useTransform(scrollYProgress,
-    [prevStart, enteringThreshold, start, exitingThreshold, nextStart],
-    [0, 1, 1, 1, 0]
+    [prevStart, start, nextStart],
+    [0, 1, 0]
   );
 
   // Explicitly force opacity based on active index to avoid hanging states
   const isActive = activeIndex === index;
   const opacity = useTransform(opacityTransform, (v) => {
     if (isActive) return 1;
-    // If it's a past section, it should be fading/faded
-    // If it's a future section, it should be hidden
     return v;
   });
 
   const blurValue = useTransform(scrollYProgress,
-    [prevStart, enteringThreshold, start, exitingThreshold, nextStart],
-    [10, 0, 0, 0, 10]
+    [prevStart, start, nextStart],
+    [10, 0, 10]
   );
   const filter = useTransform(blurValue, (v) => `blur(${v}px)`);
 
@@ -116,24 +110,27 @@ function App() {
       isLocked.current = true;
       setCurrentIndex(nextIndex);
 
-      // Calculate target using dvh if possible, or consistent window.innerHeight
+      // Calculate target: each section is 100dvh
       const vh = window.innerHeight;
-      const targetY = nextIndex * (2 * vh);
+      const targetY = nextIndex * vh;
 
       window.scrollTo({
         top: targetY,
         behavior: 'smooth'
       });
 
-      // Unlock after animation/transition time - increased for authoritative snap
+      // Unlock after transition time
       setTimeout(() => {
         isLocked.current = false;
-      }, 1000);
+      }, 800);
     }
   };
 
   useEffect(() => {
     const onWheel = (e) => {
+      // Sensitivity threshold for wheel
+      if (Math.abs(e.deltaY) < 10) return;
+
       // Don't prevent default if we're inside Guestbook and it needs to scroll
       if (currentIndex === 4) {
         const gbList = document.querySelector('.guestbook-list');
@@ -176,7 +173,8 @@ function App() {
 
     const onTouchEnd = (e) => {
       const deltaY = lastTouchY.current - e.changedTouches[0].clientY;
-      if (Math.abs(deltaY) > 50) {
+      // Increased sensitivity (threshold 20 instead of 50)
+      if (Math.abs(deltaY) > 20) {
         handleSnap(deltaY > 0 ? 'down' : 'up');
       }
     };
@@ -200,7 +198,7 @@ function App() {
       <ProgressBar />
 
       {/* Scrollable area */}
-      <div ref={containerRef} className="relative" style={{ height: `${sections.length * 200}dvh` }}>
+      <div ref={containerRef} className="relative" style={{ height: `${sections.length * 100}dvh` }}>
         {sections.map((section, idx) => (
           <Section
             key={idx}
