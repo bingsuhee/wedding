@@ -21,12 +21,16 @@ const TimelineItem = ({ event, index }) => {
   return (
     <div className="relative mb-12 last:mb-0">
       {/* Vertical Line Connector */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-px h-full bg-wedding-accent/20 -z-10" />
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-wedding-accent/40 -z-10" />
 
       {/* Icon Node */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-2 bg-white p-2 rounded-full border border-wedding-accent/30 shadow-sm z-10">
+      <motion.div
+        animate={{ y: [0, -5, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute left-1/2 transform -translate-x-1/2 -translate-y-2 bg-white p-2 rounded-full border border-wedding-accent/30 shadow-sm z-10"
+      >
         <IconComponent size={18} className="text-wedding-accent" />
-      </div>
+      </motion.div>
 
       {/* Content Container */}
       <div className={`flex items-center justify-between w-full ${isEven ? 'flex-row-reverse' : 'flex-row'}`}>
@@ -50,7 +54,7 @@ const TimelineItem = ({ event, index }) => {
 
             {event.image && (
               <div className="mb-3 inline-block">
-                <div className="bg-white p-2 shadow-md rotate-2 hover:rotate-0 transition-transform duration-300">
+                <div className="bg-white p-2 shadow-md rotate-2 hover:rotate-[-2deg] transition-transform duration-300">
                   <img
                     src={`${import.meta.env.BASE_URL}${event.image}`}
                     alt={event.title}
