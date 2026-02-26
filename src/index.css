@@ -7,82 +7,93 @@
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
 }
 
 @font-face {
-  font-family: 'CookieRun Regular';
+  font-family: 'CookieRun';
   src: url('/fonts/CookieRun Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
 }
 
 @font-face {
-  font-family: 'DMSans-VariableFont_opsz,wght';
+  font-family: 'DM Sans 9pt';
   src: url('/fonts/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A;
 }
 
 @font-face {
-  font-family: 'JosefinSans-VariableFont_wght';
+  font-family: 'Josefin Sans Thin';
   src: url('/fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A;
 }
 
 @font-face {
-  font-family: 'KyoboHandwriting2019';
+  font-family: 'Kyobo Handwriting 2019';
   src: url('/fonts/KyoboHandwriting2019.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
 }
 
 @font-face {
-  font-family: 'Maplestory Light';
+  font-family: 'Maplestory';
   src: url('/fonts/Maplestory Light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
 }
 
 @font-face {
-  font-family: 'memomentKkukkkuk';
+  font-family: 'MemomentKkukkukk';
   src: url('/fonts/memomentKkukkkuk.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
 }
 
 @font-face {
-  font-family: 'Rubik-VariableFont_wght';
+  font-family: 'Rubik Light';
   src: url('/fonts/Rubik-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A;
 }
 
 @font-face {
-  font-family: '강원교육새음';
-  src: url('/fonts/강원교육새음.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: '온글잎 의연체';
+  font-family: 'Ownglyph EuiyeonChae';
   src: url('/fonts/온글잎 의연체.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
 }
 
 @theme {
-  --font-wemade: "WN Sans M", sans-serif;
+  --font-base: sans-serif;
+  --font-wemade: "WN Sans M";
+  --font-cookierun: "CookieRun";
+  --font-kyobo: "Kyobo Handwriting 2019";
+  --font-maplestory: "Maplestory";
+  --font-memomentKkukkukk: "MemomentKkukkukk";
+  --font-ownglyph: "Ownglyph EuiyeonChae";
+
+  --font-e-dm: "DM Sans 9pt";
+  --font-e-josefin: "Josefin Sans Thin";
+  --font-e-rubik: "Rubik Light";
 
   --color-wedding-bg: #fdfdfd;
   --color-wedding-primary: #5b6467;
@@ -90,7 +101,7 @@
 }
 
 @utility font-wemade {
-  font-family: var(--font-wemade);
+  font-family: var(--font-wemade), var(--font-base);
 }
 
 @utility paper-texture {
