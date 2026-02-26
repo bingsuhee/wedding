@@ -17,13 +17,13 @@ const AccountItem = ({ name, account, relation }) => {
   return (
     <div className="flex items-center justify-between py-4 border-b border-gray-50 last:border-0">
       <div className="text-left">
-        <p className="text-[10px] text-gray-400 mb-0.5">{relation}</p>
-        <p className="text-sm font-bold text-gray-700">{name}</p>
-        <p className="text-xs text-gray-500 font-mono mt-1">{account}</p>
+        <p className="text-sm text-gray-400 mb-0.5">{relation}</p>
+        <p className="text-base font-bold text-gray-700">{name}</p>
+        <p className="text-base text-gray-500 mt-1">{account}</p>
       </div>
       <button
         onClick={handleCopy}
-        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gray-50 text-[10px] font-bold text-gray-500 hover:bg-gray-100 transition"
+        className="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-gray-50 text-sm font-bold text-gray-500 hover:bg-gray-100 transition"
       >
         {copied ? (
           <>
@@ -50,7 +50,7 @@ const AccountSection = ({ title, person, father, mother }) => {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between px-6 py-4 bg-gray-50/50 rounded-xl hover:bg-gray-50 transition"
       >
-        <span className="text-sm font-bold text-gray-700">{title} 계좌번호</span>
+        <span className="text-base font-bold text-gray-700">{title} 계좌번호</span>
         {isOpen ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
       </button>
 
@@ -80,25 +80,25 @@ const Invitation = () => {
       <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm">
         <div className="mx-auto bg-white pt-10 px-10 pb-10 rounded-2xl shadow-sm border border-gray-100 text-center">
           <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold">소중한 분들을 초대합니다</h3>
-          <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line font-serif text-sm px-2">
+          <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line font-serif text-lg px-2">
             {weddingInfo.message}
           </p>
 
           <div className="space-y-8 text-gray-700 font-serif mb-16">
             <div className="flex flex-col gap-2">
-              <span className="text-[10px] text-wedding-accent/70 uppercase tracking-widest">Groom</span>
+              <span className="text-base text-wedding-accent/70 uppercase tracking-widest">Groom</span>
               <div className="flex items-center justify-center gap-3">
-                <span className="text-sm text-gray-500">{weddingInfo.groom.father.name} · {weddingInfo.groom.mother.name}</span>
-                <span className="text-xs text-gray-300">의 장남</span>
-                <span className="text-base font-bold">{weddingInfo.groom.name}</span>
+                <span className="text-base text-gray-500">{weddingInfo.groom.father.name} · {weddingInfo.groom.mother.name}</span>
+                <span className="text-sm text-gray-300">의 장남</span>
+                <span className="text-lg font-bold">{weddingInfo.groom.name}</span>
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <span className="text-[10px] text-wedding-accent/70 uppercase tracking-widest">Bride</span>
+              <span className="text-base text-wedding-accent/70 uppercase tracking-widest">Bride</span>
               <div className="flex items-center justify-center gap-3">
-                <span className="text-sm text-gray-500">{weddingInfo.bride.father.name} · {weddingInfo.bride.mother.name}</span>
-                <span className="text-xs text-gray-300">의 장녀</span>
-                <span className="text-base font-bold">{weddingInfo.bride.name}</span>
+                <span className="text-base text-gray-500">{weddingInfo.bride.father.name} · {weddingInfo.bride.mother.name}</span>
+                <span className="text-sm text-gray-300">의 장녀</span>
+                <span className="text-lg font-bold">{weddingInfo.bride.name}</span>
               </div>
             </div>
           </div>
@@ -121,13 +121,13 @@ const Invitation = () => {
           <div className="mt-16 flex justify-center gap-3">
             <a
               href={`tel:${weddingInfo.groom.contact}`}
-              className="flex flex-1 items-center justify-center gap-2 px-4 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-[10px] font-bold transition hover:bg-wedding-accent hover:text-white uppercase tracking-tighter"
+              className="flex flex-1 items-center justify-center gap-2 px-4 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-sm font-bold transition hover:bg-wedding-accent hover:text-white uppercase tracking-tighter"
             >
               <Phone size={12} /> 신랑 연락하기
             </a>
             <a
               href={`tel:${weddingInfo.bride.contact}`}
-              className="flex flex-1 items-center justify-center gap-2 px-4 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-[10px] font-bold transition hover:bg-wedding-accent hover:text-white uppercase tracking-tighter"
+              className="flex flex-1 items-center justify-center gap-2 px-4 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-sm font-bold transition hover:bg-wedding-accent hover:text-white uppercase tracking-tighter"
             >
               <Phone size={12} /> 신부 연락하기
             </a>
