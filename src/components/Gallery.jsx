@@ -34,7 +34,7 @@ const PolaroidImage = ({ image, index }) => {
           </div>
         )}
       </Item>
-      <p className="mt-3 text-xs font-serif text-gray-400 text-center">
+      <p className="mt-3 text-sm font-serif text-gray-400 text-center">
         {image.caption}
       </p>
     </motion.div>
