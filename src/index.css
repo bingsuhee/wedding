@@ -29,6 +29,10 @@
   font-family: var(--font-sketch);
 }
 
+@utility font-wemade {
+  font-family: var(--font-wemade);
+}
+
 @utility paper-texture {
   background-color: #fcfaf2;
   position: relative;
