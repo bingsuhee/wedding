@@ -104,6 +104,38 @@
   font-family: var(--font-wemade), var(--font-base);
 }
 
+@utility font-cookierun {
+  font-family: var(--font-cookierun);
+}
+
+@utility font-kyobo {
+  font-family: var(--font-kyobo);
+}
+
+@utility font-maplestory {
+  font-family: var(--font-maplestory);
+}
+
+@utility font-memomentKkukkukk {
+  font-family: var(--font-memomentKkukkukk);
+}
+
+@utility font-ownglyph {
+  font-family: var(--font-ownglyph);
+}
+
+@utility font-e-dm {
+  font-family: var(--font-e-dm);
+}
+
+@utility font-e-josefin {
+  font-family: var(--font-e-josefin);
+}
+
+@utility font-e-rubik {
+  font-family: var(--font-e-rubik);
+}
+
 @utility paper-texture {
   background-color: #fcfaf2;
   position: relative;
