@@ -2,10 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap');
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'WEMADE';
+  src: url('/fonts/WN-Sans-Medium.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --font-sans: "Pretendard", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-serif: "Nanum Pen Script", "Gowun Batang", serif;
   --font-sketch: "Nanum Pen Script", "Gowun Dodum", cursive;
+  --font-wemade: "WEMADE", "Gowun Batang", serif;
 
   --color-wedding-bg: #fdfdfd;
   --color-wedding-primary: #5b6467;
@@ -48,7 +57,7 @@
   }
 
   body {
-    @apply bg-wedding-bg text-gray-800 font-sketch text-lg break-keep;
+    @apply bg-wedding-bg text-gray-800 font-wemade text-lg break-keep;
     overflow-y: auto;
     overflow-x: hidden;
   }

@@ -34,7 +34,7 @@ const PolaroidImage = ({ image, index }) => {
           </div>
         )}
       </Item>
-      <p className="mt-3 text-sm font-serif text-gray-400 text-center">
+      <p className="mt-3 text-sm font-wemade text-gray-400 text-center">
         {image.caption}
       </p>
     </motion.div>
@@ -53,7 +53,7 @@ const Gallery = () => {
     <ScrollAnimationWrapper>
       <section className="py-20 px-6 bg-wedding-bg/30">
         <div className="text-center mb-16">
-          <h2 className="text-2xl font-serif text-wedding-accent mb-2">Gallery</h2>
+          <h2 className="text-2xl font-wemade text-wedding-accent mb-2">Gallery</h2>
           <div className="w-12 h-px bg-wedding-accent/30 mx-auto" />
         </div>
 
@@ -73,7 +73,7 @@ const Gallery = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleLoadMore}
-              className="px-8 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-sm font-serif hover:bg-wedding-accent hover:text-white transition-colors duration-300"
+              className="px-8 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-sm font-wemade hover:bg-wedding-accent hover:text-white transition-colors duration-300"
             >
               더보기
             </motion.button>
