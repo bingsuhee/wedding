@@ -10,9 +10,10 @@ const PolaroidImage = ({ image, index }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ rotate: index % 2 === 0 ? 2 : -2, scale: 1.02 }}
       transition={{ duration: 0.6, delay: (index % 6) * 0.1 }}
       viewport={{ once: true }}
-      className="bg-white p-2 pb-6 shadow-md border border-gray-100 mb-4"
+      className="bg-white p-2 pb-6 shadow-md border border-gray-100 mb-4 transition-transform duration-300"
     >
       <Item
         original={`${import.meta.env.BASE_URL}${image.src}`}

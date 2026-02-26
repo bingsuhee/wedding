@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Main from './components/Main';
 import Invitation from './components/Invitation';
 import Timeline from './components/Timeline';
@@ -7,10 +7,16 @@ import Map from './components/Map';
 import Guestbook from './components/Guestbook';
 import ProgressBar from './components/ProgressBar';
 import Petals from './components/Petals';
+import NotificationToast from './components/NotificationToast';
 import { Heart } from 'lucide-react';
 import { weddingInfo } from './data/info';
+import { supabase } from './lib/supabaseClient';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
+  const [notificationQueue, setNotificationQueue] = useState([]);
+  const [currentNotification, setCurrentNotification] = useState(null);
+
   useEffect(() => {
     // Dynamic Title
     document.title = `${weddingInfo.groom.name} ♥ ${weddingInfo.bride.name} 저희 결혼합니다`;
@@ -35,8 +41,54 @@ function App() {
     updateMeta('twitter:description', desc);
   }, []);
 
+  // Supabase Realtime Subscription
+  useEffect(() => {
+    console.log('Initializing global Supabase subscription...');
+    const channel = supabase
+      .channel('global_guestbook_changes')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'guestbook' },
+        (payload) => {
+          console.log('New message received globally:', payload.new);
+          // 1. Add to notification queue
+          setNotificationQueue((prev) => [...prev, payload.new]);
+
+          // 2. Dispatch custom event for Guestbook component
+          window.dispatchEvent(new CustomEvent('new-guestbook-message', { detail: payload.new }));
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  // Notification Queue Handler
+  useEffect(() => {
+    if (!currentNotification && notificationQueue.length > 0) {
+      const next = notificationQueue[0];
+      setCurrentNotification(next);
+      setNotificationQueue((prev) => prev.slice(1));
+    }
+  }, [notificationQueue, currentNotification]);
+
+  const handleNotificationDone = useCallback(() => {
+    setCurrentNotification(null);
+  }, []);
+
   return (
     <div className="bg-wedding-bg min-h-screen">
+      <AnimatePresence>
+        {currentNotification && (
+          <NotificationToast
+            key={currentNotification.id}
+            message={currentNotification}
+            onDone={handleNotificationDone}
+          />
+        )}
+      </AnimatePresence>
       <Petals count={20} />
       <ProgressBar />
 

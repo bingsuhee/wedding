@@ -13,20 +13,16 @@ const Guestbook = () => {
   useEffect(() => {
     fetchMessages();
 
-    // Subscribe to realtime changes
-    const channel = supabase
-      .channel('guestbook_changes')
-      .on(
-        'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'guestbook' },
-        (payload) => {
-          setMessages((prev) => [payload.new, ...prev]);
-        }
-      )
-      .subscribe();
+    // Listen to global subscription events from App.jsx
+    const handleNewMessage = (e) => {
+      const newMessage = e.detail;
+      setMessages((prev) => [newMessage, ...prev]);
+    };
+
+    window.addEventListener('new-guestbook-message', handleNewMessage);
 
     return () => {
-      supabase.removeChannel(channel);
+      window.removeEventListener('new-guestbook-message', handleNewMessage);
     };
   }, []);
 
