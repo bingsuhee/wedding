@@ -79,7 +79,7 @@ function App() {
   }, []);
 
   return (
-    <div className="bg-wedding-bg min-h-screen text-lg">
+    <div className="bg-wedding-bg min-h-screen text-base">
       <AnimatePresence>
         {currentNotification && (
           <NotificationToast
