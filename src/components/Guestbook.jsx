@@ -12,6 +12,22 @@ const Guestbook = () => {
 
   useEffect(() => {
     fetchMessages();
+
+    // Subscribe to realtime changes
+    const channel = supabase
+      .channel('guestbook_changes')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'guestbook' },
+        (payload) => {
+          setMessages((prev) => [payload.new, ...prev]);
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const fetchMessages = async () => {
@@ -45,7 +61,7 @@ const Guestbook = () => {
 
       setName('');
       setContent('');
-      await fetchMessages();
+      // No need to call fetchMessages() as Realtime subscription handles it
     } catch (error) {
       console.error('Error adding message:', error.message);
       alert('메시지 작성에 실패했습니다.');
