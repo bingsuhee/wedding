@@ -111,7 +111,7 @@ function App() {
   <p className="font-cookierun">쿠키런 폰트</p>
   <p className="font-kyobo">교보 폰트</p>
   <p className="font-maplestory">메이플스토리 폰트</p>
-  <p className="font-memomentKkukkukk"메모꾹꾹 폰트</p>
+  <p className="font-memomentKkukkukk">메모꾹꾹 폰트</p>
   <p className="font-ownglyph">Ownglyph EuiyeonChae</p>
   <p className="font-e-dm">DM Sans 9pt</p>
   <p className="font-e-josefin">Josefin font</p>
