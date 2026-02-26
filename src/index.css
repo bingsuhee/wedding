@@ -11,7 +11,7 @@
 
 @font-face {
   font-family: 'CookieRun Regular';
-  src: url('/fonts/CookieRun Regular.ttf') format('opentype');
+  src: url('/fonts/CookieRun Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -19,7 +19,7 @@
 
 @font-face {
   font-family: 'DMSans-VariableFont_opsz,wght';
-  src: url('/fonts/DMSans-VariableFont_opsz,wght.ttf') format('opentype');
+  src: url('/fonts/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -27,7 +27,7 @@
 
 @font-face {
   font-family: 'JosefinSans-VariableFont_wght';
-  src: url('/fonts/JosefinSans-VariableFont_wght.ttf') format('opentype');
+  src: url('/fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -35,7 +35,7 @@
 
 @font-face {
   font-family: 'KyoboHandwriting2019';
-  src: url('/fonts/KyoboHandwriting2019.ttf') format('opentype');
+  src: url('/fonts/KyoboHandwriting2019.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -43,7 +43,7 @@
 
 @font-face {
   font-family: 'Maplestory Light';
-  src: url('/fonts/Maplestory Light.ttf') format('opentype');
+  src: url('/fonts/Maplestory Light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -51,7 +51,7 @@
 
 @font-face {
   font-family: 'memomentKkukkkuk';
-  src: url('/fonts/memomentKkukkkuk.ttf') format('opentype');
+  src: url('/fonts/memomentKkukkkuk.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -59,7 +59,7 @@
 
 @font-face {
   font-family: 'Rubik-VariableFont_wght';
-  src: url('/fonts/Rubik-VariableFont_wght.ttf') format('opentype');
+  src: url('/fonts/Rubik-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -67,7 +67,7 @@
 
 @font-face {
   font-family: '강원교육새음';
-  src: url('/fonts/강원교육새음.ttf') format('opentype');
+  src: url('/fonts/강원교육새음.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -75,7 +75,7 @@
 
 @font-face {
   font-family: '온글잎 의연체';
-  src: url('/fonts/온글잎 의연체.ttf') format('opentype');
+  src: url('/fonts/온글잎 의연체.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
