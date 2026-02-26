@@ -77,7 +77,7 @@ const Guestbook = () => {
           <input
             type="text"
             placeholder="이름"
-            className="w-full px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-xs font-serif"
+            className="w-full px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-base font-serif"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -86,7 +86,7 @@ const Guestbook = () => {
         <div className="mb-4">
           <textarea
             placeholder="축하 메시지를 남겨주세요"
-            className="w-full h-16 px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-xs font-serif resize-none"
+            className="w-full h-16 px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-base font-serif resize-none"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
@@ -95,7 +95,7 @@ const Guestbook = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-3 bg-wedding-accent text-white rounded-xl text-xs font-bold transition hover:opacity-90 disabled:bg-gray-200 shadow-md shadow-wedding-accent/10"
+          className="w-full flex items-center justify-center gap-2 py-3 bg-wedding-accent text-white rounded-xl text-base font-bold transition hover:opacity-90 disabled:bg-gray-200 shadow-md shadow-wedding-accent/10"
         >
           <Send size={14} /> {loading ? '보내는 중...' : '축하메시지 보내기'}
         </button>
@@ -112,19 +112,19 @@ const Guestbook = () => {
               </div>
               <div className="flex-1 text-left">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="font-bold text-xs text-gray-700 font-serif">{msg.name}</span>
-                  <span className="text-[9px] text-gray-300 font-serif">
+                  <span className="font-bold text-base text-gray-700 font-serif">{msg.name}</span>
+                  <span className="text-sm text-gray-300 font-serif">
                     {new Date(msg.created_at).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-xs text-gray-500 leading-relaxed font-serif whitespace-pre-wrap">{msg.content}</p>
+                <p className="text-base text-gray-500 leading-relaxed font-serif whitespace-pre-wrap">{msg.content}</p>
               </div>
             </div>
           ))
         ) : (
           <div className="text-center py-10 text-gray-300">
             <MessageSquare size={32} className="mx-auto mb-4 opacity-10" />
-            <p className="text-[10px] font-serif italic">첫 번째 축하 메시지를 남겨주세요.</p>
+            <p className="text-base font-serif italic">첫 번째 축하 메시지를 남겨주세요.</p>
           </div>
         )}
       </div>
