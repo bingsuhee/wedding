@@ -24,3 +24,7 @@ CREATE POLICY "Allow public insert" ON guestbook
 
 -- 삭제(DELETE) 차단
 -- 별도의 DELETE policy를 만들지 않으면 차단됩니다.
+
+-- 4. Realtime 활성화 (방명록 실시간 업데이트를 위해 필요)
+-- Supabase 대시보드(Database -> Replication)에서 설정하거나 아래 SQL 실행
+-- ALTER PUBLICATION supabase_realtime ADD TABLE guestbook;
