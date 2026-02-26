@@ -45,10 +45,10 @@ const TimelineItem = ({ event, index }) => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <span className="text-xs font-serif text-wedding-accent mb-1 block">
+            <span className="text-base font-serif text-wedding-accent mb-1 block">
               {event.date}
             </span>
-            <h4 className="text-base font-bold text-gray-800 mb-2">
+            <h4 className="text-lg font-bold text-gray-800 mb-2">
               {event.title}
             </h4>
 
@@ -64,7 +64,7 @@ const TimelineItem = ({ event, index }) => {
               </div>
             )}
 
-            <p className="text-sm text-gray-600 leading-relaxed font-serif break-keep">
+            <p className="text-base text-gray-600 leading-relaxed font-serif break-keep">
               {event.content}
             </p>
           </motion.div>
