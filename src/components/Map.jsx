@@ -21,9 +21,9 @@ const Map = () => {
     <section className="w-full min-h-dvh flex flex-col items-center justify-center py-20 px-6 overflow-hidden">
       <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm">
         <div className="text-center">
-      <h3 className="text-xl font-serif mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
+      <h3 className="text-xl font-wemade mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
       <div className="mb-8">
-        <p className="font-serif font-bold text-2xl mb-3">{name}</p>
+        <p className="font-wemade font-bold text-2xl mb-3">{name}</p>
         <p className="text-gray-400 text-xl leading-relaxed max-w-[240px] mx-auto">{address}</p>
       </div>
 

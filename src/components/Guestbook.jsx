@@ -68,16 +68,16 @@ const Guestbook = () => {
 
   return (
     <section className="w-full min-h-dvh flex flex-col items-center py-20 px-6 overflow-hidden">
-      <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm">
+      <ScrollAnimationWrapper amount={0.1} className="w-full max-w-sm">
       <div className="flex flex-col">
-      <h3 className="text-xl font-serif mb-12 text-wedding-accent text-center font-bold">방명록</h3>
+      <h3 className="text-xl font-wemade mb-12 text-wedding-accent text-center font-bold">방명록</h3>
 
       <form onSubmit={handleSubmit} className="mb-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 shrink-0">
         <div className="mb-4">
           <input
             type="text"
             placeholder="이름"
-            className="w-full px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-base font-serif"
+            className="w-full px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-base font-wemade"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -86,7 +86,7 @@ const Guestbook = () => {
         <div className="mb-4">
           <textarea
             placeholder="축하 메시지를 남겨주세요"
-            className="w-full h-16 px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-base font-serif resize-none"
+            className="w-full h-16 px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-base font-wemade resize-none"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
@@ -103,7 +103,7 @@ const Guestbook = () => {
 
       <div className="space-y-4 guestbook-list pb-10">
         {fetching ? (
-          <div className="text-center py-10 text-gray-300 text-[10px] font-serif">로딩 중...</div>
+          <div className="text-center py-10 text-gray-300 text-[10px] font-wemade">로딩 중...</div>
         ) : messages.length > 0 ? (
           messages.map((msg) => (
             <div key={msg.id} className="bg-white p-4 rounded-xl border border-gray-50 flex gap-4 shadow-sm">
@@ -112,19 +112,19 @@ const Guestbook = () => {
               </div>
               <div className="flex-1 text-left">
                 <div className="flex justify-between items-center mb-1">
-                  <span className="font-bold text-base text-gray-700 font-serif">{msg.name}</span>
-                  <span className="text-sm text-gray-300 font-serif">
+                  <span className="font-bold text-base text-gray-700 font-wemade">{msg.name}</span>
+                  <span className="text-sm text-gray-300 font-wemade">
                     {new Date(msg.created_at).toLocaleDateString()}
                   </span>
                 </div>
-                <p className="text-base text-gray-500 leading-relaxed font-serif whitespace-pre-wrap">{msg.content}</p>
+                <p className="text-base text-gray-500 leading-relaxed font-wemade whitespace-pre-wrap">{msg.content}</p>
               </div>
             </div>
           ))
         ) : (
           <div className="text-center py-10 text-gray-300">
             <MessageSquare size={32} className="mx-auto mb-4 opacity-10" />
-            <p className="text-base font-serif italic">첫 번째 축하 메시지를 남겨주세요.</p>
+            <p className="text-base font-wemade italic">첫 번째 축하 메시지를 남겨주세요.</p>
           </div>
         )}
       </div>

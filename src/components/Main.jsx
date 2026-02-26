@@ -57,7 +57,7 @@ const Main = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2, duration: 1.5 }}
-            className="font-sketch text-4xl text-wedding-primary"
+            className="font-wemade text-4xl text-wedding-primary"
           >
             Our Wedding
           </motion.h2>
@@ -130,7 +130,7 @@ const Main = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 1 }}
         >
-          <h1 className="font-sketch text-4xl sm:text-5xl mb-1 text-gray-800 tracking-wide">
+          <h1 className="font-wemade text-4xl sm:text-5xl mb-1 text-gray-800 tracking-wide">
             {weddingInfo.groom.name} <span className="text-2xl sm:text-3xl text-wedding-accent/70">&</span> {weddingInfo.bride.name}
           </h1>
           <svg width="150" height="10" viewBox="0 0 150 10" className="mx-auto mb-4 opacity-30">
@@ -144,7 +144,7 @@ const Main = () => {
               transition={{ delay: 2.5, duration: 1 }}
             />
           </svg>
-          <p className="font-sketch text-xl sm:text-2xl text-gray-500/80 leading-relaxed">
+          <p className="font-wemade text-xl sm:text-2xl text-gray-500/80 leading-relaxed">
             {weddingInfo.date}
           </p>
         </motion.div>
@@ -157,7 +157,7 @@ const Main = () => {
         transition={{ delay: 3 }}
         className="mt-12 flex flex-col items-center"
       >
-        <span className="font-sketch text-lg text-gray-400 mb-0">Scroll</span>
+        <span className="font-wemade text-lg text-gray-400 mb-0">Scroll</span>
         <motion.div
           animate={{ y: [0, 5, 0] }}
           transition={{ duration: 2, repeat: Infinity }}

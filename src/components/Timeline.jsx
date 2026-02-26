@@ -45,7 +45,7 @@ const TimelineItem = ({ event, index }) => {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <span className="text-base font-serif text-wedding-accent mb-1 block">
+            <span className="text-base font-wemade text-wedding-accent mb-1 block">
               {event.date}
             </span>
             <h4 className="text-lg font-bold text-gray-800 mb-2">
@@ -64,7 +64,7 @@ const TimelineItem = ({ event, index }) => {
               </div>
             )}
 
-            <p className="text-base text-gray-600 leading-relaxed font-serif break-keep">
+            <p className="text-base text-gray-600 leading-relaxed font-wemade break-keep">
               {event.content}
             </p>
           </motion.div>
@@ -79,7 +79,7 @@ const Timeline = () => {
     <ScrollAnimationWrapper>
       <section className="py-20 px-6 bg-white overflow-hidden">
         <div className="text-center mb-16">
-          <h2 className="text-2xl font-serif text-wedding-accent mb-2">Love Story</h2>
+          <h2 className="text-2xl font-wemade text-wedding-accent mb-2">Love Story</h2>
           <div className="w-12 h-px bg-wedding-accent/30 mx-auto" />
         </div>
 
