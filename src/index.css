@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Nanum+Myeongjo:wght@400;700;800&family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap');
 
 @font-face {
   font-family: 'WN Sans M';
@@ -10,23 +9,84 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'CookieRun Regular';
+  src: url('/fonts/CookieRun Regular.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DMSans-VariableFont_opsz,wght';
+  src: url('/fonts/DMSans-VariableFont_opsz,wght.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'JosefinSans-VariableFont_wght';
+  src: url('/fonts/JosefinSans-VariableFont_wght.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'KyoboHandwriting2019';
+  src: url('/fonts/KyoboHandwriting2019.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Maplestory Light';
+  src: url('/fonts/Maplestory Light.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'memomentKkukkkuk';
+  src: url('/fonts/memomentKkukkkuk.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Rubik-VariableFont_wght';
+  src: url('/fonts/Rubik-VariableFont_wght.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: '강원교육새음';
+  src: url('/fonts/강원교육새음.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: '온글잎 의연체';
+  src: url('/fonts/온글잎 의연체.ttf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: "Pretendard", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: "Nanum Pen Script", "Gowun Batang", serif;
-  --font-sketch: "Nanum Pen Script", "Gowun Dodum", cursive;
   --font-wemade: "WN Sans M", sans-serif;
 
   --color-wedding-bg: #fdfdfd;
   --color-wedding-primary: #5b6467;
   --color-wedding-accent: #D4AF37; /* Champagne Gold */
-}
-
-@utility font-serif {
-  font-family: var(--font-serif);
-}
-
-@utility font-sketch {
-  font-family: var(--font-sketch);
 }
 
 @utility font-wemade {
