@@ -15,7 +15,7 @@ const AccountItem = ({ name, account, relation }) => {
   };
 
   return (
-    <div className="flex items-center justify-between py-4 border-b border-gray-50 last:border-0">
+    <div className="flex items-center justify-between py-4 border-b border-gray-50 last:border-0 font-wemade">
       <div className="text-left">
         <p className="text-sm text-gray-400 mb-0.5">{relation}</p>
         <p className="text-base font-bold text-gray-700">{name}</p>
