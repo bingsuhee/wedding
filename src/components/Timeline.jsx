@@ -82,7 +82,7 @@ const Timeline = () => {
 
         <div className="relative max-w-lg mx-auto">
           {/* Continuous Vertical Line */}
-          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-0 border-l border-dashed border-wedding-accent/60 z-0" />
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-0 border-l-2 border-dashed border-wedding-accent/60 z-0" />
 
           <div className="relative z-10">
             {weddingInfo.timeline.map((event, index) => (

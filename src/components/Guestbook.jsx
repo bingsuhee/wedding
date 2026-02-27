@@ -124,7 +124,7 @@ const Guestbook = () => {
               </div>
               <p className="text-base text-gray-600 leading-relaxed whitespace-pre-wrap font-default">{msg.content}</p>
               {/* Washi tape effect */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-white/40 border border-dashed border-gray-200 rotate-2 pointer-events-none" />
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-white/40 border border-gray-200/50 rotate-2 pointer-events-none" />
             </div>
           ))
         ) : (
