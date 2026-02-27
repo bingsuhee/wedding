@@ -17,8 +17,8 @@ export const weddingInfo = {
   location: {
     name: "JK아트컨벤션",
     address: "서울 영등포구 문래로 164",
-    lat: 37.5194,
-    lng: 126.8912,
+    lat: 37.517769,
+    lng: 126.900079,
   },
   message: "저희 두 사람이 사랑으로 만나\n하나의 가정을 이루게 되었습니다.\n저희의 새로운 출발을 축복해 주시면 감사하겠습니다.",
   gallery: [
