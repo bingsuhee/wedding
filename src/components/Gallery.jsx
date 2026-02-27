@@ -62,6 +62,9 @@ const Gallery = () => {
         <PhotoGallery
           options={{
             clickToCloseNonZoomable: true,
+            bgClickAction: 'close',
+            tapAction: 'close',
+            secondaryClickAction: 'close',
           }}
         >
           <div className="grid grid-cols-2 gap-4">

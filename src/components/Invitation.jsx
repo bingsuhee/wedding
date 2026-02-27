@@ -81,7 +81,7 @@ const Invitation = () => {
         <div className="mx-auto bg-white pt-10 px-8 pb-10 sketchy-border-subtle text-center shadow-sm relative">
           <div className="absolute top-4 left-1/2 -translate-x-1/2 w-20 h-6 bg-wedding-accent/10 -rotate-2 mask-sketch opacity-50" style={{ maskImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }}></div>
 
-          <div className="flex flex-col items-center justify-center mb-12">
+          <div className="flex flex-col items-center justify-center mb-6">
             <div className="flex items-center justify-center gap-2 mb-6">
               <Star size={16} className="text-wedding-accent/40 animate-pulse" />
               <h3 className="text-xl text-wedding-accent font-bold marker-highlight inline-block">소중한 분들을 초대합니다</h3>
@@ -90,7 +90,7 @@ const Invitation = () => {
             <img
               src={`${import.meta.env.BASE_URL}images/illust/main_cake.png`}
               alt="Wedding Cake"
-              className="w-24 h-24 object-contain"
+              className="w-48 h-48 object-contain"
             />
           </div>
           <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line text-lg px-2 relative">
