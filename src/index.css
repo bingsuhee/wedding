@@ -2,16 +2,16 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 @font-face {
-  font-family: 'Nanum GaRamYeonGgoc';
+  font-family: 'Korean Font';
   src: url('/fonts/NanumGaRamYeonGgoc.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
+  /*unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;*/
 }
 
 @font-face {
-  font-family: 'Dancing Script';
+  font-family: 'English Font';
   src: url('/fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
@@ -20,8 +20,8 @@
 }
 
 @font-face {
-  font-family: 'Montserrat';
-  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-family: 'Number Font';
+  src: url('/fonts/NanumGaRamYeonGgoc.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -31,9 +31,9 @@
 
 @theme {
   --font-base: sans-serif;
-  --font-korean: "Nanum GaRamYeonGgoc";
-  --font-english: "Dancing Script";
-  --font-number: "Montserrat";
+  --font-korean: "Korean Font";
+  --font-english: "English Font";
+  --font-number: "Number Font";
 
   --font-default: var(--font-number), var(--font-english), var(--font-korean), var(--font-base);
 
