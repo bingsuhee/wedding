@@ -68,7 +68,7 @@ const Guestbook = () => {
 
   return (
     <section className="w-full min-h-dvh flex flex-col items-center py-20 px-6 overflow-hidden">
-      <ScrollAnimationWrapper amount={0.1} className="w-full max-w-sm">
+      <ScrollAnimationWrapper amount={0.05} className="w-full max-w-sm">
       <div className="flex flex-col">
       <h3 className="text-xl mb-12 text-wedding-accent text-center font-bold">방명록</h3>
 
