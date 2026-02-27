@@ -64,11 +64,11 @@ const NotificationToast = ({ message, onDone }) => {
           )}
           <div className="flex-1 overflow-hidden">
             <div className="flex justify-between items-center mb-0.5">
-              <span className="font-bold text-sm">새로운 축하 메시지</span>
+              <span className="font-bold text-xs">새로운 축하 메시지</span>
               <span className="text-[10px] opacity-40">지금</span>
             </div>
-            <p className="font-bold text-base mb-0.5">{message.name}</p>
-            <p className="text-base opacity-80 truncate">{message.content}</p>
+            <p className="font-bold text-sm mb-0.5">{message.name}</p>
+            <p className="text-xs opacity-80 truncate">{message.content}</p>
           </div>
         </div>
       </div>

@@ -67,17 +67,17 @@ const Guestbook = () => {
   };
 
   return (
-    <section className="w-full min-h-dvh flex flex-col items-center py-20 px-6 overflow-hidden">
+    <section className="w-full min-h-dvh flex flex-col items-center py-20 px-6 overflow-hidden relative">
       <ScrollAnimationWrapper amount={0.05} className="w-full max-w-sm">
       <div className="flex flex-col">
-      <h3 className="text-xl mb-12 text-wedding-accent text-center font-bold">방명록</h3>
+      <h3 className="text-xl mb-12 text-wedding-accent text-center font-bold marker-highlight inline-block self-center">방명록</h3>
 
-      <form onSubmit={handleSubmit} className="mb-6 bg-white p-6 rounded-2xl shadow-sm border border-gray-100 shrink-0">
+      <form onSubmit={handleSubmit} className="mb-6 bg-white p-6 sketchy-border-subtle shrink-0 shadow-sm">
         <div className="mb-4">
           <input
             type="text"
             placeholder="이름"
-            className="w-full px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-base"
+            className="w-full px-4 py-2 sketchy-border-subtle bg-gray-50/30 focus:outline-none focus:border-wedding-accent/50 text-base"
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
@@ -86,7 +86,7 @@ const Guestbook = () => {
         <div className="mb-4">
           <textarea
             placeholder="축하 메시지를 남겨주세요"
-            className="w-full h-16 px-4 py-2 rounded-xl border border-gray-100 bg-gray-50/50 focus:outline-none focus:ring-1 focus:ring-wedding-accent/30 text-base resize-none"
+            className="w-full h-16 px-4 py-2 sketchy-border-subtle bg-gray-50/30 focus:outline-none focus:border-wedding-accent/50 text-base resize-none"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
@@ -95,18 +95,18 @@ const Guestbook = () => {
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-3 bg-wedding-accent text-white rounded-xl text-base font-bold transition hover:opacity-90 disabled:bg-gray-200 shadow-md shadow-wedding-accent/10"
+          className="w-full flex items-center justify-center gap-2 py-3 bg-wedding-accent text-white sketchy-border text-base font-bold transition hover:opacity-90 disabled:bg-gray-200 shadow-sm"
         >
           <Send size={14} /> {loading ? '보내는 중...' : '축하메시지 보내기'}
         </button>
       </form>
 
-      <div className="space-y-4 guestbook-list pb-10">
+      <div className="space-y-4 guestbook-list pb-10 px-2">
         {fetching ? (
           <div className="text-center py-10 text-gray-300 text-[10px]">로딩 중...</div>
         ) : messages.length > 0 ? (
           messages.map((msg) => (
-            <div key={msg.id} className="bg-white p-4 rounded-xl border border-gray-50 flex gap-4 shadow-sm">
+            <div key={msg.id} className="bg-white p-4 sketchy-border-subtle flex gap-4 shadow-sm">
               <div className="flex-shrink-0 w-10 h-10 bg-wedding-accent/5 rounded-full flex items-center justify-center text-wedding-accent/30">
                 <User size={20} />
               </div>
