@@ -30,7 +30,7 @@ const Map = () => {
             <KakaoMap
               center={{ lat, lng }}
               style={{ width: '100%', height: '100%' }}
-              level={5}
+              level={4}
             >
               <MapMarker
                 position={{ lat, lng }}
