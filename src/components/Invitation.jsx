@@ -15,7 +15,7 @@ const AccountItem = ({ name, account, relation }) => {
   };
 
   return (
-    <div className="flex items-center justify-between py-4 border-b border-gray-50 last:border-0 font-wemade">
+    <div className="flex items-center justify-between py-4 border-b border-gray-50 last:border-0">
       <div className="text-left">
         <p className="text-sm text-gray-400 mb-0.5">{relation}</p>
         <p className="text-base font-bold text-gray-700">{name}</p>
@@ -79,12 +79,12 @@ const Invitation = () => {
     <section className="w-full min-h-dvh flex items-center justify-center py-20 overflow-hidden">
       <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm">
         <div className="mx-auto bg-white pt-10 px-10 pb-10 rounded-2xl shadow-sm border border-gray-100 text-center">
-          <h3 className="text-xl font-wemade mb-12 text-wedding-accent font-bold">소중한 분들을 초대합니다</h3>
-          <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line font-wemade text-lg px-2">
+          <h3 className="text-xl mb-12 text-wedding-accent font-bold">소중한 분들을 초대합니다</h3>
+          <p className="text-gray-600 leading-[2.2] mb-16 whitespace-pre-line text-lg px-2">
             {weddingInfo.message}
           </p>
 
-          <div className="space-y-8 text-gray-700 font-wemade mb-16">
+          <div className="space-y-8 text-gray-700 mb-16">
             <div className="flex flex-col gap-2">
               <span className="text-base text-wedding-accent/70 uppercase tracking-widest">Groom</span>
               <div className="flex items-center justify-center gap-3">
