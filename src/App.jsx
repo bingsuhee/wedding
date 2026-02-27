@@ -103,7 +103,7 @@ function App() {
 
       <footer className="py-20 flex flex-col items-center justify-center bg-white border-t border-gray-50">
         <Heart size={24} className="mx-auto text-wedding-accent mb-4 opacity-30" />
-        <p className="text-sm text-gray-400 font-wemade">
+        <p className="text-sm text-gray-400">
           © {new Date().getFullYear()}. All rights reserved.
         </p>
       </footer>

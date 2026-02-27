@@ -110,8 +110,8 @@
   --color-wedding-accent: #D4AF37; /* Champagne Gold */
 }
 
-@utility font-wemade {
-  font-family: var(--font-wemade), var(--font-base);
+@utility font-base {
+  font-family: var(--font-e-continuous), var(--font-memomentKkukkukk), var(--font-base);
 }
 
 @utility font-cookierun {
@@ -178,7 +178,7 @@
   }
 
   body {
-    @apply bg-wedding-bg text-gray-800 font-wemade text-lg break-keep;
+    @apply bg-wedding-bg text-gray-800 font-base text-lg break-keep;
     overflow-y: auto;
     overflow-x: hidden;
   }
