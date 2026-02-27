@@ -50,10 +50,19 @@ const NotificationToast = ({ message, onDone }) => {
           <WatercolorHeart delay={0.6} />
         </div>
 
-        {/* Kakao-style Toast */}
-        <div className="bg-[#FAE100] text-[#3C1E1E] p-4 rounded-2xl shadow-xl flex items-start gap-3 border border-yellow-200/50">
+        {/* Doodle-style Toast */}
+        <div className="bg-white text-gray-800 p-4 shadow-xl flex items-start gap-3 sketchy-border relative overflow-hidden">
+          {/* Decorative Doodles */}
+          <svg className="absolute top-0 right-0 w-16 h-16 text-wedding-accent/10 pointer-events-none -rotate-12" viewBox="0 0 100 100">
+            <path d="M20,50 Q40,20 60,50 T100,50" fill="none" stroke="currentColor" strokeWidth="2" />
+            <circle cx="80" cy="20" r="5" fill="currentColor" opacity="0.5" />
+          </svg>
+          <svg className="absolute bottom-1 left-4 w-12 h-4 text-wedding-accent/20 pointer-events-none" viewBox="0 0 100 20">
+            <path d="M0,10 Q25,0 50,10 T100,10" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+          </svg>
+
           {!iconError && (
-            <div className="shrink-0 bg-white p-2 rounded-xl shadow-sm overflow-hidden flex items-center justify-center w-9 h-9">
+            <div className="shrink-0 bg-white p-1 rounded-lg sketchy-border-subtle overflow-hidden flex items-center justify-center w-10 h-10 z-10">
               <img
                 src={iconSrc}
                 alt=""
@@ -62,13 +71,13 @@ const NotificationToast = ({ message, onDone }) => {
               />
             </div>
           )}
-          <div className="flex-1 overflow-hidden">
+          <div className="flex-1 overflow-hidden z-10">
             <div className="flex justify-between items-center mb-0.5">
-              <span className="font-bold text-xs">새로운 축하 메시지</span>
-              <span className="text-[10px] opacity-40">지금</span>
+              <span className="text-wedding-accent text-[10px] font-bold marker-highlight inline-block">New Message</span>
+              <span className="text-[10px] opacity-40 font-mono">Just now</span>
             </div>
-            <p className="font-bold text-sm mb-0.5">{message.name}</p>
-            <p className="text-xs opacity-80 truncate">{message.content}</p>
+            <p className="font-bold text-sm text-gray-800 mb-0.5">{message.name}</p>
+            <p className="text-xs text-gray-600 truncate italic">{message.content}</p>
           </div>
         </div>
       </div>
