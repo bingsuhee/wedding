@@ -20,9 +20,6 @@ const TimelineItem = ({ event, index }) => {
 
   return (
     <div className="relative mb-12 last:mb-0">
-      {/* Vertical Line Connector */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-wedding-accent/40 -z-10" />
-
       {/* Icon Node */}
       <motion.div
         animate={{ y: [0, -5, 0] }}
@@ -84,9 +81,14 @@ const Timeline = () => {
         </div>
 
         <div className="relative max-w-lg mx-auto">
-          {weddingInfo.timeline.map((event, index) => (
-            <TimelineItem key={index} event={event} index={index} />
-          ))}
+          {/* Continuous Vertical Line */}
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-0 border-l border-dashed border-wedding-accent/60 z-0" />
+
+          <div className="relative z-10">
+            {weddingInfo.timeline.map((event, index) => (
+              <TimelineItem key={index} event={event} index={index} />
+            ))}
+          </div>
         </div>
       </section>
     </ScrollAnimationWrapper>
