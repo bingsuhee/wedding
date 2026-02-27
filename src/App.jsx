@@ -116,6 +116,7 @@ function App() {
   <p className="font-e-dm">DM Sans 9pt</p>
   <p className="font-e-josefin">Josefin font</p>
   <p className="font-e-rubikk">rubbik font</p>
+  <p className="font-e-continuous">continuous font</p>
 
     </div>
   );
