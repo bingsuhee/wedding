@@ -21,6 +21,12 @@ export const weddingInfo = {
     lng: 126.900079,
   },
   message: "저희 두 사람이 사랑으로 만나\n하나의 가정을 이루게 되었습니다.\n저희의 새로운 출발을 축복해 주시면 감사하겠습니다.",
+  guestGuide: [
+    {
+      icon: "MapPin",
+      content: "신부 대기실 안내: 신부 대기실은 로비 정면에 보이는 계단을 통해 2층으로 올라오시면 됩니다.",
+    }
+  ],
   gallery: [
     { src: "images/gallery/g1.jpg", width: 800, height: 1000, caption: "우리의 시작" },
     { src: "images/gallery/g2.jpg", width: 800, height: 1000, caption: "햇살 좋은 날" },

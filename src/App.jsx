@@ -3,6 +3,7 @@ import Main from './components/Main';
 import Invitation from './components/Invitation';
 import Timeline from './components/Timeline';
 import Gallery from './components/Gallery';
+import GuestGuide from './components/GuestGuide';
 import Map from './components/Map';
 import Guestbook from './components/Guestbook';
 import ProgressBar from './components/ProgressBar';
@@ -68,9 +69,16 @@ function App() {
   // Notification Queue Handler
   useEffect(() => {
     if (!currentNotification && notificationQueue.length > 0) {
-      const next = notificationQueue[0];
-      setCurrentNotification(next);
-      setNotificationQueue((prev) => prev.slice(1));
+      // Use a small timeout to avoid synchronous setState inside effect lint error
+      const timer = setTimeout(() => {
+        setNotificationQueue((prev) => {
+          if (prev.length === 0) return prev;
+          const [next, ...rest] = prev;
+          setCurrentNotification(next);
+          return rest;
+        });
+      }, 0);
+      return () => clearTimeout(timer);
     }
   }, [notificationQueue, currentNotification]);
 
@@ -97,6 +105,7 @@ function App() {
         <Invitation />
         <Timeline />
         <Gallery />
+        <GuestGuide />
         <Map />
         <Guestbook />
       </main>
