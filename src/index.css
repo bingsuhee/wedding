@@ -178,7 +178,8 @@
   }
 
   body {
-    @apply bg-wedding-bg text-gray-800 font-base text-lg break-keep;
+    @apply bg-wedding-bg text-gray-800 text-lg break-keep;
+    font-family: var(--font-e-continuous), var(--font-memomentKkukkukk), var(--font-base);
     overflow-y: auto;
     overflow-x: hidden;
   }
