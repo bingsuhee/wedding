@@ -76,8 +76,8 @@ const NotificationToast = ({ message, onDone }) => {
               <span className="text-wedding-accent text-[10px] font-bold marker-highlight inline-block">New Message</span>
               <span className="text-[10px] opacity-40 font-mono">Just now</span>
             </div>
-            <p className="font-bold text-sm text-gray-800 mb-0.5">{message.name}</p>
-            <p className="text-xs text-gray-600 truncate italic">{message.content}</p>
+            <p className="font-bold text-base text-gray-800 mb-0.5">{message.name}</p>
+            <p className="text-base text-gray-600 truncate italic">{message.content}</p>
           </div>
         </div>
       </div>
