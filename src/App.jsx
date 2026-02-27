@@ -107,17 +107,6 @@ function App() {
           © {new Date().getFullYear()}. All rights reserved.
         </p>
       </footer>
-
-  <p className="font-cookierun">쿠키런 폰트</p>
-  <p className="font-kyobo">교보 폰트</p>
-  <p className="font-maplestory">메이플스토리 폰트</p>
-  <p className="font-memomentKkukkukk">메모꾹꾹 폰트</p>
-  <p className="font-ownglyph">온글잎 의연체 폰트</p>
-  <p className="font-e-dm">DM Sans 9pt</p>
-  <p className="font-e-josefin">Josefin font</p>
-  <p className="font-e-rubikk">rubbik font</p>
-  <p className="font-e-continuous">continuous font</p>
-
     </div>
   );
 }

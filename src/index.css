@@ -91,19 +91,29 @@
   unicode-range: U+0041-005A, U+0061-007A;
 }
 
+@font-face {
+  font-family: 'NanumGaramyonkkot';
+  src: url('/fonts/NanumGaRamYeonGgoc.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
+}
+
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('/fonts/DancingScript-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0041-005A, U+0061-007A;
+}
+
+
 @theme {
   --font-base: sans-serif;
-  --font-wemade: "WN Sans M";
-  --font-cookierun: "CookieRun";
-  --font-kyobo: "Kyobo Handwriting 2019";
-  --font-maplestory: "Maplestory";
-  --font-memomentKkukkukk: "MemomentKkukkukk";
-  --font-ownglyph: "Ownglyph EuiyeonChae";
-
-  --font-e-dm: "DM Sans 9pt";
-  --font-e-josefin: "Josefin Sans Thin";
-  --font-e-rubik: "Rubik Light";
-  --font-e-continuous: "continuous";
+  --font-nanum-garamyonkkot: "NanumGaramyonkkot";
+  --font-e-dancing-script: "Dancing Script";
 
   --color-wedding-bg: #fdfdfd;
   --color-wedding-primary: #5b6467;
@@ -111,43 +121,7 @@
 }
 
 @utility font-base {
-  font-family: var(--font-e-continuous), var(--font-memomentKkukkukk), var(--font-base);
-}
-
-@utility font-cookierun {
-  font-family: var(--font-cookierun);
-}
-
-@utility font-kyobo {
-  font-family: var(--font-kyobo);
-}
-
-@utility font-maplestory {
-  font-family: var(--font-maplestory);
-}
-
-@utility font-memomentKkukkukk {
-  font-family: var(--font-memomentKkukkukk);
-}
-
-@utility font-ownglyph {
-  font-family: var(--font-ownglyph);
-}
-
-@utility font-e-dm {
-  font-family: var(--font-e-dm);
-}
-
-@utility font-e-josefin {
-  font-family: var(--font-e-josefin);
-}
-
-@utility font-e-rubik {
-  font-family: var(--font-e-rubik);
-}
-
-@utility font-e-continuous {
-  font-family: var(--font-e-continuous);
+  font-family: var(--font-e-dancing-script), var(--font-nanum-garamyonkkot), var(--font-base);
 }
 
 @utility paper-texture {
