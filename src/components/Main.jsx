@@ -91,7 +91,7 @@ const Main = () => {
 
         <div className="relative w-full h-full p-4 z-10">
           <img
-            src={`${import.meta.env.BASE_URL}images/main_hero_transparent.png`}
+            src={`${import.meta.env.BASE_URL}images/illust/main_cross.png`}
             alt="Wedding Hero"
             className="w-full h-full object-contain"
           />

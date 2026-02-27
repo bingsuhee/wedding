@@ -1,22 +1,27 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Heart } from 'lucide-react';
 
-const WatercolorHeart = ({ delay }) => (
-  <motion.div
-    initial={{ opacity: 0, scale: 0, y: 0 }}
-    animate={{
-      opacity: [0, 0.6, 0],
-      scale: [0.5, 1.2, 0.8],
-      y: -40,
-      x: Math.random() * 40 - 20
-    }}
-    transition={{ duration: 2, delay, ease: "easeOut" }}
-    className="absolute pointer-events-none"
-  >
-    <Heart size={16} fill="#FFB7C5" className="text-pink-200 opacity-60" />
-  </motion.div>
-);
+const WatercolorHeart = ({ delay }) => {
+  const [randomX] = useState(() => Math.random() * 40 - 20);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0, y: 0 }}
+      animate={{
+        opacity: [0, 0.6, 0],
+        scale: [0.5, 1.2, 0.8],
+        y: -40,
+        x: randomX
+      }}
+      transition={{ duration: 2, delay, ease: "easeOut" }}
+      className="absolute pointer-events-none"
+    >
+      <Heart size={16} fill="#FFB7C5" className="text-pink-200 opacity-60" />
+    </motion.div>
+  );
+};
 
 const NotificationToast = ({ message, onDone }) => {
   const [iconError, setIconError] = useState(false);

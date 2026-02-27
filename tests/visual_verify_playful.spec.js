@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 
 test('visual verification of playful design and notification', async ({ page }) => {
   // Go to the local dev server
