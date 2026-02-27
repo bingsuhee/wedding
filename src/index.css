@@ -2,96 +2,6 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
 @font-face {
-  font-family: 'WN Sans M';
-  src: url('/fonts/WN-Sans-Medium.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
-}
-
-@font-face {
-  font-family: 'CookieRun';
-  src: url('/fonts/CookieRun Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
-}
-
-@font-face {
-  font-family: 'DM Sans 9pt';
-  src: url('/fonts/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0041-005A, U+0061-007A;
-}
-
-@font-face {
-  font-family: 'Josefin Sans Thin';
-  src: url('/fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0041-005A, U+0061-007A;
-}
-
-@font-face {
-  font-family: 'Kyobo Handwriting 2019';
-  src: url('/fonts/KyoboHandwriting2019.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
-}
-
-@font-face {
-  font-family: 'Maplestory';
-  src: url('/fonts/Maplestory Light.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
-}
-
-@font-face {
-  font-family: 'MemomentKkukkukk';
-  src: url('/fonts/memomentKkukkkuk.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
-}
-
-@font-face {
-  font-family: 'Rubik Light';
-  src: url('/fonts/Rubik-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0041-005A, U+0061-007A;
-}
-
-@font-face {
-  font-family: 'Ownglyph EuiyeonChae';
-  src: url('/fonts/온글잎 의연체.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+AC00-D7A3, U+1100-11FF, U+3130-318F;
-}
-
-@font-face {
-  font-family: 'continuous';
-  src: url('/fonts/continuous.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+0041-005A, U+0061-007A;
-}
-
-@font-face {
   font-family: 'Nanum GaRamYeonGgoc';
   src: url('/fonts/NanumGaRamYeonGgoc.ttf') format('truetype');
   font-weight: normal;
@@ -109,19 +19,31 @@
   unicode-range: U+0041-005A, U+0061-007A;
 }
 
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0030-0039;
+}
+
 
 @theme {
   --font-base: sans-serif;
-  --font-nanum-garamyonkkot: "Nanum GaRamYeonGgoc";
-  --font-e-dancing-script: "Dancing Script";
+  --font-korean: "Nanum GaRamYeonGgoc";
+  --font-english: "Dancing Script";
+  --font-number: "Montserrat";
+
+  --font-default: var(--font-number), var(--font-english), var(--font-korean), var(--font-base);
 
   --color-wedding-bg: #fdfdfd;
   --color-wedding-primary: #5b6467;
   --color-wedding-accent: #D4AF37; /* Champagne Gold */
 }
 
-@utility font-base {
-  font-family: var(--font-e-dancing-script), var(--font-nanum-garamyonkkot), var(--font-base);
+@utility font-default {
+  font-family: var(--font-default);
 }
 
 @utility paper-texture {
@@ -153,7 +75,7 @@
 
   body {
     @apply bg-wedding-bg text-gray-800 text-lg break-keep;
-    font-family: var(--font-e-dancing-script), var(--font-nanum-garamyonkkot), var(--font-base);
+    font-family: var(--font-default);
     overflow-y: auto;
     overflow-x: hidden;
   }
