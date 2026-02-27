@@ -13,7 +13,7 @@ const PolaroidImage = ({ image, index }) => {
       whileHover={{ rotate: index % 2 === 0 ? 2 : -2, scale: 1.02 }}
       transition={{ duration: 0.6, delay: (index % 6) * 0.1 }}
       viewport={{ once: true }}
-      className="bg-white p-2 pb-6 shadow-md border border-gray-100 mb-4 transition-transform duration-300"
+      className="bg-white p-2 pb-6 shadow-md sketchy-border-subtle mb-4 transition-transform duration-300 washi-tape"
     >
       <Item
         original={`${import.meta.env.BASE_URL}${image.src}`}
@@ -51,10 +51,10 @@ const Gallery = () => {
 
   return (
     <ScrollAnimationWrapper>
-      <section className="py-20 px-6 bg-wedding-bg/30">
+      <section className="py-20 px-6 bg-wedding-bg/30 relative">
         <div className="text-center mb-16">
-          <h2 className="text-2xl text-wedding-accent mb-2">Gallery</h2>
-          <div className="w-12 h-px bg-wedding-accent/30 mx-auto" />
+          <h2 className="text-2xl text-wedding-accent mb-2 marker-highlight inline-block">Gallery</h2>
+          <div className="w-12 h-px bg-wedding-accent/30 mx-auto mt-2" />
         </div>
 
         <PhotoGallery>
@@ -73,7 +73,7 @@ const Gallery = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={handleLoadMore}
-              className="px-8 py-3 rounded-full border border-wedding-accent/30 text-wedding-accent text-sm hover:bg-wedding-accent hover:text-white transition-colors duration-300"
+              className="px-8 py-3 sketchy-border-subtle text-wedding-accent text-sm hover:bg-wedding-accent hover:text-white transition-colors duration-300 bg-white"
             >
               더보기
             </motion.button>

@@ -18,16 +18,16 @@ const Map = () => {
   };
 
   return (
-    <section className="w-full min-h-dvh flex flex-col items-center justify-center py-20 px-6 overflow-hidden">
-      <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm">
+    <section className="w-full min-h-dvh flex flex-col items-center justify-center py-20 px-6 overflow-hidden relative">
+      <ScrollAnimationWrapper amount={0.4} className="w-full max-w-sm px-4">
         <div className="text-center">
-      <h3 className="text-xl mb-12 text-wedding-accent font-bold italic">오시는 길</h3>
+      <h3 className="text-xl mb-12 text-wedding-accent font-bold marker-highlight inline-block">오시는 길</h3>
       <div className="mb-8">
         <p className="font-bold text-2xl mb-3">{name}</p>
         <p className="text-gray-400 text-xl leading-relaxed max-w-[240px] mx-auto">{address}</p>
       </div>
 
-      <div className="w-full aspect-[4/3] bg-gray-50 rounded-2xl mb-6 flex items-center justify-center text-gray-300 overflow-hidden shadow-sm border border-gray-100">
+      <div className="w-full aspect-[4/3] bg-gray-50 mb-6 flex items-center justify-center text-gray-300 overflow-hidden shadow-sm sketchy-border-subtle p-1">
         {clientId ? (
           <img
             src={staticMapUrl}
@@ -46,7 +46,7 @@ const Map = () => {
         )}
       </div>
 
-      <div className="bg-gray-50/30 p-5 rounded-2xl text-left border border-gray-100/50 w-full max-w-[320px] mb-8 mx-auto">
+      <div className="bg-gray-50/30 p-5 text-left sketchy-border-subtle w-full max-w-[320px] mb-8 mx-auto">
         <ul className="space-y-3">
           <li className="flex items-start gap-2 text-base text-gray-600 leading-relaxed">
             <span className="w-1 h-1 rounded-full bg-wedding-accent mt-1.5 shrink-0" />
@@ -67,13 +67,13 @@ const Map = () => {
         <div className="flex gap-2">
           <button
             onClick={openNaverMap}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-white border border-gray-100 rounded-xl text-base font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-white sketchy-border-subtle text-base font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
           >
             <Navigation size={12} className="text-wedding-accent" /> 네이버 지도
           </button>
           <button
             onClick={openKakaoMap}
-            className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-white border border-gray-100 rounded-xl text-base font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-3 bg-white sketchy-border-subtle text-base font-bold text-gray-600 hover:bg-gray-50 transition shadow-sm"
           >
             <Navigation size={12} className="text-wedding-accent" /> 카카오 맵
           </button>
