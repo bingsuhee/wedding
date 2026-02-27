@@ -131,9 +131,9 @@ const Main = () => {
           transition={{ delay: 1, duration: 1 }}
         >
           <h1 className="text-4xl sm:text-5xl mb-1 text-gray-800 tracking-wide flex items-center justify-center gap-4">
-            <span>{weddingInfo.groom.name}</span>
+            <span className="marker-highlight">{weddingInfo.groom.name}</span>
             <span className="text-2xl sm:text-3xl text-wedding-accent/70 italic">&</span>
-            <span>{weddingInfo.bride.name}</span>
+            <span className="marker-highlight">{weddingInfo.bride.name}</span>
           </h1>
           <svg width="180" height="15" viewBox="0 0 180 15" className="mx-auto mb-4 opacity-40">
             <motion.path

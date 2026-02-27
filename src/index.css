@@ -37,9 +37,10 @@
 
   --font-default: var(--font-number), var(--font-english), var(--font-korean), var(--font-base);
 
-  --color-wedding-bg: #fdfdfd;
-  --color-wedding-primary: #5b6467;
+  --color-wedding-bg: #fcfaf2;
+  --color-wedding-primary: #4b5563; /* 진회색 */
   --color-wedding-accent: #D4AF37; /* Champagne Gold */
+  --color-marker: rgba(254, 240, 138, 0.5); /* bg-yellow-200/50 */
 }
 
 @utility font-default {
@@ -59,14 +60,25 @@
   }
 }
 
+@utility grid-pattern {
+  background-image: linear-gradient(rgba(75, 85, 99, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(75, 85, 99, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
 @utility sketchy-border {
-  border: 2px solid #5b6467;
+  border: 2px solid #4b5563;
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
 @utility sketchy-border-subtle {
-  border: 1px solid rgba(91, 100, 103, 0.2);
+  border: 1px solid rgba(75, 85, 99, 0.3);
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+@utility doodle-border {
+  border: 2px dashed #4b5563;
+  border-radius: 20px;
 }
 
 @utility marker-highlight {
@@ -78,8 +90,8 @@
     bottom: 2px;
     left: -2px;
     right: -2px;
-    height: 40%;
-    background-color: rgba(212, 175, 55, 0.15);
+    height: 45%;
+    background-color: var(--color-marker);
     z-index: -1;
     transform: rotate(-1deg);
     border-radius: 20% 80% 30% 70% / 60% 30% 70% 40%;
