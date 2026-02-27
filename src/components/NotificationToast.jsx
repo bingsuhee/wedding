@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Heart } from 'lucide-react';
+import { Heart } from 'lucide-react';
 
 const WatercolorHeart = ({ delay }) => (
   <motion.div
@@ -19,12 +19,16 @@ const WatercolorHeart = ({ delay }) => (
 );
 
 const NotificationToast = ({ message, onDone }) => {
+  const [iconError, setIconError] = useState(false);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       onDone();
     }, 3500); // 3.5 seconds total (3s display + buffer)
     return () => clearTimeout(timer);
   }, [onDone]);
+
+  const iconSrc = `${import.meta.env.BASE_URL}images/thumb/guestbook_alert_icon.png`;
 
   return (
     <motion.div
@@ -48,9 +52,16 @@ const NotificationToast = ({ message, onDone }) => {
 
         {/* Kakao-style Toast */}
         <div className="bg-[#FAE100] text-[#3C1E1E] p-4 rounded-2xl shadow-xl flex items-start gap-3 border border-yellow-200/50">
-          <div className="bg-white p-2 rounded-xl shadow-sm">
-            <MessageCircle size={18} fill="#FAE100" className="text-yellow-400" />
-          </div>
+          {!iconError && (
+            <div className="shrink-0 bg-white p-2 rounded-xl shadow-sm overflow-hidden flex items-center justify-center w-9 h-9">
+              <img
+                src={iconSrc}
+                alt=""
+                className="w-full h-full object-contain"
+                onError={() => setIconError(true)}
+              />
+            </div>
+          )}
           <div className="flex-1 overflow-hidden">
             <div className="flex justify-between items-center mb-0.5">
               <span className="font-bold text-xs">새로운 축하 메시지</span>
