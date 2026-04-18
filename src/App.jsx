@@ -6,8 +6,7 @@ import { weddingInfo } from './data/info';
 
 const INTRO_DURATION_MS = 3600;
 const CEREMONY_DATE = new Date(2026, 9, 11);
-const PLACEHOLDER_VIDEO =
-  'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const PLACEHOLDER_VIDEO = `${import.meta.env.BASE_URL}videos/intro-video.mp4`;
 
 function SectionTitle({ children, bold = false }) {
   return (
