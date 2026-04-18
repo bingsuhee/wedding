@@ -4,7 +4,11 @@ import Guestbook from './components/Guestbook';
 import Map from './components/Map';
 import { weddingInfo } from './data/info';
 
-const INTRO_DURATION_MS = 3600;
+const INTRO_PRIMARY_TEXT = '박수빈&김소희';
+const INTRO_SECONDARY_TEXT = '저희의 결혼식에 초대드립니다.';
+const INTRO_TYPE_SPEED_MS = 90;
+const INTRO_SECONDARY_DELAY_MS = 250;
+const INTRO_HOLD_MS = 1000;
 const CEREMONY_DATE = new Date(2026, 9, 11);
 const PLACEHOLDER_VIDEO = `${import.meta.env.BASE_URL}videos/intro-video.mp4`;
 
@@ -191,6 +195,8 @@ function CalendarBlock() {
 function App() {
   const [introVisible, setIntroVisible] = useState(true);
   const [dDayText, setDDayText] = useState('D-00');
+  const [introPrimaryCount, setIntroPrimaryCount] = useState(0);
+  const [introSecondaryCount, setIntroSecondaryCount] = useState(0);
 
   const loveStoryImages = weddingInfo.gallery.slice(0, 5);
   const galleryImages = weddingInfo.gallery.slice(5, 10);
@@ -227,23 +233,62 @@ function App() {
   useEffect(() => {
     const body = document.body;
     const html = document.documentElement;
+    let primaryInterval;
+    let secondaryTimeout;
+    let secondaryInterval;
+    let hideTimeout;
 
     if (introVisible) {
       body.style.overflow = 'hidden';
       html.style.overflow = 'hidden';
       body.style.touchAction = 'none';
+
+      setIntroPrimaryCount(0);
+      setIntroSecondaryCount(0);
+
+      primaryInterval = window.setInterval(() => {
+        setIntroPrimaryCount((prev) => {
+          if (prev >= INTRO_PRIMARY_TEXT.length) {
+            window.clearInterval(primaryInterval);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, INTRO_TYPE_SPEED_MS);
+
+      const primaryDuration = INTRO_PRIMARY_TEXT.length * INTRO_TYPE_SPEED_MS;
+      secondaryTimeout = window.setTimeout(() => {
+        secondaryInterval = window.setInterval(() => {
+          setIntroSecondaryCount((prev) => {
+            if (prev >= INTRO_SECONDARY_TEXT.length) {
+              window.clearInterval(secondaryInterval);
+              return prev;
+            }
+            return prev + 1;
+          });
+        }, INTRO_TYPE_SPEED_MS);
+      }, primaryDuration + INTRO_SECONDARY_DELAY_MS);
+
+      const totalDuration =
+        primaryDuration +
+        INTRO_SECONDARY_DELAY_MS +
+        INTRO_SECONDARY_TEXT.length * INTRO_TYPE_SPEED_MS +
+        INTRO_HOLD_MS;
+
+      hideTimeout = window.setTimeout(() => {
+        setIntroVisible(false);
+      }, totalDuration);
     } else {
       body.style.overflow = '';
       html.style.overflow = '';
       body.style.touchAction = '';
     }
 
-    const timer = window.setTimeout(() => {
-      setIntroVisible(false);
-    }, INTRO_DURATION_MS);
-
     return () => {
-      window.clearTimeout(timer);
+      window.clearInterval(primaryInterval);
+      window.clearTimeout(secondaryTimeout);
+      window.clearInterval(secondaryInterval);
+      window.clearTimeout(hideTimeout);
       body.style.overflow = '';
       html.style.overflow = '';
       body.style.touchAction = '';
@@ -264,17 +309,38 @@ function App() {
     updateDDay();
   }, []);
 
+  const introPrimaryFirst = INTRO_PRIMARY_TEXT.slice(0, 3);
+  const introPrimaryAmp = INTRO_PRIMARY_TEXT.slice(3, 4);
+  const introPrimarySecond = INTRO_PRIMARY_TEXT.slice(4);
+
+  const typedPrimaryFirst = introPrimaryFirst.slice(0, Math.min(introPrimaryCount, introPrimaryFirst.length));
+  const typedPrimaryAmp =
+    introPrimaryCount > introPrimaryFirst.length
+      ? introPrimaryAmp.slice(0, Math.min(introPrimaryCount - introPrimaryFirst.length, introPrimaryAmp.length))
+      : '';
+  const typedPrimarySecond =
+    introPrimaryCount > introPrimaryFirst.length + introPrimaryAmp.length
+      ? introPrimarySecond.slice(
+          0,
+          Math.min(
+            introPrimaryCount - introPrimaryFirst.length - introPrimaryAmp.length,
+            introPrimarySecond.length
+          )
+        )
+      : '';
+  const typedSecondary = INTRO_SECONDARY_TEXT.slice(0, introSecondaryCount);
+
   return (
     <>
       {introVisible && (
         <div className="intro-overlay">
           <div className="intro-text">
-            <div className="intro-line intro-line-primary">
-              <span className="intro-name">박수빈</span>
-              <span className="intro-amp">&amp;</span>
-              <span className="intro-name">김소희</span>
+            <div className="intro-line intro-line-primary" aria-label={INTRO_PRIMARY_TEXT}>
+              <span className="intro-name">{typedPrimaryFirst}</span>
+              {typedPrimaryAmp ? <span className="intro-amp">{typedPrimaryAmp}</span> : null}
+              <span className="intro-name">{typedPrimarySecond}</span>
             </div>
-            <div className="intro-line intro-line-secondary">저희의 결혼식에 초대드립니다.</div>
+            <div className="intro-line intro-line-secondary">{typedSecondary}</div>
           </div>
         </div>
       )}
@@ -292,7 +358,7 @@ function App() {
                   loop
                   playsInline
                 />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-b from-transparent via-white/55 to-white" />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[18%] bg-gradient-to-b from-transparent via-transparent to-white" />
               </div>
             </div>
 
