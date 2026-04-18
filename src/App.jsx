@@ -269,11 +269,14 @@ function App() {
     <>
       {introVisible && (
         <div className="intro-overlay">
-          <p className="intro-text">
-            박수빈 and 김소희
-            <br />
-            We&apos;are getting married
-          </p>
+          <div className="intro-text">
+            <div className="intro-line intro-line-primary">
+              <span className="intro-name">박수빈</span>
+              <span className="intro-amp">&amp;</span>
+              <span className="intro-name">김소희</span>
+            </div>
+            <div className="intro-line intro-line-secondary">저희의 결혼식에 초대드립니다.</div>
+          </div>
         </div>
       )}
 
