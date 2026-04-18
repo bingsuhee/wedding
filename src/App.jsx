@@ -4,7 +4,7 @@ import Guestbook from './components/Guestbook';
 import Map from './components/Map';
 import { weddingInfo } from './data/info';
 
-const INTRO_DURATION_MS = 2600;
+const INTRO_DURATION_MS = 3600;
 const CEREMONY_DATE = new Date(2026, 9, 11);
 const PLACEHOLDER_VIDEO =
   'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
