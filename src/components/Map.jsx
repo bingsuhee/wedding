@@ -4,6 +4,7 @@ import { weddingInfo } from '../data/info';
 
 const Map = () => {
   const { lat, lng, name, address, naverUrl, kakaoUrl } = weddingInfo.location;
+  const tmapUrl = `tmap://?rGoName=${encodeURIComponent(name)}&rGoY=${lat}&rGoX=${lng}`;
 
   return (
     <section className="section-block gap-8">
@@ -29,7 +30,7 @@ const Map = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-3 gap-3">
         <button
           type="button"
           onClick={() => window.open(naverUrl, '_blank', 'noopener,noreferrer')}
@@ -45,6 +46,14 @@ const Map = () => {
         >
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#FEE500] text-[10px] font-bold text-[#3C1E1E]">K</span>
           카카오맵
+        </button>
+        <button
+          type="button"
+          onClick={() => window.open(tmapUrl, '_blank', 'noopener,noreferrer')}
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-black/10 px-5 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
+        >
+          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#0A43FF] text-[10px] font-bold text-white">T</span>
+          티맵
         </button>
       </div>
 

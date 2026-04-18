@@ -151,7 +151,7 @@ function CalendarBlock() {
   const weeks = useMemo(() => {
     const year = 2026;
     const monthIndex = 9;
-    const firstDay = new Date(year, monthIndex, 1).getDay();
+    const firstDay = (new Date(year, monthIndex, 1).getDay() + 6) % 7;
     const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
     const cells = Array.from({ length: firstDay }, () => null);
 
@@ -175,11 +175,10 @@ function CalendarBlock() {
     <div className="bg-[#fafafa] p-6">
       <div className="mb-6 flex items-center justify-between">
         <p className="text-[16px] font-medium text-black">2026.10</p>
-        <p className="text-[11px] text-black/45">Sun Mon Tue Wed Thu Fri Sat</p>
       </div>
 
       <div className="grid grid-cols-7 gap-2 text-center text-[11px] text-black/45">
-        {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) => (
+        {['월', '화', '수', '목', '금', '토', '일'].map((day) => (
           <div key={day} className="py-2">
             {day}
           </div>
@@ -447,7 +446,9 @@ function App() {
               <p className="text-[18px] leading-[1.7] tracking-[-0.03em] text-black">
                 오래 알고 지낸 친구처럼,
                 <br />
+                <br />
                 앞으로도 그렇게 함께하려 합니다.
+                <br />
                 <br />
                 따뜻한 축복으로 자리를 빛내 주세요.
               </p>
@@ -496,7 +497,14 @@ function App() {
 
           <ScrollAnimationWrapper amount={0.18}>
             <section className="section-block gap-8">
-              <SectionHeading title="D-Day" subtitle="COUNTDOWN" />
+              <SectionHeading title="예식 안내" subtitle="CEREMONY INFO" />
+              <p className="text-center text-[13px] leading-[1.8] text-black/55">
+                JK아트컨벤션 아트리움홀
+                <br />
+                2026년 10월 11일 일요일
+                <br />
+                오후 12시
+              </p>
               <CalendarBlock />
               <div className="text-center">
                 <p className="text-[14px] text-black/55">수빈 and 소희 결혼식까지</p>
@@ -578,6 +586,32 @@ function App() {
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper amount={0.12}>
             <Guestbook />
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper amount={0.12}>
+            <section className="section-block text-center">
+              <p className="text-[13px] leading-[2] text-black/68">
+                바쁘신 일정에도 귀한 걸음 해주셔서
+                <br />
+                진심으로 감사드립니다.
+                <br />
+                <br />
+                저희 두사람,
+                <br />
+                잘 먹고
+                <br />
+                잘 자고,
+                <br />
+                잘 놀며,
+                <br />
+                <br />
+                세월이 흘러도 한결같은 마음으로
+                <br />
+                서로의 가장 친한 친구가 되어주겠습니다.
+                <br />
+                <br />
+                진심 어린 축복과 응원 부탁드립니다.
+              </p>
+            </section>
           </ScrollAnimationWrapper>
         </main>
       </div>
