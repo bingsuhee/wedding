@@ -279,9 +279,9 @@ function App() {
 
       <div className="app-shell">
         <main className="mx-auto flex w-full max-w-[480px] flex-col bg-white">
-          <section className="section-block gap-8 pt-10">
-            <div className="overflow-hidden rounded-[32px] border border-black/10 bg-black">
-              <div className="relative aspect-[9/16]">
+          <section className="flex flex-col gap-8">
+            <div className="overflow-hidden bg-black">
+              <div className="relative aspect-[4/6]">
                 <video
                   className="h-full w-full object-cover object-center"
                   src={PLACEHOLDER_VIDEO}
@@ -294,15 +294,15 @@ function App() {
               </div>
             </div>
 
-            <div className="space-y-4 text-center">
+            <div className="space-y-4 px-6 text-center">
               <div className="space-y-2">
                 <p className="leading-tight text-black">
-                  <span className="text-[28px] font-bold">박수빈</span>
-                  <span className="mx-2 text-[24px] font-normal">그리고</span>
-                  <span className="text-[28px] font-bold">김소희</span>
+                  <span className="text-[24px] font-bold">박수빈</span>
+                  <span className="mx-2 text-[20px] font-normal">그리고</span>
+                  <span className="text-[24px] font-bold">김소희</span>
                 </p>
-                <p className="text-[26px] leading-tight tracking-[-0.04em] text-black">
-                  소중한분들을 초대드립니다.
+                <p className="text-[22px] leading-tight tracking-[-0.04em] text-black">
+                  10월 11일 저희 결혼합니다.
                 </p>
               </div>
             </div>
