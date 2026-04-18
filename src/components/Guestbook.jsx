@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { MessageSquare, Send, User } from 'lucide-react';
 import { supabase } from '../lib/supabaseClient';
-import { Send, User, MessageSquare } from 'lucide-react';
-import ScrollAnimationWrapper from './ScrollAnimationWrapper';
 
 const Guestbook = () => {
   const [messages, setMessages] = useState([]);
@@ -12,22 +11,11 @@ const Guestbook = () => {
 
   useEffect(() => {
     fetchMessages();
-
-    // Listen to global subscription events from App.jsx
-    const handleNewMessage = (e) => {
-      const newMessage = e.detail;
-      setMessages((prev) => [newMessage, ...prev]);
-    };
-
-    window.addEventListener('new-guestbook-message', handleNewMessage);
-
-    return () => {
-      window.removeEventListener('new-guestbook-message', handleNewMessage);
-    };
   }, []);
 
   const fetchMessages = async () => {
     setFetching(true);
+
     try {
       const { data, error } = await supabase
         .from('guestbook')
@@ -43,21 +31,27 @@ const Guestbook = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     if (!name.trim() || !content.trim()) return;
 
     setLoading(true);
+
     try {
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from('guestbook')
-        .insert([{ name: name.trim(), content: content.trim() }]);
+        .insert([{ name: name.trim(), content: content.trim() }])
+        .select()
+        .single();
 
       if (error) throw error;
 
+      if (data) {
+        setMessages((prev) => [data, ...prev]);
+      }
+
       setName('');
       setContent('');
-      // No need to call fetchMessages() as Realtime subscription handles it
     } catch (error) {
       console.error('Error adding message:', error.message);
       alert('메시지 작성에 실패했습니다.');
@@ -67,76 +61,74 @@ const Guestbook = () => {
   };
 
   return (
-    <section className="w-full min-h-dvh flex flex-col items-center py-20 px-6 overflow-hidden relative grid-pattern">
-      <ScrollAnimationWrapper amount={0.05} className="w-full max-w-sm">
-      <div className="flex flex-col">
-      <h3 className="text-xl mb-12 text-wedding-accent text-center font-bold marker-highlight inline-block self-center">방명록</h3>
+    <section className="section-block gap-8">
+      <h2 className="text-[44pt] font-semibold leading-[1.08] tracking-[-0.06em] text-black">
+        방명록
+      </h2>
 
-      <form onSubmit={handleSubmit} className="mb-10 bg-white p-6 doodle-border shrink-0 shadow-sm rotate-1">
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="이름"
-            className="w-full px-4 py-2 sketchy-border bg-white focus:outline-none focus:border-wedding-accent/50 text-base"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <textarea
-            placeholder="축하 메시지를 남겨주세요"
-            className="w-full h-16 px-4 py-2 sketchy-border bg-white focus:outline-none focus:border-wedding-accent/50 text-base resize-none"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-        </div>
+      <form onSubmit={handleSubmit} className="space-y-4 rounded-[32px] border border-black/10 bg-[#fafafa] p-6">
+        <input
+          type="text"
+          placeholder="이름"
+          className="w-full rounded-[20px] border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition focus:border-black"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          required
+        />
+        <textarea
+          placeholder="축하 메시지를 남겨주세요"
+          className="h-28 w-full resize-none rounded-[20px] border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition focus:border-black"
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
+          required
+        />
         <button
           type="submit"
           disabled={loading}
-          className="w-full flex items-center justify-center gap-2 py-3 bg-white text-wedding-accent doodle-border text-base font-bold transition hover:bg-gray-50 disabled:bg-gray-100 shadow-sm"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-5 py-3 text-base text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/50"
         >
-          <Send size={14} /> {loading ? '보내는 중...' : '축하메시지 보내기'}
+          <Send size={16} />
+          {loading ? '보내는 중...' : '축하메시지 보내기'}
         </button>
       </form>
 
-      <div className="flex flex-col gap-6 guestbook-list pb-10 px-2">
+      <div className="space-y-4">
         {fetching ? (
-          <div className="text-center py-10 text-gray-300 text-[10px]">로딩 중...</div>
+          <div className="rounded-[28px] border border-black/10 bg-[#fafafa] px-5 py-10 text-center text-black/45">
+            로딩 중...
+          </div>
         ) : messages.length > 0 ? (
-          messages.map((msg, idx) => (
-            <div
-              key={msg.id}
-              className={`bg-white p-6 shadow-md flex flex-col gap-3 relative grid-pattern sketchy-border ${idx % 2 === 0 ? 'rotate-1 -translate-x-1' : '-rotate-1 translate-x-1'} -mb-4 hover:z-20 hover:rotate-0 transition-transform duration-300`}
-              style={{ backgroundColor: idx % 3 === 0 ? '#fff9c4' : idx % 3 === 1 ? '#e3f2fd' : '#fce4ec' }}
+          messages.map((message) => (
+            <article
+              key={message.id}
+              className="rounded-[28px] border border-black/10 bg-white px-5 py-5"
             >
-              <div className="flex justify-between items-start">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 bg-black/5 rounded-full flex items-center justify-center text-gray-400">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-black/5 text-black/50">
                     <User size={16} />
                   </div>
-                  <span className="font-bold text-base text-gray-700">{msg.name}</span>
+                  <div>
+                    <p className="text-lg font-medium text-black">{message.name}</p>
+                    <p className="text-xs text-black/35">
+                      {new Date(message.created_at).toLocaleDateString()}
+                    </p>
+                  </div>
                 </div>
-                <span className="text-xs text-gray-400 font-mono">
-                  {new Date(msg.created_at).toLocaleDateString()}
-                </span>
               </div>
-              <p className="text-base text-gray-600 leading-relaxed whitespace-pre-wrap font-default">{msg.content}</p>
-              {/* Washi tape effect */}
-              <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-16 h-6 bg-white/40 border border-gray-200/50 rotate-2 pointer-events-none" />
-            </div>
+              <p className="mt-4 whitespace-pre-wrap text-base leading-relaxed text-black/70">
+                {message.content}
+              </p>
+            </article>
           ))
         ) : (
-          <div className="text-center py-10 text-gray-300">
-            <MessageSquare size={32} className="mx-auto mb-4 opacity-10" />
-            <p className="text-base italic">첫 번째 축하 메시지를 남겨주세요.</p>
+          <div className="rounded-[28px] border border-black/10 bg-[#fafafa] px-5 py-10 text-center text-black/45">
+            <MessageSquare size={28} className="mx-auto mb-3 opacity-40" />
+            첫 번째 축하 메시지를 남겨주세요.
           </div>
         )}
       </div>
-    </div>
-    </ScrollAnimationWrapper>
-  </section>
+    </section>
   );
 };
 
