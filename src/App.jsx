@@ -12,7 +12,7 @@ const PLACEHOLDER_VIDEO =
 function SectionTitle({ children, bold = false }) {
   return (
     <h2
-      className={`text-[44pt] leading-[1.08] tracking-[-0.06em] text-black ${
+      className={`text-[28px] leading-[1.2] tracking-[-0.04em] text-black ${
         bold ? 'font-semibold' : 'font-normal'
       }`}
     >
@@ -281,46 +281,52 @@ function App() {
         <main className="mx-auto flex w-full max-w-[480px] flex-col bg-white">
           <section className="section-block gap-8 pt-10">
             <div className="overflow-hidden rounded-[32px] border border-black/10 bg-black">
-              <div className="aspect-[6/4]">
+              <div className="relative aspect-[9/16]">
                 <video
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover object-center"
                   src={PLACEHOLDER_VIDEO}
                   autoPlay
                   muted
                   loop
                   playsInline
                 />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[22%] bg-gradient-to-b from-transparent via-white/55 to-white" />
               </div>
             </div>
 
             <div className="space-y-4 text-center">
-              <SectionTitle>
-                박수빈 그리고 김소희
-                <br />
-                소중한 분들을 초대드립니다.
-              </SectionTitle>
+              <div className="space-y-2">
+                <p className="leading-tight text-black">
+                  <span className="text-[28px] font-bold">박수빈</span>
+                  <span className="mx-2 text-[24px] font-normal">그리고</span>
+                  <span className="text-[28px] font-bold">김소희</span>
+                </p>
+                <p className="text-[26px] leading-tight tracking-[-0.04em] text-black">
+                  소중한분들을 초대드립니다.
+                </p>
+              </div>
             </div>
           </section>
 
           <section className="section-block gap-4 pt-0 text-center">
             <p className="text-[1.15rem] leading-relaxed text-black/70">
-                2026.10.11 (일) 12:00
+              2026.10.11 (일) 12:00
                 <br />
-                JK아트컨벤션 아트리움홀
+              JK아트컨벤션 아트리움홀
             </p>
           </section>
 
           <section className="section-block gap-8">
             <div className="grid grid-cols-2 gap-4">
               <article className="overflow-hidden rounded-[32px] border border-black/10 bg-[#fafafa]">
-                <div className="aspect-[4/5]">
+                <div className="aspect-square">
                   <img
                     src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[0].src}`}
                     alt="신랑 박수빈"
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="space-y-2 px-5 py-5">
+                <div className="space-y-2 px-5 py-5 text-center">
                   <p className="text-sm leading-relaxed text-black/55">
                     박경수, 신정미의 장남
                   </p>
@@ -329,14 +335,14 @@ function App() {
               </article>
 
               <article className="overflow-hidden rounded-[32px] border border-black/10 bg-[#fafafa]">
-                <div className="aspect-[4/5]">
+                <div className="aspect-square">
                   <img
                     src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[1].src}`}
                     alt="신부 김소희"
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="space-y-2 px-5 py-5">
+                <div className="space-y-2 px-5 py-5 text-center">
                   <p className="text-sm leading-relaxed text-black/55">
                     김종범, 송해란의 장녀
                   </p>
@@ -382,7 +388,7 @@ function App() {
           </section>
 
           <section className="section-block text-center">
-            <p className="text-[1.5rem] leading-[1.9] tracking-[-0.03em] text-black">
+            <p className="text-[28px] leading-[1.7] tracking-[-0.03em] text-black">
               오래 알고 지낸 친구처럼,
               <br />
               앞으로도 그렇게 함께하려 합니다.

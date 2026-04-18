@@ -62,7 +62,7 @@ const Guestbook = () => {
 
   return (
     <section className="section-block gap-8">
-      <h2 className="text-[44pt] font-semibold leading-[1.08] tracking-[-0.06em] text-black">
+      <h2 className="text-[28px] font-semibold leading-[1.2] tracking-[-0.04em] text-black">
         방명록
       </h2>
 
