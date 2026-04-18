@@ -32,6 +32,38 @@ export const weddingInfo = {
     '문래역에서 도보 7분',
     '문래역 4번 출구 뒤쪽에서 셔틀버스 상시(5분 주기) 운행',
   ],
+  loveStory: [
+    {
+      date: '2022.03',
+      title: '처음 눈을 맞춘 날',
+      description: '낯설지 않은 편안함으로 서로를 알아가기 시작했습니다.',
+      image: 'images/gallery/g1.jpg',
+    },
+    {
+      date: '2022.08',
+      title: '함께 웃는 시간이 늘어가고',
+      description: '평범한 하루도 특별해지는 순간들을 차곡차곡 쌓아갔습니다.',
+      image: 'images/gallery/g3.jpg',
+    },
+    {
+      date: '2023.05',
+      title: '우리만의 여행을 떠나고',
+      description: '새로운 풍경 속에서 서로가 더 또렷해지는 시간을 보냈습니다.',
+      image: 'images/gallery/g4.jpg',
+    },
+    {
+      date: '2024.11',
+      title: '같은 방향을 바라보며',
+      description: '앞으로의 날들을 함께하고 싶다는 마음이 자연스레 깊어졌습니다.',
+      image: 'images/gallery/g8.jpg',
+    },
+    {
+      date: '2026.10',
+      title: '이제 하나의 계절로',
+      description: '서로의 가장 가까운 사람이 되어 새로운 시작을 맞이합니다.',
+      image: 'images/gallery/g10.jpg',
+    },
+  ],
   gallery: [
     { src: 'images/gallery/g1.jpg', width: 800, height: 1000, caption: '처음 함께한 계절' },
     { src: 'images/gallery/g2.jpg', width: 800, height: 1000, caption: '햇살 가득한 오후' },

@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, Copy, Check } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Copy, Check, X } from 'lucide-react';
 import Guestbook from './components/Guestbook';
 import Map from './components/Map';
 import ScrollAnimationWrapper from './components/ScrollAnimationWrapper';
@@ -22,6 +22,17 @@ function SectionTitle({ children, bold = false }) {
     >
       {children}
     </h2>
+  );
+}
+
+function SectionHeading({ title, subtitle, bold = true }) {
+  return (
+    <div className="text-center">
+      <SectionTitle bold={bold}>{title}</SectionTitle>
+      {subtitle ? (
+        <p className="mt-2 text-[11px] uppercase tracking-[0.28em] text-black/35">{subtitle}</p>
+      ) : null}
+    </div>
   );
 }
 
@@ -79,52 +90,57 @@ function AccountAccordion({ title, people }) {
   );
 }
 
-function ImageCarousel({ title, images }) {
-  const viewportRef = useRef(null);
-
-  const scrollByCard = (direction) => {
-    const node = viewportRef.current;
-    if (!node) return;
-    node.scrollBy({ left: direction * Math.min(node.clientWidth * 0.88, 320), behavior: 'smooth' });
-  };
-
+function LoveStoryTimeline({ items }) {
   return (
     <section className="section-block gap-8">
-      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <SectionTitle bold>{title}</SectionTitle>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            aria-label={`${title} 이전`}
-            onClick={() => scrollByCard(-1)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition hover:bg-black hover:text-white"
-          >
-            <ChevronLeft size={18} />
-          </button>
-          <button
-            type="button"
-            aria-label={`${title} 다음`}
-            onClick={() => scrollByCard(1)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-black/10 bg-white text-black transition hover:bg-black hover:text-white"
-          >
-            <ChevronRight size={18} />
-          </button>
-        </div>
+      <SectionHeading title="우리의 이야기" subtitle="LOVE STORY" />
+      <div className="relative space-y-8 before:absolute before:left-[14px] before:top-2 before:h-[calc(100%-16px)] before:w-px before:bg-black/10">
+        {items.map((item) => (
+          <article key={`${item.date}-${item.title}`} className="relative grid grid-cols-[28px_1fr] gap-4">
+            <div className="relative flex justify-center">
+              <span className="mt-2 h-[9px] w-[9px] rounded-full bg-black" />
+            </div>
+            <div className="space-y-3">
+              <p className="text-[11px] uppercase tracking-[0.24em] text-black/35">{item.date}</p>
+              <div className="grid gap-3 sm:grid-cols-[112px_1fr] sm:items-start">
+                <img
+                  src={`${import.meta.env.BASE_URL}${item.image}`}
+                  alt={item.title}
+                  className="aspect-square w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="space-y-2">
+                  <h3 className="text-[15px] font-medium tracking-[-0.03em] text-black">{item.title}</h3>
+                  <p className="text-[12px] leading-[1.8] text-black/65">{item.description}</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        ))}
       </div>
+    </section>
+  );
+}
 
-      <div ref={viewportRef} className="carousel-track">
-        {images.map((image) => (
-          <figure key={`${title}-${image.src}`} className="carousel-card">
+function GalleryGrid({ images, onSelect }) {
+  return (
+    <section className="section-block gap-8">
+      <SectionHeading title="갤러리" subtitle="GALLERY" />
+      <div className="grid grid-cols-3 gap-2">
+        {images.slice(0, 9).map((image) => (
+          <button
+            key={image.src}
+            type="button"
+            onClick={() => onSelect(image)}
+            className="overflow-hidden bg-[#f3f3f3]"
+          >
             <img
               src={`${import.meta.env.BASE_URL}${image.src}`}
               alt={image.caption}
-              className="h-full w-full object-cover"
+              className="aspect-square h-full w-full object-cover transition duration-300 hover:scale-[1.03]"
               loading="lazy"
             />
-            <figcaption className="border-t border-black/5 px-5 py-4 text-[11px] text-black/60">
-              {image.caption}
-            </figcaption>
-          </figure>
+          </button>
         ))}
       </div>
     </section>
@@ -156,7 +172,7 @@ function CalendarBlock() {
   }, []);
 
   return (
-    <div className="rounded-[32px] border border-black/10 bg-[#fafafa] p-6">
+    <div className="bg-[#fafafa] p-6">
       <div className="mb-6 flex items-center justify-between">
         <p className="text-[16px] font-medium text-black">2026.10</p>
         <p className="text-[11px] text-black/45">Sun Mon Tue Wed Thu Fri Sat</p>
@@ -178,7 +194,7 @@ function CalendarBlock() {
               return (
                 <div
                   key={`day-${rowIndex}-${colIndex}`}
-                  className={`flex aspect-square items-center justify-center rounded-full text-[13px] ${
+                  className={`flex aspect-square items-center justify-center text-[13px] ${
                     isHighlight ? 'bg-black text-white' : 'text-black'
                   }`}
                 >
@@ -198,9 +214,10 @@ function App() {
   const [dDayText, setDDayText] = useState('D-00');
   const [introPrimaryCount, setIntroPrimaryCount] = useState(0);
   const [introSecondaryCount, setIntroSecondaryCount] = useState(0);
+  const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
 
-  const loveStoryImages = weddingInfo.gallery.slice(0, 5);
-  const galleryImages = weddingInfo.gallery.slice(5, 10);
+  const loveStoryItems = weddingInfo.loveStory;
+  const galleryImages = weddingInfo.gallery;
 
   useEffect(() => {
     document.title = `${weddingInfo.groom.name} and ${weddingInfo.bride.name} | Wedding Invitation`;
@@ -333,6 +350,33 @@ function App() {
 
   return (
     <>
+      {selectedGalleryImage ? (
+        <div
+          className="fixed inset-0 z-[110] flex items-center justify-center bg-black/88 p-5"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setSelectedGalleryImage(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setSelectedGalleryImage(null)}
+            className="absolute right-5 top-5 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white"
+            aria-label="닫기"
+          >
+            <X size={18} />
+          </button>
+          <figure className="max-w-[420px]" onClick={(event) => event.stopPropagation()}>
+            <img
+              src={`${import.meta.env.BASE_URL}${selectedGalleryImage.src}`}
+              alt={selectedGalleryImage.caption}
+              className="max-h-[78vh] w-full object-contain"
+            />
+            <figcaption className="mt-4 text-center text-[13px] text-white/75">
+              {selectedGalleryImage.caption}
+            </figcaption>
+          </figure>
+        </div>
+      ) : null}
       {introVisible && (
         <div className="intro-overlay">
           <div className="intro-text">
@@ -412,6 +456,7 @@ function App() {
 
           <ScrollAnimationWrapper amount={0.18} delay={0.04}>
             <section className="section-block gap-8">
+              <SectionHeading title="우리의 소개" subtitle="OUR INTRODUCTION" />
               <div className="grid grid-cols-2 gap-4">
                 <article className="overflow-hidden bg-[#fafafa]">
                   <div className="aspect-square">
@@ -446,6 +491,55 @@ function App() {
                 </article>
               </div>
 
+            </section>
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper amount={0.18}>
+            <section className="section-block gap-8">
+              <SectionHeading title="D-Day" subtitle="COUNTDOWN" />
+              <CalendarBlock />
+              <div className="text-center">
+                <p className="text-[14px] text-black/55">수빈 and 소희 결혼식까지</p>
+                <p className="mt-3 text-[38px] font-semibold tracking-[-0.06em] text-black">
+                  {dDayText}
+                </p>
+              </div>
+            </section>
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper amount={0.16}>
+            <LoveStoryTimeline items={loveStoryItems} />
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper amount={0.16}>
+            <GalleryGrid images={galleryImages} onSelect={setSelectedGalleryImage} />
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper amount={0.18}>
+            <section className="section-block gap-8">
+              <SectionHeading title="안내사항" subtitle="INFORMATION" />
+              <figure className="overflow-hidden bg-[#fafafa]">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/timeline/anniversary.jpg`}
+                  alt="안내사항 이미지"
+                  className="aspect-[4/5] w-full object-cover"
+                />
+              </figure>
+            </section>
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper amount={0.16}>
+            <Map />
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper amount={0.14}>
+            <section className="section-block gap-6">
+              <SectionHeading title="마음 전하실 곳" subtitle="SEND YOUR HEART" />
+              <p className="text-center text-[13px] leading-[1.8] text-black/55">
+                비대면으로 축하를 전하고자
+                <br />
+                하시는 분들을 위해 기재하였습니다.
+                <br />
+                너그러운 마음으로 양해부탁드립니다.
+              </p>
               <div className="grid gap-4">
                 <AccountAccordion
                   title="신랑측"
@@ -481,43 +575,6 @@ function App() {
                 />
               </div>
             </section>
-          </ScrollAnimationWrapper>
-
-          <ScrollAnimationWrapper amount={0.18}>
-            <section className="section-block gap-8">
-              <SectionTitle>D-Day</SectionTitle>
-              <CalendarBlock />
-              <div className="text-center">
-                <p className="text-[14px] text-black/55">수빈 and 소희 결혼식까지</p>
-                <p className="mt-3 text-[38px] font-semibold tracking-[-0.06em] text-black">
-                  {dDayText}
-                </p>
-              </div>
-            </section>
-          </ScrollAnimationWrapper>
-
-          <ScrollAnimationWrapper amount={0.16}>
-            <ImageCarousel title="우리의 이야기" images={loveStoryImages} />
-          </ScrollAnimationWrapper>
-          <ScrollAnimationWrapper amount={0.16}>
-            <ImageCarousel title="갤러리" images={galleryImages} />
-          </ScrollAnimationWrapper>
-
-          <ScrollAnimationWrapper amount={0.18}>
-            <section className="section-block gap-8">
-              <SectionTitle bold>안내사항</SectionTitle>
-              <figure className="overflow-hidden rounded-[32px] border border-black/10 bg-[#fafafa]">
-                <img
-                  src={`${import.meta.env.BASE_URL}images/timeline/anniversary.jpg`}
-                  alt="안내사항 이미지"
-                  className="aspect-[4/5] w-full object-cover"
-                />
-              </figure>
-            </section>
-          </ScrollAnimationWrapper>
-
-          <ScrollAnimationWrapper amount={0.16}>
-            <Map />
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper amount={0.12}>
             <Guestbook />

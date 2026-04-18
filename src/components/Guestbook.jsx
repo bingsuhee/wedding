@@ -62,9 +62,12 @@ const Guestbook = () => {
 
   return (
     <section className="section-block gap-8">
-      <h2 className="text-[22px] font-semibold leading-[1.2] tracking-[-0.04em] text-black">
-        방명록
-      </h2>
+      <div className="text-center">
+        <h2 className="text-[22px] font-semibold leading-[1.2] tracking-[-0.04em] text-black">
+          방명록
+        </h2>
+        <p className="mt-2 text-[11px] uppercase tracking-[0.28em] text-black/35">GUESTBOOK</p>
+      </div>
 
       <form onSubmit={handleSubmit} className="space-y-4 rounded-[32px] border border-black/10 bg-[#fafafa] p-6">
         <input
