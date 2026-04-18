@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Copy, Check } from 'lucide-react';
 import Guestbook from './components/Guestbook';
 import Map from './components/Map';
+import ScrollAnimationWrapper from './components/ScrollAnimationWrapper';
 import { weddingInfo } from './data/info';
 
 const INTRO_PRIMARY_TEXT = '박수빈&김소희';
@@ -347,151 +348,170 @@ function App() {
 
       <div className="app-shell">
         <main className="mx-auto flex w-full max-w-[480px] flex-col bg-white">
-          <section className="flex flex-col gap-8">
-            <div className="overflow-hidden bg-black">
-              <div className="relative aspect-[4/6]">
-                <video
-                  className="h-full w-full object-cover object-center"
-                  src={PLACEHOLDER_VIDEO}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                />
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[18%] bg-gradient-to-b from-transparent via-transparent to-white" />
-              </div>
-            </div>
-
-            <div className="space-y-4 px-6 text-center">
-              <div className="space-y-2">
-                <p className="leading-tight text-black">
-                  <span className="text-[24px] font-bold">박수빈</span>
-                  <span className="mx-2 text-[20px] font-normal">그리고</span>
-                  <span className="text-[24px] font-bold">김소희</span>
-                </p>
-                <p className="text-[22px] leading-tight tracking-[-0.04em] text-black">
-                  10월 11일 저희 결혼합니다.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="section-block gap-4 pt-0 text-center">
-            <p className="text-[1.15rem] leading-relaxed text-black/70">
-              2026.10.11 (일) 12:00
-                <br />
-              JK아트컨벤션 아트리움홀
-            </p>
-          </section>
-
-          <section className="section-block gap-8">
-            <div className="grid grid-cols-2 gap-4">
-              <article className="overflow-hidden rounded-[32px] border border-black/10 bg-[#fafafa]">
-                <div className="aspect-square">
-                  <img
-                    src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[0].src}`}
-                    alt="신랑 박수빈"
-                    className="h-full w-full object-cover"
+          <ScrollAnimationWrapper amount={0.08} duration={0.9}>
+            <section className="flex flex-col gap-8">
+              <div className="overflow-hidden bg-black">
+                <div className="relative aspect-[4/6]">
+                  <video
+                    className="h-full w-full object-cover object-center"
+                    src={PLACEHOLDER_VIDEO}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
                   />
                 </div>
-                <div className="space-y-2 px-5 py-5 text-center">
-                  <p className="text-sm leading-relaxed text-black/55">
-                    박경수, 신정미의 장남
+              </div>
+
+              <div className="space-y-4 px-6 text-center">
+                <div className="space-y-2">
+                  <p className="leading-tight text-black">
+                    <span className="text-[24px] font-bold">박수빈</span>
+                    <span className="mx-2 text-[20px] font-normal">그리고</span>
+                    <span className="text-[24px] font-bold">김소희</span>
                   </p>
-                  <p className="text-[1.65rem] font-medium tracking-[-0.04em] text-black">수빈</p>
-                </div>
-              </article>
-
-              <article className="overflow-hidden rounded-[32px] border border-black/10 bg-[#fafafa]">
-                <div className="aspect-square">
-                  <img
-                    src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[1].src}`}
-                    alt="신부 김소희"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                <div className="space-y-2 px-5 py-5 text-center">
-                  <p className="text-sm leading-relaxed text-black/55">
-                    김종범, 송해란의 장녀
+                  <p className="text-[22px] leading-tight tracking-[-0.04em] text-black">
+                    10월 11일 저희 결혼합니다.
                   </p>
-                  <p className="text-[1.65rem] font-medium tracking-[-0.04em] text-black">소희</p>
                 </div>
-              </article>
-            </div>
+              </div>
+            </section>
+          </ScrollAnimationWrapper>
 
-            <div className="grid gap-4">
-              <AccountAccordion
-                title="신랑측"
-                people={[
-                  { label: '신랑', name: weddingInfo.groom.name, account: weddingInfo.groom.account },
-                  {
-                    label: '부',
-                    name: weddingInfo.groom.father.name,
-                    account: weddingInfo.groom.father.account,
-                  },
-                  {
-                    label: '모',
-                    name: weddingInfo.groom.mother.name,
-                    account: weddingInfo.groom.mother.account,
-                  },
-                ]}
-              />
-              <AccountAccordion
-                title="신부측"
-                people={[
-                  { label: '신부', name: weddingInfo.bride.name, account: weddingInfo.bride.account },
-                  {
-                    label: '부',
-                    name: weddingInfo.bride.father.name,
-                    account: weddingInfo.bride.father.account,
-                  },
-                  {
-                    label: '모',
-                    name: weddingInfo.bride.mother.name,
-                    account: weddingInfo.bride.mother.account,
-                  },
-                ]}
-              />
-            </div>
-          </section>
-
-          <section className="section-block text-center">
-            <p className="text-[28px] leading-[1.7] tracking-[-0.03em] text-black">
-              오래 알고 지낸 친구처럼,
-              <br />
-              앞으로도 그렇게 함께하려 합니다.
-              <br />
-              따뜻한 축복으로 자리를 빛내 주세요.
-            </p>
-          </section>
-
-          <section className="section-block gap-8">
-            <SectionTitle>D-Day</SectionTitle>
-            <CalendarBlock />
-            <div className="text-center">
-              <p className="text-lg text-black/55">수빈 and 소희 결혼식까지</p>
-              <p className="mt-3 text-[3rem] font-semibold tracking-[-0.06em] text-black">
-                {dDayText}
+          <ScrollAnimationWrapper amount={0.18} delay={0.03}>
+            <section className="section-block gap-4 pt-0 text-center">
+              <p className="text-[1.15rem] leading-relaxed text-black/70">
+                2026.10.11 (일) 12:00
+                  <br />
+                JK아트컨벤션 아트리움홀
               </p>
-            </div>
-          </section>
+            </section>
+          </ScrollAnimationWrapper>
 
-          <ImageCarousel title="우리의 이야기" images={loveStoryImages} />
-          <ImageCarousel title="갤러리" images={galleryImages} />
+          <ScrollAnimationWrapper amount={0.2}>
+            <section className="section-block text-center">
+              <p className="text-[20pt] leading-[1.7] tracking-[-0.03em] text-black">
+                오래 알고 지낸 친구처럼,
+                <br />
+                앞으로도 그렇게 함께하려 합니다.
+                <br />
+                따뜻한 축복으로 자리를 빛내 주세요.
+              </p>
+            </section>
+          </ScrollAnimationWrapper>
 
-          <section className="section-block gap-8">
-            <SectionTitle bold>안내사항</SectionTitle>
-            <figure className="overflow-hidden rounded-[32px] border border-black/10 bg-[#fafafa]">
-              <img
-                src={`${import.meta.env.BASE_URL}images/timeline/anniversary.jpg`}
-                alt="안내사항 이미지"
-                className="aspect-[4/5] w-full object-cover"
-              />
-            </figure>
-          </section>
+          <ScrollAnimationWrapper amount={0.18} delay={0.04}>
+            <section className="section-block gap-8">
+              <div className="grid grid-cols-2 gap-4">
+                <article className="overflow-hidden bg-[#fafafa]">
+                  <div className="aspect-square">
+                    <img
+                      src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[0].src}`}
+                      alt="신랑 박수빈"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="space-y-2 px-5 py-5 text-center">
+                    <p className="text-sm leading-relaxed text-black/55">
+                      박경수, 신정미의 장남
+                    </p>
+                    <p className="text-[1.65rem] font-medium tracking-[-0.04em] text-black">수빈</p>
+                  </div>
+                </article>
 
-          <Map />
-          <Guestbook />
+                <article className="overflow-hidden bg-[#fafafa]">
+                  <div className="aspect-square">
+                    <img
+                      src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[1].src}`}
+                      alt="신부 김소희"
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="space-y-2 px-5 py-5 text-center">
+                    <p className="text-sm leading-relaxed text-black/55">
+                      김종범, 송해란의 장녀
+                    </p>
+                    <p className="text-[1.65rem] font-medium tracking-[-0.04em] text-black">소희</p>
+                  </div>
+                </article>
+              </div>
+
+              <div className="grid gap-4">
+                <AccountAccordion
+                  title="신랑측"
+                  people={[
+                    { label: '신랑', name: weddingInfo.groom.name, account: weddingInfo.groom.account },
+                    {
+                      label: '부',
+                      name: weddingInfo.groom.father.name,
+                      account: weddingInfo.groom.father.account,
+                    },
+                    {
+                      label: '모',
+                      name: weddingInfo.groom.mother.name,
+                      account: weddingInfo.groom.mother.account,
+                    },
+                  ]}
+                />
+                <AccountAccordion
+                  title="신부측"
+                  people={[
+                    { label: '신부', name: weddingInfo.bride.name, account: weddingInfo.bride.account },
+                    {
+                      label: '부',
+                      name: weddingInfo.bride.father.name,
+                      account: weddingInfo.bride.father.account,
+                    },
+                    {
+                      label: '모',
+                      name: weddingInfo.bride.mother.name,
+                      account: weddingInfo.bride.mother.account,
+                    },
+                  ]}
+                />
+              </div>
+            </section>
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper amount={0.18}>
+            <section className="section-block gap-8">
+              <SectionTitle>D-Day</SectionTitle>
+              <CalendarBlock />
+              <div className="text-center">
+                <p className="text-lg text-black/55">수빈 and 소희 결혼식까지</p>
+                <p className="mt-3 text-[3rem] font-semibold tracking-[-0.06em] text-black">
+                  {dDayText}
+                </p>
+              </div>
+            </section>
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper amount={0.16}>
+            <ImageCarousel title="우리의 이야기" images={loveStoryImages} />
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper amount={0.16}>
+            <ImageCarousel title="갤러리" images={galleryImages} />
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper amount={0.18}>
+            <section className="section-block gap-8">
+              <SectionTitle bold>안내사항</SectionTitle>
+              <figure className="overflow-hidden rounded-[32px] border border-black/10 bg-[#fafafa]">
+                <img
+                  src={`${import.meta.env.BASE_URL}images/timeline/anniversary.jpg`}
+                  alt="안내사항 이미지"
+                  className="aspect-[4/5] w-full object-cover"
+                />
+              </figure>
+            </section>
+          </ScrollAnimationWrapper>
+
+          <ScrollAnimationWrapper amount={0.16}>
+            <Map />
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper amount={0.12}>
+            <Guestbook />
+          </ScrollAnimationWrapper>
         </main>
       </div>
     </>

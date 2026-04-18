@@ -73,7 +73,7 @@
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  animation: intro-fade 3.6s ease both;
+  animation: intro-fade 3.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   width: min(100%, 360px);
 }
 
@@ -137,22 +137,22 @@
 @keyframes intro-fade {
   0% {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translateY(24px) scale(0.985);
   }
 
   20% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   88% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 
   100% {
     opacity: 0;
-    transform: translateY(-12px);
+    transform: translateY(-18px) scale(0.985);
   }
 }
 
