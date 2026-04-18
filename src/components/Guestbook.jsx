@@ -62,7 +62,7 @@ const Guestbook = () => {
 
   return (
     <section className="section-block gap-8">
-      <h2 className="text-[28px] font-semibold leading-[1.2] tracking-[-0.04em] text-black">
+      <h2 className="text-[22px] font-semibold leading-[1.2] tracking-[-0.04em] text-black">
         방명록
       </h2>
 
@@ -70,14 +70,14 @@ const Guestbook = () => {
         <input
           type="text"
           placeholder="이름"
-          className="w-full rounded-[20px] border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition focus:border-black"
+          className="w-full rounded-[20px] border border-black/10 bg-white px-4 py-3 text-[13px] text-black outline-none transition focus:border-black"
           value={name}
           onChange={(event) => setName(event.target.value)}
           required
         />
         <textarea
           placeholder="축하 메시지를 남겨주세요"
-          className="h-28 w-full resize-none rounded-[20px] border border-black/10 bg-white px-4 py-3 text-base text-black outline-none transition focus:border-black"
+          className="h-28 w-full resize-none rounded-[20px] border border-black/10 bg-white px-4 py-3 text-[13px] text-black outline-none transition focus:border-black"
           value={content}
           onChange={(event) => setContent(event.target.value)}
           required
@@ -85,7 +85,7 @@ const Guestbook = () => {
         <button
           type="submit"
           disabled={loading}
-          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-5 py-3 text-base text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/50"
+          className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-black px-5 py-3 text-[13px] text-white transition hover:bg-black/85 disabled:cursor-not-allowed disabled:bg-black/50"
         >
           <Send size={16} />
           {loading ? '보내는 중...' : '축하메시지 보내기'}
@@ -109,14 +109,14 @@ const Guestbook = () => {
                     <User size={16} />
                   </div>
                   <div>
-                    <p className="text-lg font-medium text-black">{message.name}</p>
+                    <p className="text-[14px] font-medium text-black">{message.name}</p>
                     <p className="text-xs text-black/35">
                       {new Date(message.created_at).toLocaleDateString()}
                     </p>
                   </div>
                 </div>
               </div>
-              <p className="mt-4 whitespace-pre-wrap text-base leading-relaxed text-black/70">
+              <p className="mt-4 whitespace-pre-wrap text-[13px] leading-relaxed text-black/70">
                 {message.content}
               </p>
             </article>

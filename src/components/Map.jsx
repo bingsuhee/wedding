@@ -7,13 +7,13 @@ const Map = () => {
 
   return (
     <section className="section-block gap-8">
-      <h2 className="text-[28px] font-semibold leading-[1.2] tracking-[-0.04em] text-black">
+      <h2 className="text-[22px] font-semibold leading-[1.2] tracking-[-0.04em] text-black">
         오시는 길
       </h2>
 
       <div className="space-y-3">
-        <p className="text-[1.35rem] font-medium tracking-[-0.03em] text-black">{name}</p>
-        <p className="text-base leading-relaxed text-black/65">
+        <p className="text-[17px] font-medium tracking-[-0.03em] text-black">{name}</p>
+        <p className="text-[13px] leading-relaxed text-black/65">
           {address}
         </p>
       </div>
@@ -30,20 +30,20 @@ const Map = () => {
         <button
           type="button"
           onClick={() => window.open(naverUrl, '_blank', 'noopener,noreferrer')}
-          className="rounded-full border border-black/10 px-5 py-3 text-base text-black transition hover:bg-black hover:text-white"
+          className="rounded-full border border-black/10 px-5 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
         >
           네이버지도
         </button>
         <button
           type="button"
           onClick={() => window.open(kakaoUrl, '_blank', 'noopener,noreferrer')}
-          className="rounded-full border border-black/10 px-5 py-3 text-base text-black transition hover:bg-black hover:text-white"
+          className="rounded-full border border-black/10 px-5 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
         >
           카카오맵
         </button>
       </div>
 
-      <p className="text-base leading-[1.9] text-black/65">
+      <p className="text-[13px] leading-[1.9] text-black/65">
         영등포역 타임스퀘어에서 도보 7분
         <br />
         문래역에서 도보 7분

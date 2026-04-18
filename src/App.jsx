@@ -16,7 +16,7 @@ const PLACEHOLDER_VIDEO = `${import.meta.env.BASE_URL}videos/intro-video.mp4`;
 function SectionTitle({ children, bold = false }) {
   return (
     <h2
-      className={`text-[28px] leading-[1.2] tracking-[-0.04em] text-black ${
+      className={`text-[22px] leading-[1.2] tracking-[-0.04em] text-black ${
         bold ? 'font-semibold' : 'font-normal'
       }`}
     >
@@ -46,8 +46,8 @@ function AccountAccordion({ title, people }) {
         onClick={() => setOpen((prev) => !prev)}
         className="flex w-full items-center justify-between px-5 py-4 text-left"
       >
-        <span className="text-base font-medium text-black">{title} 계좌번호</span>
-        <span className="text-sm text-black/50">{open ? '닫기' : '열기'}</span>
+        <span className="text-[13px] font-medium text-black">{title} 계좌번호</span>
+        <span className="text-[11px] text-black/50">{open ? '닫기' : '열기'}</span>
       </button>
 
       {open && (
@@ -58,15 +58,15 @@ function AccountAccordion({ title, people }) {
               className="flex items-center justify-between gap-4 border-b border-black/5 py-4 last:border-b-0"
             >
               <div>
-                <p className="text-sm text-black/45">{person.label}</p>
-                <p className="mt-1 text-lg font-medium text-black">{person.name}</p>
-                <p className="mt-1 text-sm text-black/60">{person.account}</p>
+                <p className="text-[11px] text-black/45">{person.label}</p>
+                <p className="mt-1 text-[14px] font-medium text-black">{person.name}</p>
+                <p className="mt-1 text-[11px] text-black/60">{person.account}</p>
               </div>
 
               <button
                 type="button"
                 onClick={() => copyText(person.account)}
-                className="inline-flex shrink-0 items-center gap-1 rounded-full border border-black/10 px-3 py-2 text-sm text-black transition hover:bg-black hover:text-white"
+                className="inline-flex shrink-0 items-center gap-1 rounded-full border border-black/10 px-3 py-2 text-[11px] text-black transition hover:bg-black hover:text-white"
               >
                 {copiedValue === person.account ? <Check size={14} /> : <Copy size={14} />}
                 {copiedValue === person.account ? '복사됨' : '복사'}
@@ -121,7 +121,7 @@ function ImageCarousel({ title, images }) {
               className="h-full w-full object-cover"
               loading="lazy"
             />
-            <figcaption className="border-t border-black/5 px-5 py-4 text-sm text-black/60">
+            <figcaption className="border-t border-black/5 px-5 py-4 text-[11px] text-black/60">
               {image.caption}
             </figcaption>
           </figure>
@@ -158,11 +158,11 @@ function CalendarBlock() {
   return (
     <div className="rounded-[32px] border border-black/10 bg-[#fafafa] p-6">
       <div className="mb-6 flex items-center justify-between">
-        <p className="text-xl font-medium text-black">2026.10</p>
-        <p className="text-sm text-black/45">Sun Mon Tue Wed Thu Fri Sat</p>
+        <p className="text-[16px] font-medium text-black">2026.10</p>
+        <p className="text-[11px] text-black/45">Sun Mon Tue Wed Thu Fri Sat</p>
       </div>
 
-      <div className="grid grid-cols-7 gap-2 text-center text-sm text-black/45">
+      <div className="grid grid-cols-7 gap-2 text-center text-[11px] text-black/45">
         {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) => (
           <div key={day} className="py-2">
             {day}
@@ -178,7 +178,7 @@ function CalendarBlock() {
               return (
                 <div
                   key={`day-${rowIndex}-${colIndex}`}
-                  className={`flex aspect-square items-center justify-center rounded-full text-base ${
+                  className={`flex aspect-square items-center justify-center rounded-full text-[13px] ${
                     isHighlight ? 'bg-black text-white' : 'text-black'
                   }`}
                 >
@@ -366,11 +366,11 @@ function App() {
               <div className="space-y-4 px-6 text-center">
                 <div className="space-y-2">
                   <p className="leading-tight text-black">
-                    <span className="text-[24px] font-bold">박수빈</span>
-                    <span className="mx-2 text-[20px] font-normal">그리고</span>
-                    <span className="text-[24px] font-bold">김소희</span>
+                    <span className="text-[19px] font-bold">박수빈</span>
+                    <span className="mx-2 text-[16px] font-normal">그리고</span>
+                    <span className="text-[19px] font-bold">김소희</span>
                   </p>
-                  <p className="text-[22px] leading-tight tracking-[-0.04em] text-black">
+                  <p className="text-[18px] leading-tight tracking-[-0.04em] text-black">
                     10월 11일 저희 결혼합니다.
                   </p>
                 </div>
@@ -380,17 +380,27 @@ function App() {
 
           <ScrollAnimationWrapper amount={0.18} delay={0.03}>
             <section className="section-block gap-4 pt-0 text-center">
-              <p className="text-[1.15rem] leading-relaxed text-black/70">
+              <div className="mx-auto flex w-full max-w-[260px] items-center justify-center gap-3 text-[#b39b62]">
+                <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d8c89a] to-[#b39b62]" />
+                <span className="text-[11px]">✦</span>
+                <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[#d8c89a] to-[#b39b62]" />
+              </div>
+              <p className="text-[15px] leading-relaxed text-black/70">
                 2026.10.11 (일) 12:00
                   <br />
                 JK아트컨벤션 아트리움홀
               </p>
+              <div className="mx-auto flex w-full max-w-[260px] items-center justify-center gap-3 text-[#b39b62]">
+                <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d8c89a] to-[#b39b62]" />
+                <span className="text-[11px]">✦</span>
+                <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[#d8c89a] to-[#b39b62]" />
+              </div>
             </section>
           </ScrollAnimationWrapper>
 
           <ScrollAnimationWrapper amount={0.2}>
             <section className="section-block text-center">
-              <p className="text-[20pt] leading-[1.7] tracking-[-0.03em] text-black">
+              <p className="text-[18px] leading-[1.7] tracking-[-0.03em] text-black">
                 오래 알고 지낸 친구처럼,
                 <br />
                 앞으로도 그렇게 함께하려 합니다.
@@ -412,10 +422,10 @@ function App() {
                     />
                   </div>
                   <div className="space-y-2 px-5 py-5 text-center">
-                    <p className="text-sm leading-relaxed text-black/55">
+                    <p className="text-[11px] leading-relaxed text-black/55">
                       박경수, 신정미의 장남
                     </p>
-                    <p className="text-[1.65rem] font-medium tracking-[-0.04em] text-black">수빈</p>
+                    <p className="text-[21px] font-medium tracking-[-0.04em] text-black">수빈</p>
                   </div>
                 </article>
 
@@ -428,10 +438,10 @@ function App() {
                     />
                   </div>
                   <div className="space-y-2 px-5 py-5 text-center">
-                    <p className="text-sm leading-relaxed text-black/55">
+                    <p className="text-[11px] leading-relaxed text-black/55">
                       김종범, 송해란의 장녀
                     </p>
-                    <p className="text-[1.65rem] font-medium tracking-[-0.04em] text-black">소희</p>
+                    <p className="text-[21px] font-medium tracking-[-0.04em] text-black">소희</p>
                   </div>
                 </article>
               </div>
@@ -478,8 +488,8 @@ function App() {
               <SectionTitle>D-Day</SectionTitle>
               <CalendarBlock />
               <div className="text-center">
-                <p className="text-lg text-black/55">수빈 and 소희 결혼식까지</p>
-                <p className="mt-3 text-[3rem] font-semibold tracking-[-0.06em] text-black">
+                <p className="text-[14px] text-black/55">수빈 and 소희 결혼식까지</p>
+                <p className="mt-3 text-[38px] font-semibold tracking-[-0.06em] text-black">
                   {dDayText}
                 </p>
               </div>
