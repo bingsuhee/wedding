@@ -110,7 +110,7 @@ function LoveStoryTimeline({ items }) {
                     <img
                       src={`${import.meta.env.BASE_URL}${item.image}`}
                       alt={item.title}
-                      className="aspect-[4/5] w-full object-cover"
+                      className="aspect-square w-full object-cover"
                       loading="lazy"
                     />
                   </div>
@@ -452,7 +452,7 @@ function App() {
                   <p className="point-text text-[18px] leading-tight tracking-[-0.04em]">
                     10월 11일 저희 결혼합니다.
                   </p>
-                  <p className="text-[15px] leading-relaxed text-black/70">
+                  <p className="point-text-soft text-[15px] leading-relaxed">
                     2026.10.11 (일) 12:00
                     <br />
                     JK아트컨벤션 아트리움홀
