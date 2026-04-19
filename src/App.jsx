@@ -235,6 +235,12 @@ function CalendarBlock() {
 function App() {
   const [introVisible, setIntroVisible] = useState(true);
   const [infoTab, setInfoTab] = useState('bride-room');
+  const [attendanceModalOpen, setAttendanceModalOpen] = useState(false);
+  const [attendanceSide, setAttendanceSide] = useState('groom');
+  const [attendanceStatus, setAttendanceStatus] = useState('attending');
+  const [attendanceName, setAttendanceName] = useState('');
+  const [attendanceMeal, setAttendanceMeal] = useState('yes');
+  const [attendanceConsent, setAttendanceConsent] = useState(false);
   const [countdown, setCountdown] = useState({
     days: '000',
     hours: '00',
@@ -390,6 +396,7 @@ function App() {
         )
       : '';
   const typedSecondary = INTRO_SECONDARY_TEXT.slice(0, introSecondaryCount);
+  const canSubmitAttendance = attendanceName.trim() && attendanceConsent;
   const infoTabContent =
     infoTab === 'bride-room'
       ? {
@@ -405,6 +412,172 @@ function App() {
 
   return (
     <>
+      {attendanceModalOpen ? (
+        <div
+          className="fixed inset-0 z-[120] flex items-center justify-center bg-black/55 p-4"
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setAttendanceModalOpen(false)}
+        >
+          <div
+            className="soft-card-strong w-full max-w-[720px] rounded-[28px] px-5 py-6 sm:px-8 sm:py-7"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="flex items-start justify-between gap-4">
+              <h3 className="text-[24px] font-semibold tracking-[-0.05em] text-black sm:text-[28px]">
+                참석 의사 전달
+              </h3>
+              <button
+                type="button"
+                onClick={() => setAttendanceModalOpen(false)}
+                className="inline-flex h-10 w-10 items-center justify-center text-black/35 transition hover:text-black"
+                aria-label="팝업 닫기"
+              >
+                <X size={22} />
+              </button>
+            </div>
+
+            <div className="mt-5 rounded-[20px] bg-[#f4f4f2] px-4 py-5 sm:px-5">
+              <div className="space-y-7">
+                <div>
+                  <p className="text-[16px] font-medium tracking-[-0.03em] text-black sm:text-[18px]">
+                    어느 측 하객이신가요? <span className="text-[#ff4d4f]">*</span>
+                  </p>
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setAttendanceSide('groom')}
+                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                        attendanceSide === 'groom'
+                          ? 'border-[#4f91ff] bg-white text-[#4f91ff] shadow-[0_6px_18px_rgba(79,145,255,0.16)]'
+                          : 'border-black/10 bg-white text-black'
+                      }`}
+                    >
+                      신랑
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAttendanceSide('bride')}
+                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                        attendanceSide === 'bride'
+                          ? 'border-[#4f91ff] bg-white text-[#4f91ff] shadow-[0_6px_18px_rgba(79,145,255,0.16)]'
+                          : 'border-black/10 bg-white text-black'
+                      }`}
+                    >
+                      신부
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-[16px] font-medium tracking-[-0.03em] text-black sm:text-[18px]">
+                    참석 하시나요? <span className="text-[#ff4d4f]">*</span>
+                  </p>
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setAttendanceStatus('attending')}
+                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                        attendanceStatus === 'attending'
+                          ? 'border-transparent bg-[#cdbdaf] text-white shadow-[0_6px_18px_rgba(161,133,108,0.22)]'
+                          : 'border-black/10 bg-white text-black'
+                      }`}
+                    >
+                      참석
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAttendanceStatus('absent')}
+                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                        attendanceStatus === 'absent'
+                          ? 'border-transparent bg-[#cdbdaf] text-white shadow-[0_6px_18px_rgba(161,133,108,0.22)]'
+                          : 'border-black/10 bg-white text-black'
+                      }`}
+                    >
+                      불참석
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-[16px] font-medium tracking-[-0.03em] text-black sm:text-[18px]">
+                    성함 <span className="text-[#ff4d4f]">*</span>
+                  </p>
+                  <input
+                    type="text"
+                    value={attendanceName}
+                    onChange={(event) => setAttendanceName(event.target.value)}
+                    className="soft-input mt-3 w-full rounded-[12px] px-4 py-4 text-[16px] text-black outline-none transition focus:border-black"
+                  />
+                </div>
+
+                <div>
+                  <p className="text-[16px] font-medium tracking-[-0.03em] text-black sm:text-[18px]">
+                    식사 하시나요?
+                  </p>
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setAttendanceMeal('yes')}
+                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                        attendanceMeal === 'yes'
+                          ? 'border-transparent bg-[#cdbdaf] text-white shadow-[0_6px_18px_rgba(161,133,108,0.22)]'
+                          : 'border-black/10 bg-white text-black'
+                      }`}
+                    >
+                      O
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setAttendanceMeal('no')}
+                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                        attendanceMeal === 'no'
+                          ? 'border-transparent bg-[#cdbdaf] text-white shadow-[0_6px_18px_rgba(161,133,108,0.22)]'
+                          : 'border-black/10 bg-white text-black'
+                      }`}
+                    >
+                      X
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3 text-[14px] text-black/42 sm:text-[15px]">
+                  <button
+                    type="button"
+                    onClick={() => setAttendanceConsent((prev) => !prev)}
+                    className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[9px] border transition ${
+                      attendanceConsent ? 'border-black bg-black text-white' : 'border-black/14 bg-white text-transparent'
+                    }`}
+                    aria-label="개인정보 수집 및 활용 동의"
+                  >
+                    <Check size={16} />
+                  </button>
+                  <span>개인정보 수집 및 활용 동의</span>
+                  <button
+                    type="button"
+                    onClick={() => window.alert('참석 의사 확인을 위한 최소한의 정보만 수집합니다.')}
+                    className="text-black/45 underline underline-offset-4"
+                  >
+                    [자세히보기]
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              disabled={!canSubmitAttendance}
+              onClick={() => {
+                window.alert('참석 의사가 전달되었습니다.');
+                setAttendanceModalOpen(false);
+              }}
+              className="mt-5 inline-flex w-full items-center justify-center rounded-[14px] bg-[#cfcfcf] px-5 py-4 text-[18px] font-semibold text-white transition enabled:bg-[#cdbdaf] enabled:shadow-[0_10px_24px_rgba(161,133,108,0.22)] disabled:cursor-not-allowed"
+            >
+              전달하기
+            </button>
+          </div>
+        </div>
+      ) : null}
       {selectedGalleryImage ? (
         <div
           className="fixed inset-0 z-[110] flex items-center justify-center bg-black/88 p-5"
@@ -492,6 +665,15 @@ function App() {
                 <br />
                 두 사람의 시작을 축복해 주세요.
               </p>
+              <div className="mt-6 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setAttendanceModalOpen(true)}
+                  className="soft-card-strong rounded-full px-7 py-3 text-[15px] font-medium tracking-[-0.03em] text-black transition hover:bg-black hover:text-white"
+                >
+                  참석 의사 전달
+                </button>
+              </div>
             </section>
           </ScrollAnimationWrapper>
 
@@ -508,16 +690,16 @@ function App() {
                     />
                   </div>
                   <div className="space-y-2 self-center">
-                    <p className="text-[11px] leading-relaxed text-black/55">
+                    <p className="text-[13px] leading-relaxed text-black/55">
                       <span className="font-semibold text-black/72">박경수, 신정미</span>의 장남
                     </p>
                     <div className="flex items-center gap-2">
-                      <span className="soft-chip inline-block px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
+                      <span className="soft-chip inline-block px-2 py-0.5 text-[11px] font-medium tracking-[0.16em] text-black/55">
                         신랑
                       </span>
-                      <p className="point-text text-[21px] font-medium tracking-[-0.04em]">수빈</p>
+                      <p className="point-text text-[24px] font-medium tracking-[-0.04em]">수빈</p>
                     </div>
-                    <div className="text-[11px] leading-[1.8] text-black/45">
+                    <div className="text-[13px] leading-[1.8] text-black/45">
                       <p>1993년 9월 9일</p>
                       <p>#ESTP #강하늘닮은꼴 #실상은바보 #빙수</p>
                     </div>
@@ -526,16 +708,16 @@ function App() {
 
                 <article className="soft-card grid grid-cols-[1fr_110px] gap-4 p-4">
                   <div className="space-y-2 self-center text-right">
-                    <p className="text-[11px] leading-relaxed text-black/55">
+                    <p className="text-[13px] leading-relaxed text-black/55">
                       <span className="font-semibold text-black/72">김종범, 송해란</span>의 장녀
                     </p>
                     <div className="flex items-center justify-end gap-2">
-                      <span className="soft-chip inline-block px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
+                      <span className="soft-chip inline-block px-2 py-0.5 text-[11px] font-medium tracking-[0.16em] text-black/55">
                         신부
                       </span>
-                      <p className="point-text text-[21px] font-medium tracking-[-0.04em]">소희</p>
+                      <p className="point-text text-[24px] font-medium tracking-[-0.04em]">소희</p>
                     </div>
-                    <div className="text-[11px] leading-[1.8] text-black/45">
+                    <div className="text-[13px] leading-[1.8] text-black/45">
                       <p>1994년 10월 31일</p>
                       <p>#ISTP #얼굴은얄라리 #성격은박명수 #땃지</p>
                     </div>
