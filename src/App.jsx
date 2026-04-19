@@ -135,10 +135,7 @@ function LoveStoryTimeline({ items }) {
                   >
                     {item.date}
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="point-text text-[18px] font-semibold tracking-[-0.04em]">{item.title}</h3>
-                    <p className="text-[14px] leading-[1.8] text-black/68">{item.description}</p>
-                  </div>
+                  <p className="text-[14px] leading-[1.8] text-black/68">{item.description}</p>
                 </div>
               </article>
             );
