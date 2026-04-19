@@ -108,23 +108,25 @@ function LoveStoryTimeline({ items }) {
           const formattedDate = dateMatch
             ? `${dateMatch[1]}.${String(dateMatch[2]).padStart(2, '0')}`
             : item.date;
-          const tiltClass = index % 2 === 0 ? '-rotate-[1.2deg]' : 'rotate-[1.2deg]';
+          const isLeftColumn = index % 2 === 0;
+          const tiltClass = isLeftColumn ? 'rotate-[2.2deg]' : '-rotate-[2.2deg]';
           const offsetClass =
-            index % 4 === 0
-              ? 'translate-y-0'
-              : index % 4 === 1
-                ? 'translate-y-4'
-                : index % 4 === 2
-                  ? '-translate-y-1'
-                  : 'translate-y-3';
+            index === 0
+              ? '-translate-y-1 -translate-x-1'
+              : index === 1
+                ? 'translate-y-4 translate-x-1'
+                : index === 2
+                  ? '-translate-y-1 -translate-x-1.5'
+                  : index === 3
+                    ? 'translate-y-3 translate-x-1.5'
+                    : 'translate-y-1 -translate-x-1';
 
           return (
             <article
               key={`${item.date}-${item.title}`}
               className={`relative border border-black/8 bg-white p-2.5 pb-4 shadow-[0_14px_30px_rgba(35,28,20,0.08)] ${tiltClass} ${offsetClass}`}
             >
-              <span className="absolute left-[18%] top-[-10px] h-6 w-14 -rotate-[8deg] bg-[#e8dcc8]/90 shadow-sm" />
-              <span className="absolute right-[18%] top-[-10px] h-6 w-14 rotate-[7deg] bg-[#e8dcc8]/90 shadow-sm" />
+              <span className="absolute left-1/2 top-[-11px] h-6 w-16 -translate-x-1/2 rotate-[4deg] bg-[#e8dcc8]/90 shadow-sm" />
               <img
                 src={`${import.meta.env.BASE_URL}${item.image}`}
                 alt={item.title}
