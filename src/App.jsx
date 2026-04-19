@@ -410,7 +410,7 @@ function App() {
                 <div className="space-y-2">
                   <p className="leading-tight text-black">
                     <span className="text-[19px] font-bold">박수빈</span>
-                    <span className="mx-2 text-[16px] font-normal">그리고</span>
+                    <span className="mx-2 text-[16px] font-normal">♥</span>
                     <span className="text-[19px] font-bold">김소희</span>
                   </p>
                   <p className="text-[18px] leading-tight tracking-[-0.04em] text-black">
@@ -472,6 +472,9 @@ function App() {
                       박경수, 신정미의 장남
                     </p>
                     <p className="text-[21px] font-medium tracking-[-0.04em] text-black">수빈</p>
+                    <p className="text-[11px] leading-[1.8] text-black/45">
+                      #다정한사람 #유쾌한미소 #든든한짝꿍 #감성충만 #평생친구
+                    </p>
                   </div>
                 </article>
 
@@ -488,6 +491,9 @@ function App() {
                       김종범, 송해란의 장녀
                     </p>
                     <p className="text-[21px] font-medium tracking-[-0.04em] text-black">소희</p>
+                    <p className="text-[11px] leading-[1.8] text-black/45">
+                      #따뜻한마음 #밝은에너지 #센스있는사람 #여행메이트 #영원한베프
+                    </p>
                   </div>
                 </article>
               </div>
@@ -499,7 +505,9 @@ function App() {
             <section className="section-block gap-8">
               <SectionHeading title="예식 안내" subtitle="CEREMONY INFO" />
               <p className="text-center text-[13px] leading-[1.8] text-black/55">
-                JK아트컨벤션 아트리움홀
+                <span className="text-[17px] font-semibold tracking-[-0.03em] text-black">
+                  JK아트컨벤션 아트리움홀
+                </span>
                 <br />
                 2026년 10월 11일 일요일
                 <br />
