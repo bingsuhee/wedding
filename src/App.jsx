@@ -236,10 +236,10 @@ function App() {
   const [introVisible, setIntroVisible] = useState(true);
   const [infoTab, setInfoTab] = useState('bride-room');
   const [attendanceModalOpen, setAttendanceModalOpen] = useState(false);
-  const [attendanceSide, setAttendanceSide] = useState('groom');
-  const [attendanceStatus, setAttendanceStatus] = useState('attending');
+  const [attendanceSide, setAttendanceSide] = useState('');
+  const [attendanceStatus, setAttendanceStatus] = useState('');
   const [attendanceName, setAttendanceName] = useState('');
-  const [attendanceMeal, setAttendanceMeal] = useState('yes');
+  const [attendanceMeal, setAttendanceMeal] = useState('');
   const [attendanceConsent, setAttendanceConsent] = useState(false);
   const [countdown, setCountdown] = useState({
     days: '000',
@@ -396,7 +396,11 @@ function App() {
         )
       : '';
   const typedSecondary = INTRO_SECONDARY_TEXT.slice(0, introSecondaryCount);
-  const canSubmitAttendance = attendanceName.trim() && attendanceConsent;
+  const canSubmitAttendance =
+    attendanceSide &&
+    attendanceStatus &&
+    attendanceName.trim() &&
+    attendanceConsent;
   const infoTabContent =
     infoTab === 'bride-room'
       ? {
@@ -420,7 +424,7 @@ function App() {
           onClick={() => setAttendanceModalOpen(false)}
         >
           <div
-            className="soft-card-strong w-full max-w-[720px] rounded-[28px] px-5 py-6 sm:px-8 sm:py-7"
+            className="soft-card-strong w-full max-w-[min(92vw,560px)] rounded-[28px] px-5 py-6 sm:px-6 sm:py-6"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4">
@@ -665,15 +669,6 @@ function App() {
                 <br />
                 두 사람의 시작을 축복해 주세요.
               </p>
-              <div className="mt-6 flex justify-center">
-                <button
-                  type="button"
-                  onClick={() => setAttendanceModalOpen(true)}
-                  className="soft-card-strong rounded-full px-7 py-3 text-[15px] font-medium tracking-[-0.03em] text-black transition hover:bg-black hover:text-white"
-                >
-                  참석 의사 전달
-                </button>
-              </div>
             </section>
           </ScrollAnimationWrapper>
 
@@ -908,6 +903,27 @@ function App() {
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper amount={0.12}>
             <Guestbook />
+          </ScrollAnimationWrapper>
+          <ScrollAnimationWrapper amount={0.12}>
+            <section className="section-block gap-6 text-center">
+              <SectionHeading title="참석 의사 전달" subtitle="RSVP" />
+              <p className="text-[18px] leading-[1.7] tracking-[-0.03em] text-black">
+                축하의 마음으로 참석해주시는
+                <br />
+                모든 분들을 귀하게 모실 수 있도록
+                <br />
+                참석 의사를 미리 말씀해주세요.
+              </p>
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setAttendanceModalOpen(true)}
+                  className="soft-card-strong rounded-full px-7 py-3 text-[15px] font-medium tracking-[-0.03em] text-black transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(35,28,20,0.12)]"
+                >
+                  참석 의사 전달
+                </button>
+              </div>
+            </section>
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper amount={0.12}>
             <section className="section-block text-center">
