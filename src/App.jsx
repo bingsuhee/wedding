@@ -102,7 +102,7 @@ function LoveStoryTimeline({ items }) {
     <section className="section-block gap-8">
       <SectionHeading title="우리의 이야기" subtitle="LOVE STORY" />
       <div className="relative mx-auto w-full max-w-[420px]">
-        <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-[#cdb9a7]" />
+        <div className="absolute left-1/2 top-4 h-[calc(100%-32px)] w-px -translate-x-1/2 bg-[#d7c9bd]" />
         <div className="space-y-10">
           {items.map((item, index) => {
             const isImageLeft = index % 2 === 0;
@@ -110,33 +110,34 @@ function LoveStoryTimeline({ items }) {
             return (
               <article
                 key={`${item.date}-${item.title}`}
-                className="grid grid-cols-[1fr_34px_1fr] items-center gap-3"
+                className="grid grid-cols-[1fr_34px_1fr] items-start gap-3"
               >
                 <div className={isImageLeft ? 'order-1' : 'order-3'}>
-                  <div className="overflow-hidden bg-white shadow-[0_10px_24px_rgba(35,28,20,0.08)]">
+                  <div className="border border-black/6 bg-white p-3 shadow-[0_14px_30px_rgba(35,28,20,0.08)]">
                     <img
                       src={`${import.meta.env.BASE_URL}${item.image}`}
                       alt={item.title}
                       className="aspect-square w-full object-cover"
                       loading="lazy"
                     />
+                    <div className={`space-y-3 px-1 pb-1 pt-4 ${isImageLeft ? 'text-left' : 'text-right'}`}>
+                      <div
+                        className={`inline-flex rounded-full bg-[#d6c7ba] px-4 py-2 text-[12px] font-semibold tracking-[-0.03em] text-white ${
+                          isImageLeft ? '' : 'ml-auto'
+                        }`}
+                      >
+                        {item.date}
+                      </div>
+                      <p className="text-[14px] leading-[1.8] tracking-[-0.02em] text-black/68">{item.description}</p>
+                    </div>
                   </div>
                 </div>
 
-                <div className="order-2 flex justify-center">
+                <div className="order-2 flex justify-center pt-28">
                   <span className="h-[14px] w-[14px] rounded-full border-[3px] border-white bg-[#b49b87] shadow-[0_0_0_1px_rgba(180,155,135,0.5)]" />
                 </div>
 
-                <div className={`space-y-3 ${isImageLeft ? 'order-3 text-left' : 'order-1 text-right'}`}>
-                  <div
-                    className={`inline-flex rounded-full bg-[#cdbdaf] px-4 py-2 text-[12px] font-semibold tracking-[-0.03em] text-white ${
-                      isImageLeft ? '' : 'ml-auto'
-                    }`}
-                  >
-                    {item.date}
-                  </div>
-                  <p className="text-[14px] leading-[1.8] text-black/68">{item.description}</p>
-                </div>
+                <div className={`${isImageLeft ? 'order-3' : 'order-1'}`} />
               </article>
             );
           })}
