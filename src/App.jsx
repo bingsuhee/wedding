@@ -459,7 +459,7 @@ function App() {
                   <p className="point-text text-[18px] leading-tight tracking-[-0.04em]">
                     10월 11일 저희 결혼합니다.
                   </p>
-                  <p className="point-text-soft text-[15px] leading-relaxed">
+                  <p className="text-[15px] leading-relaxed text-black/35">
                     2026.10.11 (일) 12:00
                     <br />
                     JK아트컨벤션 아트리움홀
