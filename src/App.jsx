@@ -94,29 +94,49 @@ function LoveStoryTimeline({ items }) {
   return (
     <section className="section-block gap-8">
       <SectionHeading title="우리의 이야기" subtitle="LOVE STORY" />
-      <div className="relative mx-auto w-full max-w-[320px] space-y-8 before:absolute before:left-[14px] before:top-2 before:h-[calc(100%-16px)] before:w-px before:bg-black/10">
-        {items.map((item) => (
-          <article key={`${item.date}-${item.title}`} className="relative grid grid-cols-[28px_1fr] gap-4">
-            <div className="relative flex justify-center">
-              <span className="mt-2 h-[9px] w-[9px] rounded-full bg-black" />
-            </div>
-            <div className="space-y-3">
-              <p className="text-[11px] uppercase tracking-[0.24em] text-black/35">{item.date}</p>
-              <div className="grid gap-3 sm:grid-cols-[96px_1fr] sm:items-start">
-                <img
-                  src={`${import.meta.env.BASE_URL}${item.image}`}
-                  alt={item.title}
-                  className="aspect-square w-full object-cover"
-                  loading="lazy"
-                />
-                <div className="space-y-2">
-                  <h3 className="text-[15px] font-medium tracking-[-0.03em] text-black">{item.title}</h3>
-                  <p className="text-[12px] leading-[1.8] text-black/65">{item.description}</p>
+      <div className="relative mx-auto w-full max-w-[420px]">
+        <div className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-[#cdb9a7]" />
+        <div className="space-y-10">
+          {items.map((item, index) => {
+            const isImageLeft = index % 2 === 0;
+
+            return (
+              <article
+                key={`${item.date}-${item.title}`}
+                className="grid grid-cols-[1fr_34px_1fr] items-center gap-3"
+              >
+                <div className={isImageLeft ? 'order-1' : 'order-3'}>
+                  <div className="overflow-hidden rounded-[14px] bg-white shadow-[0_10px_24px_rgba(35,28,20,0.08)]">
+                    <img
+                      src={`${import.meta.env.BASE_URL}${item.image}`}
+                      alt={item.title}
+                      className="aspect-[4/5] w-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
-              </div>
-            </div>
-          </article>
-        ))}
+
+                <div className="order-2 flex justify-center">
+                  <span className="h-[14px] w-[14px] rounded-full border-[3px] border-white bg-[#b49b87] shadow-[0_0_0_1px_rgba(180,155,135,0.5)]" />
+                </div>
+
+                <div className={`space-y-3 ${isImageLeft ? 'order-3 text-left' : 'order-1 text-right'}`}>
+                  <div
+                    className={`inline-flex rounded-full bg-[#cdbdaf] px-4 py-2 text-[12px] font-semibold tracking-[-0.03em] text-white ${
+                      isImageLeft ? '' : 'ml-auto'
+                    }`}
+                  >
+                    {item.date}
+                  </div>
+                  <div className="space-y-2">
+                    <h3 className="point-text text-[18px] font-semibold tracking-[-0.04em]">{item.title}</h3>
+                    <p className="text-[14px] leading-[1.8] text-black/68">{item.description}</p>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -444,9 +464,6 @@ function App() {
 
           <ScrollAnimationWrapper amount={0.2}>
             <section className="section-block pt-0 text-center">
-              <p className="point-text mb-4 text-[17px] font-medium tracking-[-0.03em]">
-                소중한 분들을 초대드립니다.
-              </p>
               <p className="text-[18px] leading-[1.7] tracking-[-0.03em] text-black">
                 서로를 향한 따뜻한 마음으로 만나
                 <br />
@@ -534,20 +551,22 @@ function App() {
                 <p className="point-text text-[14px]">
                   수빈 ♥ 소희 결혼식까지 <span className="font-semibold">{remainingDaysText}</span> 남았습니다.
                 </p>
-                <div className="soft-card-strong mt-3 grid grid-cols-4 gap-3 px-5 py-4">
+                <div className="soft-card-strong mt-3 flex items-center justify-center gap-2 px-5 py-4">
                   {[
                     { label: 'Days', value: countdown.days },
                     { label: 'Hour', value: countdown.hours },
                     { label: 'Min', value: countdown.minutes },
                     { label: 'Sec', value: countdown.seconds },
                   ].map((item, index, array) => (
-                    <div key={item.label} className="relative min-w-[58px] text-center">
-                      <p className="point-text text-[23px] font-semibold tracking-[-0.06em]">
-                        {item.value}
-                        {index < array.length - 1 ? <span className="ml-2 text-black/35">:</span> : null}
-                      </p>
-                      <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-black/45">{item.label}</p>
-                    </div>
+                    <React.Fragment key={item.label}>
+                      <div className="min-w-[58px] text-center">
+                        <p className="point-text text-[23px] font-semibold tracking-[-0.06em]">{item.value}</p>
+                        <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-black/45">{item.label}</p>
+                      </div>
+                      {index < array.length - 1 ? (
+                        <span className="point-text -mt-4 text-[20px] font-semibold leading-none">:</span>
+                      ) : null}
+                    </React.Fragment>
                   ))}
                 </div>
               </div>
@@ -568,7 +587,7 @@ function App() {
                 <img
                   src={`${import.meta.env.BASE_URL}images/information-guide.jpeg`}
                   alt="안내사항 이미지"
-                  className="aspect-[4/5] w-full object-cover"
+                  className="aspect-auto w-full object-contain"
                 />
                 <figcaption className="px-5 py-4 text-center text-[13px] leading-[1.8] text-black/62">
                   예식 관련 세부 안내는 이미지를 참고해 주세요.
@@ -633,7 +652,7 @@ function App() {
           </ScrollAnimationWrapper>
           <ScrollAnimationWrapper amount={0.12}>
             <section className="section-block text-center">
-              <p className="text-[13px] leading-[2] text-black/68">
+              <p className="text-[18px] leading-[1.7] tracking-[-0.03em] text-black/68">
                 바쁘신 일정에도 귀한 걸음 해주셔서
                 <br />
                 진심으로 감사드립니다.

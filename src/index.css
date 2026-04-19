@@ -3,8 +3,8 @@
 
 @theme {
   --font-base: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
-  --color-point: #6f7f3a;
-  --color-point-soft: #89985a;
+  --color-point: #000000;
+  --color-point-soft: #000000;
 }
 
 @layer base {
