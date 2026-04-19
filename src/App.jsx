@@ -10,8 +10,8 @@ const INTRO_SECONDARY_TEXT = '저희의 결혼식에 초대드립니다.';
 const INTRO_TYPE_SPEED_MS = 90;
 const INTRO_SECONDARY_DELAY_MS = 250;
 const INTRO_HOLD_MS = 1000;
-const CEREMONY_DATE = new Date(2026, 9, 11);
-const HERO_IMAGE = `${import.meta.env.BASE_URL}images/hero-top.png`;
+const CEREMONY_DATE = new Date(2026, 9, 11, 12, 0, 0);
+const HERO_IMAGE = `${import.meta.env.BASE_URL}images/hero-top.jpg`;
 
 function SectionTitle({ children, bold = false }) {
   return (
@@ -210,7 +210,13 @@ function CalendarBlock() {
 
 function App() {
   const [introVisible, setIntroVisible] = useState(true);
-  const [dDayText, setDDayText] = useState('D-00');
+  const [countdown, setCountdown] = useState({
+    days: '000',
+    hours: '00',
+    minutes: '00',
+    seconds: '00',
+  });
+  const [remainingDaysText, setRemainingDaysText] = useState('000일');
   const [introPrimaryCount, setIntroPrimaryCount] = useState(0);
   const [introSecondaryCount, setIntroSecondaryCount] = useState(0);
   const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
@@ -313,17 +319,30 @@ function App() {
   }, [introVisible]);
 
   useEffect(() => {
-    const updateDDay = () => {
+    const updateCountdown = () => {
       const now = new Date();
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const diffDays = Math.max(
-        0,
-        Math.ceil((CEREMONY_DATE.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-      );
-      setDDayText(`D-${String(diffDays).padStart(2, '0')}`);
+      const diffMs = Math.max(0, CEREMONY_DATE.getTime() - now.getTime());
+      const totalSeconds = Math.floor(diffMs / 1000);
+      const days = Math.floor(totalSeconds / (60 * 60 * 24));
+      const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+      const seconds = totalSeconds % 60;
+
+      setCountdown({
+        days: String(days).padStart(3, '0'),
+        hours: String(hours).padStart(2, '0'),
+        minutes: String(minutes).padStart(2, '0'),
+        seconds: String(seconds).padStart(2, '0'),
+      });
+      setRemainingDaysText(`${String(days).padStart(3, '0')}일`);
     };
 
-    updateDDay();
+    updateCountdown();
+    const intervalId = window.setInterval(updateCountdown, 1000);
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
   }, []);
 
   const introPrimaryFirst = INTRO_PRIMARY_TEXT.slice(0, 3);
@@ -392,19 +411,19 @@ function App() {
       <div className="app-shell">
         <main className="mx-auto flex w-full max-w-[480px] flex-col bg-transparent">
           <ScrollAnimationWrapper amount={0.08} duration={0.9}>
-            <section className="flex flex-col gap-8">
+            <section className="flex flex-col gap-5">
               <div className="overflow-hidden bg-black">
                 <div className="relative aspect-[4/6]">
                   <img
-                    className="h-full w-full object-cover object-center"
+                    className="h-full w-full object-cover object-top"
                     src={HERO_IMAGE}
                     alt="박수빈 김소희 웨딩 메인 이미지"
                   />
                 </div>
               </div>
 
-              <div className="space-y-4 px-6 text-center">
-                <div className="space-y-2">
+              <div className="space-y-2 px-6 text-center">
+                <div className="space-y-1.5">
                   <p className="leading-tight text-black">
                     <span className="text-[19px] font-bold">박수빈</span>
                     <span className="mx-2 text-[16px] font-normal">♥</span>
@@ -419,7 +438,7 @@ function App() {
           </ScrollAnimationWrapper>
 
           <ScrollAnimationWrapper amount={0.18} delay={0.03}>
-            <section className="section-block gap-4 pt-0 text-center">
+            <section className="section-block gap-3 pt-0 pb-10 text-center">
               <div className="soft-card-strong mx-auto w-full max-w-[280px] px-6 py-5">
                 <p className="text-[15px] leading-relaxed text-black/70">
                   2026.10.11 (일) 12:00
@@ -431,7 +450,7 @@ function App() {
           </ScrollAnimationWrapper>
 
           <ScrollAnimationWrapper amount={0.2}>
-            <section className="section-block text-center">
+            <section className="section-block pt-0 text-center">
               <p className="text-[18px] leading-[1.7] tracking-[-0.03em] text-black">
                 오래 알고 지낸 친구처럼,
                 <br />
@@ -460,12 +479,12 @@ function App() {
                     <p className="text-[11px] leading-relaxed text-black/55">
                       박경수, 신정미의 장남
                     </p>
-                    <p className="text-[21px] font-medium tracking-[-0.04em] text-black">
-                      <span className="soft-chip mr-2 inline-block px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
+                    <div className="flex items-center gap-2">
+                      <span className="soft-chip inline-block px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
                         신랑
                       </span>
-                      수빈
-                    </p>
+                      <p className="text-[21px] font-medium tracking-[-0.04em] text-black">수빈</p>
+                    </div>
                     <p className="text-[11px] leading-[1.8] text-black/45">
                       #다정한사람 #유쾌한미소 #든든한짝꿍 #감성충만 #평생친구
                     </p>
@@ -477,12 +496,12 @@ function App() {
                     <p className="text-[11px] leading-relaxed text-black/55">
                       김종범, 송해란의 장녀
                     </p>
-                    <p className="text-[21px] font-medium tracking-[-0.04em] text-black">
-                      <span className="soft-chip mr-2 inline-block px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
+                    <div className="flex items-center justify-end gap-2">
+                      <span className="soft-chip inline-block px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
                         신부
                       </span>
-                      소희
-                    </p>
+                      <p className="text-[21px] font-medium tracking-[-0.04em] text-black">소희</p>
+                    </div>
                     <p className="text-[11px] leading-[1.8] text-black/45">
                       #따뜻한마음 #밝은에너지 #센스있는사람 #여행메이트 #영원한베프
                     </p>
@@ -514,11 +533,19 @@ function App() {
               </p>
               <CalendarBlock />
               <div className="text-center">
-                <p className="text-[14px] text-black/55">수빈 and 소희 결혼식까지</p>
-                <div className="soft-card-strong mt-3 inline-flex min-w-[220px] items-center justify-center rounded-full px-10 py-4">
-                  <p className="text-[38px] font-semibold tracking-[-0.06em] text-black">
-                    {dDayText}
-                  </p>
+                <p className="text-[14px] text-black/55">수빈 ♥ 소희 결혼식까지 {remainingDaysText} 남았습니다.</p>
+                <div className="soft-card-strong mt-3 grid grid-cols-4 gap-3 px-5 py-4">
+                  {[
+                    { label: 'Days', value: countdown.days },
+                    { label: 'Hour', value: countdown.hours },
+                    { label: 'Min', value: countdown.minutes },
+                    { label: 'Sec', value: countdown.seconds },
+                  ].map((item) => (
+                    <div key={item.label} className="min-w-[58px] text-center">
+                      <p className="text-[23px] font-semibold tracking-[-0.06em] text-black">{item.value}</p>
+                      <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-black/45">{item.label}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </section>
@@ -536,10 +563,15 @@ function App() {
               <SectionHeading title="안내사항" subtitle="INFORMATION" />
               <figure className="soft-card overflow-hidden">
                 <img
-                  src={`${import.meta.env.BASE_URL}images/timeline/anniversary.jpg`}
+                  src={`${import.meta.env.BASE_URL}images/information-guide.jpeg`}
                   alt="안내사항 이미지"
                   className="aspect-[4/5] w-full object-cover"
                 />
+                <figcaption className="px-5 py-4 text-center text-[13px] leading-[1.8] text-black/62">
+                  예식 관련 세부 안내는 이미지를 참고해 주세요.
+                  <br />
+                  편안한 마음으로 함께해 주시면 감사하겠습니다.
+                </figcaption>
               </figure>
             </section>
           </ScrollAnimationWrapper>
