@@ -23,7 +23,7 @@ const Map = () => {
         </p>
       </div>
 
-      <div className="overflow-hidden bg-[#f5f5f5]">
+      <div className="soft-card-strong overflow-hidden rounded-[28px]">
         <div className="aspect-[4/3]">
           <KakaoMap center={{ lat, lng }} style={{ width: '100%', height: '100%' }} level={4}>
             <MapMarker position={{ lat, lng }} />
@@ -35,7 +35,7 @@ const Map = () => {
         <button
           type="button"
           onClick={() => window.open(naverUrl, '_blank', 'noopener,noreferrer')}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-black/10 px-4 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
+          className="soft-chip inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
         >
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#03C75A] text-[10px] font-bold text-white">N</span>
           네이버지도
@@ -43,7 +43,7 @@ const Map = () => {
         <button
           type="button"
           onClick={() => window.open(kakaoUrl, '_blank', 'noopener,noreferrer')}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-black/10 px-4 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
+          className="soft-chip inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
         >
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#FEE500] text-[10px] font-bold text-[#3C1E1E]">K</span>
           카카오맵
@@ -51,7 +51,7 @@ const Map = () => {
         <button
           type="button"
           onClick={() => window.open(tmapUrl, '_blank', 'noopener,noreferrer')}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-black/10 px-4 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
+          className="soft-chip inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full px-4 py-3 text-[13px] text-black transition hover:bg-black hover:text-white"
         >
           <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#0A43FF] text-[10px] font-bold text-white">T</span>
           티맵
