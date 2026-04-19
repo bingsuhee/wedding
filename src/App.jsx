@@ -237,6 +237,7 @@ function CalendarBlock() {
 
 function App() {
   const [introVisible, setIntroVisible] = useState(true);
+  const [infoTab, setInfoTab] = useState('bride-room');
   const [countdown, setCountdown] = useState({
     days: '000',
     hours: '00',
@@ -392,6 +393,18 @@ function App() {
         )
       : '';
   const typedSecondary = INTRO_SECONDARY_TEXT.slice(0, introSecondaryCount);
+  const infoTabContent =
+    infoTab === 'bride-room'
+      ? {
+          title: '신부대기실',
+          image: `${import.meta.env.BASE_URL}images/bride-room.jpg`,
+          alt: '신부대기실 안내 이미지',
+        }
+      : {
+          title: '연회장',
+          image: `${import.meta.env.BASE_URL}images/banquet-hall.jpg`,
+          alt: '연회장 안내 이미지',
+        };
 
   return (
     <>
@@ -507,9 +520,10 @@ function App() {
                       </span>
                       <p className="point-text text-[21px] font-medium tracking-[-0.04em]">수빈</p>
                     </div>
-                    <p className="text-[11px] leading-[1.8] text-black/45">
-                      #다정한사람 #유쾌한미소 #든든한짝꿍 #감성충만 #평생친구
-                    </p>
+                    <div className="text-[11px] leading-[1.8] text-black/45">
+                      <p>1993년 9월 9일</p>
+                      <p>#ESTP #강하늘닮은꼴 #실상은바보 #빙수</p>
+                    </div>
                   </div>
                 </article>
 
@@ -524,9 +538,10 @@ function App() {
                       </span>
                       <p className="point-text text-[21px] font-medium tracking-[-0.04em]">소희</p>
                     </div>
-                    <p className="text-[11px] leading-[1.8] text-black/45">
-                      #따뜻한마음 #밝은에너지 #센스있는사람 #여행메이트 #영원한베프
-                    </p>
+                    <div className="text-[11px] leading-[1.8] text-black/45">
+                      <p>1994년 10월 31일</p>
+                      <p>#ISTP #얼굴은얄라리 #성격은박명수 #땃지</p>
+                    </div>
                   </div>
                   <div className="aspect-square">
                     <img
@@ -590,16 +605,74 @@ function App() {
           <ScrollAnimationWrapper amount={0.18}>
             <section className="section-block gap-8">
               <SectionHeading title="안내사항" subtitle="INFORMATION" />
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setInfoTab('bride-room')}
+                  className={`px-4 py-3 text-[13px] font-medium transition ${
+                    infoTab === 'bride-room'
+                      ? 'soft-card-strong point-text'
+                      : 'soft-card text-black/55 hover:text-black'
+                  }`}
+                >
+                  신부대기실
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setInfoTab('banquet')}
+                  className={`px-4 py-3 text-[13px] font-medium transition ${
+                    infoTab === 'banquet'
+                      ? 'soft-card-strong point-text'
+                      : 'soft-card text-black/55 hover:text-black'
+                  }`}
+                >
+                  연회장
+                </button>
+              </div>
+
               <figure className="soft-card overflow-hidden">
                 <img
-                  src={`${import.meta.env.BASE_URL}images/information-guide.jpeg`}
-                  alt="안내사항 이미지"
+                  src={infoTabContent.image}
+                  alt={infoTabContent.alt}
                   className="aspect-auto w-full object-contain"
                 />
-                <figcaption className="px-5 py-4 text-center text-[13px] leading-[1.8] text-black/62">
-                  예식 관련 세부 안내는 이미지를 참고해 주세요.
-                  <br />
-                  편안한 마음으로 함께해 주시면 감사하겠습니다.
+                <figcaption className="space-y-4 px-5 py-5 text-left text-[13px] leading-[1.8] text-black/68">
+                  <div className="text-center">
+                    <p className="point-text text-[18px] font-semibold tracking-[-0.04em]">
+                      {infoTabContent.title}
+                    </p>
+                  </div>
+
+                  {infoTab === 'bride-room' ? (
+                    <div className="space-y-3">
+                      <p>신부대기실은 옆 계단으로 올라오셔야 합니다.</p>
+                      <p>
+                        계단을 이용하시기 어려우신 분들은
+                        <br />
+                        직원 안내에 따라 엘리베이터로 올라오실 수 있어요.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <p>
+                        연회장은 예식장 바로 옆에 위치하고 있습니다.
+                        <br />
+                        연회장은 예식 30분 전부터 이용 가능합니다.
+                      </p>
+                      <p>180여 가지의 뷔페식이고, 음주류도 있으니 맘껏 즐겨주세요.</p>
+                      <div className="space-y-2">
+                        <p className="font-semibold text-black">특히 이 메뉴는 놓치지 마세요!</p>
+                        <ul className="space-y-1">
+                          <li>- LA 갈비를 포함한 모든 고기 메뉴</li>
+                          <li>- 전복갈비탕, 설렁탕, 도가니탕</li>
+                          <li>- 육회는 꼭 노른자를 곁들여서</li>
+                          <li>- 파스타는 바로 만들어서 신선</li>
+                          <li>- 젤라또는 와플이랑 같이</li>
+                          <li>- 사케 + 냉면 꿀조합 / 와인은 반반 믹스 추천</li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
                 </figcaption>
               </figure>
             </section>
