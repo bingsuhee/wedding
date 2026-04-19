@@ -101,18 +101,27 @@ function LoveStoryTimeline({ items }) {
   return (
     <section className="section-block gap-8">
       <SectionHeading title="우리의 이야기" subtitle="LOVE STORY" />
-      <div className="mx-auto w-full max-w-[320px] space-y-6">
+      <div className="mx-auto w-full max-w-[360px]">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-5">
         {items.map((item, index) => {
           const dateMatch = item.date.match(/(\d{4})년\s*(\d{1,2})월/);
           const formattedDate = dateMatch
             ? `${dateMatch[1]}.${String(dateMatch[2]).padStart(2, '0')}`
             : item.date;
           const tiltClass = index % 2 === 0 ? '-rotate-[1.2deg]' : 'rotate-[1.2deg]';
+          const offsetClass =
+            index % 4 === 0
+              ? 'translate-y-0'
+              : index % 4 === 1
+                ? 'translate-y-4'
+                : index % 4 === 2
+                  ? '-translate-y-1'
+                  : 'translate-y-3';
 
           return (
             <article
               key={`${item.date}-${item.title}`}
-              className={`relative border border-black/8 bg-white p-3 pb-5 shadow-[0_14px_30px_rgba(35,28,20,0.08)] ${tiltClass}`}
+              className={`relative border border-black/8 bg-white p-2.5 pb-4 shadow-[0_14px_30px_rgba(35,28,20,0.08)] ${tiltClass} ${offsetClass}`}
             >
               <span className="absolute left-[18%] top-[-10px] h-6 w-14 -rotate-[8deg] bg-[#e8dcc8]/90 shadow-sm" />
               <span className="absolute right-[18%] top-[-10px] h-6 w-14 rotate-[7deg] bg-[#e8dcc8]/90 shadow-sm" />
@@ -122,13 +131,14 @@ function LoveStoryTimeline({ items }) {
                 className="aspect-square w-full object-cover"
                 loading="lazy"
               />
-              <div className="space-y-2 px-2 pt-4 text-center">
-                <p className="text-[11px] tracking-[0.18em] text-black/32">{formattedDate}</p>
-                <p className="text-[14px] leading-[1.8] tracking-[-0.02em] text-black/68">{item.description}</p>
+              <div className="space-y-2 px-1.5 pt-3 text-center">
+                <p className="text-[10px] tracking-[0.16em] text-black/32">{formattedDate}</p>
+                <p className="text-[12px] leading-[1.75] tracking-[-0.02em] text-black/68">{item.description}</p>
               </div>
             </article>
           );
         })}
+        </div>
       </div>
     </section>
   );
