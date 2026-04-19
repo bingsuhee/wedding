@@ -23,7 +23,7 @@ const Map = () => {
         </p>
       </div>
 
-      <div className="soft-card-strong overflow-hidden rounded-[28px]">
+      <div className="soft-card-strong overflow-hidden">
         <div className="aspect-[4/3]">
           <KakaoMap center={{ lat, lng }} style={{ width: '100%', height: '100%' }} level={4}>
             <MapMarker position={{ lat, lng }} />

@@ -94,7 +94,7 @@ function LoveStoryTimeline({ items }) {
   return (
     <section className="section-block gap-8">
       <SectionHeading title="우리의 이야기" subtitle="LOVE STORY" />
-      <div className="relative space-y-8 before:absolute before:left-[14px] before:top-2 before:h-[calc(100%-16px)] before:w-px before:bg-black/10">
+      <div className="relative mx-auto w-full max-w-[320px] space-y-8 before:absolute before:left-[14px] before:top-2 before:h-[calc(100%-16px)] before:w-px before:bg-black/10">
         {items.map((item) => (
           <article key={`${item.date}-${item.title}`} className="relative grid grid-cols-[28px_1fr] gap-4">
             <div className="relative flex justify-center">
@@ -102,7 +102,7 @@ function LoveStoryTimeline({ items }) {
             </div>
             <div className="space-y-3">
               <p className="text-[11px] uppercase tracking-[0.24em] text-black/35">{item.date}</p>
-              <div className="grid gap-3 sm:grid-cols-[112px_1fr] sm:items-start">
+              <div className="grid gap-3 sm:grid-cols-[96px_1fr] sm:items-start">
                 <img
                   src={`${import.meta.env.BASE_URL}${item.image}`}
                   alt={item.title}
@@ -448,7 +448,7 @@ function App() {
             <section className="section-block gap-8">
               <SectionHeading title="우리의 소개" subtitle="OUR INTRODUCTION" />
               <div className="space-y-6">
-                <article className="soft-card rounded-[28px] grid grid-cols-[110px_1fr] gap-4 p-4">
+                <article className="soft-card grid grid-cols-[110px_1fr] gap-4 p-4">
                   <div className="aspect-square">
                     <img
                       src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[0].src}`}
@@ -472,7 +472,7 @@ function App() {
                   </div>
                 </article>
 
-                <article className="soft-card rounded-[28px] grid grid-cols-[1fr_110px] gap-4 p-4">
+                <article className="soft-card grid grid-cols-[1fr_110px] gap-4 p-4">
                   <div className="space-y-2 self-center text-right">
                     <p className="text-[11px] leading-relaxed text-black/55">
                       김종범, 송해란의 장녀
@@ -515,7 +515,7 @@ function App() {
               <CalendarBlock />
               <div className="text-center">
                 <p className="text-[14px] text-black/55">수빈 and 소희 결혼식까지</p>
-                <div className="soft-card-strong mt-3 inline-flex min-w-[132px] items-center justify-center rounded-[18px] px-5 py-3">
+                <div className="soft-card-strong mt-3 inline-flex min-w-[220px] items-center justify-center rounded-full px-10 py-4">
                   <p className="text-[38px] font-semibold tracking-[-0.06em] text-black">
                     {dDayText}
                   </p>
@@ -534,7 +534,7 @@ function App() {
           <ScrollAnimationWrapper amount={0.18}>
             <section className="section-block gap-8">
               <SectionHeading title="안내사항" subtitle="INFORMATION" />
-              <figure className="soft-card overflow-hidden rounded-[28px]">
+              <figure className="soft-card overflow-hidden">
                 <img
                   src={`${import.meta.env.BASE_URL}images/timeline/anniversary.jpg`}
                   alt="안내사항 이미지"

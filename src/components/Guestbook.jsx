@@ -69,18 +69,18 @@ const Guestbook = () => {
         <p className="mt-2 text-[11px] uppercase tracking-[0.28em] text-black/35">GUESTBOOK</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="soft-card-strong space-y-4 rounded-[32px] p-6">
+      <form onSubmit={handleSubmit} className="soft-card-strong space-y-4 p-6">
         <input
           type="text"
           placeholder="이름"
-          className="soft-input w-full rounded-[20px] px-4 py-3 text-[13px] text-black outline-none transition focus:border-black"
+          className="soft-input w-full px-4 py-3 text-[13px] text-black outline-none transition focus:border-black"
           value={name}
           onChange={(event) => setName(event.target.value)}
           required
         />
         <textarea
           placeholder="축하 메시지를 남겨주세요"
-          className="soft-input h-28 w-full resize-none rounded-[20px] px-4 py-3 text-[13px] text-black outline-none transition focus:border-black"
+          className="soft-input h-28 w-full resize-none px-4 py-3 text-[13px] text-black outline-none transition focus:border-black"
           value={content}
           onChange={(event) => setContent(event.target.value)}
           required
@@ -97,14 +97,14 @@ const Guestbook = () => {
 
       <div className="space-y-4">
         {fetching ? (
-          <div className="soft-card rounded-[28px] px-5 py-10 text-center text-black/45">
+          <div className="soft-card px-5 py-10 text-center text-black/45">
             로딩 중...
           </div>
         ) : messages.length > 0 ? (
           messages.map((message) => (
             <article
               key={message.id}
-              className="soft-card-strong rounded-[28px] px-5 py-5"
+              className="soft-card-strong px-5 py-5"
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
@@ -125,7 +125,7 @@ const Guestbook = () => {
             </article>
           ))
         ) : (
-          <div className="soft-card rounded-[28px] px-5 py-10 text-center text-black/45">
+          <div className="soft-card px-5 py-10 text-center text-black/45">
             <MessageSquare size={28} className="mx-auto mb-3 opacity-40" />
             첫 번째 축하 메시지를 남겨주세요.
           </div>
