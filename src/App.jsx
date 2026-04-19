@@ -16,7 +16,7 @@ const HERO_IMAGE = `${import.meta.env.BASE_URL}images/hero-top.jpg`;
 function SectionTitle({ children, bold = false }) {
   return (
     <h2
-      className={`text-[22px] leading-[1.2] tracking-[-0.04em] text-black ${
+      className={`point-text text-[22px] leading-[1.2] tracking-[-0.04em] ${
         bold ? 'font-semibold' : 'font-normal'
       }`}
     >
@@ -423,42 +423,40 @@ function App() {
               </div>
 
               <div className="space-y-2 px-6 text-center">
-                <div className="space-y-1.5">
-                  <p className="leading-tight text-black">
+                <div className="space-y-2">
+                  <p className="point-text leading-tight">
                     <span className="text-[19px] font-bold">박수빈</span>
                     <span className="mx-2 text-[16px] font-normal">♥</span>
                     <span className="text-[19px] font-bold">김소희</span>
                   </p>
-                  <p className="text-[18px] leading-tight tracking-[-0.04em] text-black">
+                  <p className="point-text text-[18px] leading-tight tracking-[-0.04em]">
                     10월 11일 저희 결혼합니다.
+                  </p>
+                  <p className="text-[15px] leading-relaxed text-black/70">
+                    2026.10.11 (일) 12:00
+                    <br />
+                    JK아트컨벤션 아트리움홀
                   </p>
                 </div>
               </div>
             </section>
           </ScrollAnimationWrapper>
 
-          <ScrollAnimationWrapper amount={0.18} delay={0.03}>
-            <section className="section-block gap-3 pt-0 pb-10 text-center">
-              <div className="soft-card-strong mx-auto w-full max-w-[280px] px-6 py-5">
-                <p className="text-[15px] leading-relaxed text-black/70">
-                  2026.10.11 (일) 12:00
-                  <br />
-                  JK아트컨벤션 아트리움홀
-                </p>
-              </div>
-            </section>
-          </ScrollAnimationWrapper>
-
           <ScrollAnimationWrapper amount={0.2}>
             <section className="section-block pt-0 text-center">
+              <p className="point-text mb-4 text-[17px] font-medium tracking-[-0.03em]">
+                소중한 분들을 초대드립니다.
+              </p>
               <p className="text-[18px] leading-[1.7] tracking-[-0.03em] text-black">
-                오래 알고 지낸 친구처럼,
+                서로를 향한 따뜻한 마음으로 만나
                 <br />
                 <br />
-                앞으로도 그렇게 함께하려 합니다.
+                이제 평생을 함께 걸어가려 합니다.
                 <br />
                 <br />
-                따뜻한 축복으로 자리를 빛내 주세요.
+                귀한 걸음으로 오셔서
+                <br />
+                두 사람의 시작을 축복해 주세요.
               </p>
             </section>
           </ScrollAnimationWrapper>
@@ -477,13 +475,13 @@ function App() {
                   </div>
                   <div className="space-y-2 self-center">
                     <p className="text-[11px] leading-relaxed text-black/55">
-                      박경수, 신정미의 장남
+                      <span className="font-semibold text-black/72">박경수, 신정미</span>의 장남
                     </p>
                     <div className="flex items-center gap-2">
                       <span className="soft-chip inline-block px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
                         신랑
                       </span>
-                      <p className="text-[21px] font-medium tracking-[-0.04em] text-black">수빈</p>
+                      <p className="point-text text-[21px] font-medium tracking-[-0.04em]">수빈</p>
                     </div>
                     <p className="text-[11px] leading-[1.8] text-black/45">
                       #다정한사람 #유쾌한미소 #든든한짝꿍 #감성충만 #평생친구
@@ -494,13 +492,13 @@ function App() {
                 <article className="soft-card grid grid-cols-[1fr_110px] gap-4 p-4">
                   <div className="space-y-2 self-center text-right">
                     <p className="text-[11px] leading-relaxed text-black/55">
-                      김종범, 송해란의 장녀
+                      <span className="font-semibold text-black/72">김종범, 송해란</span>의 장녀
                     </p>
                     <div className="flex items-center justify-end gap-2">
                       <span className="soft-chip inline-block px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
                         신부
                       </span>
-                      <p className="text-[21px] font-medium tracking-[-0.04em] text-black">소희</p>
+                      <p className="point-text text-[21px] font-medium tracking-[-0.04em]">소희</p>
                     </div>
                     <p className="text-[11px] leading-[1.8] text-black/45">
                       #따뜻한마음 #밝은에너지 #센스있는사람 #여행메이트 #영원한베프
@@ -523,7 +521,7 @@ function App() {
             <section className="section-block gap-8">
               <SectionHeading title="예식 안내" subtitle="CEREMONY INFO" />
               <p className="text-center text-[13px] leading-[1.8] text-black/55">
-                <span className="text-[17px] font-semibold tracking-[-0.03em] text-black">
+                <span className="point-text text-[17px] font-semibold tracking-[-0.03em]">
                   JK아트컨벤션 아트리움홀
                 </span>
                 <br />
@@ -533,16 +531,21 @@ function App() {
               </p>
               <CalendarBlock />
               <div className="text-center">
-                <p className="text-[14px] text-black/55">수빈 ♥ 소희 결혼식까지 {remainingDaysText} 남았습니다.</p>
+                <p className="point-text text-[14px]">
+                  수빈 ♥ 소희 결혼식까지 <span className="font-semibold">{remainingDaysText}</span> 남았습니다.
+                </p>
                 <div className="soft-card-strong mt-3 grid grid-cols-4 gap-3 px-5 py-4">
                   {[
                     { label: 'Days', value: countdown.days },
                     { label: 'Hour', value: countdown.hours },
                     { label: 'Min', value: countdown.minutes },
                     { label: 'Sec', value: countdown.seconds },
-                  ].map((item) => (
-                    <div key={item.label} className="min-w-[58px] text-center">
-                      <p className="text-[23px] font-semibold tracking-[-0.06em] text-black">{item.value}</p>
+                  ].map((item, index, array) => (
+                    <div key={item.label} className="relative min-w-[58px] text-center">
+                      <p className="point-text text-[23px] font-semibold tracking-[-0.06em]">
+                        {item.value}
+                        {index < array.length - 1 ? <span className="ml-2 text-black/35">:</span> : null}
+                      </p>
                       <p className="mt-1 text-[10px] uppercase tracking-[0.2em] text-black/45">{item.label}</p>
                     </div>
                   ))}
@@ -638,11 +641,11 @@ function App() {
                 <br />
                 저희 두사람,
                 <br />
-                <span className="font-semibold tracking-[0.08em] text-black">잘 먹고</span>
+                <span className="point-text font-semibold tracking-[0.08em]">잘 먹고</span>
                 <br />
-                <span className="font-semibold tracking-[0.08em] text-black">잘 자고</span>
+                <span className="point-text font-semibold tracking-[0.08em]">잘 자고</span>
                 <br />
-                <span className="font-semibold tracking-[0.08em] text-black">잘 놀고</span>
+                <span className="point-text font-semibold tracking-[0.08em]">잘 놀고</span>
                 <br />
                 그리고
                 <br />

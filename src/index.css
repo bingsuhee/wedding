@@ -3,6 +3,8 @@
 
 @theme {
   --font-base: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --color-point: #6f7f3a;
+  --color-point-soft: #89985a;
 }
 
 @layer base {
@@ -202,6 +204,14 @@
   border: 1px solid rgba(17, 17, 17, 0.06);
   background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 8px 18px rgba(35, 28, 20, 0.05);
+}
+
+.point-text {
+  color: var(--color-point);
+}
+
+.point-text-soft {
+  color: var(--color-point-soft);
 }
 
 @media (min-width: 768px) {
