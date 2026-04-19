@@ -11,7 +11,7 @@ const INTRO_TYPE_SPEED_MS = 90;
 const INTRO_SECONDARY_DELAY_MS = 250;
 const INTRO_HOLD_MS = 1000;
 const CEREMONY_DATE = new Date(2026, 9, 11);
-const PLACEHOLDER_VIDEO = `${import.meta.env.BASE_URL}videos/intro-video.mp4`;
+const HERO_IMAGE = `${import.meta.env.BASE_URL}images/hero-top.png`;
 
 function SectionTitle({ children, bold = false }) {
   return (
@@ -395,13 +395,10 @@ function App() {
             <section className="flex flex-col gap-8">
               <div className="overflow-hidden bg-black">
                 <div className="relative aspect-[4/6]">
-                  <video
+                  <img
                     className="h-full w-full object-cover object-center"
-                    src={PLACEHOLDER_VIDEO}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
+                    src={HERO_IMAGE}
+                    alt="박수빈 김소희 웨딩 메인 이미지"
                   />
                 </div>
               </div>
@@ -423,20 +420,12 @@ function App() {
 
           <ScrollAnimationWrapper amount={0.18} delay={0.03}>
             <section className="section-block gap-4 pt-0 text-center">
-              <div className="mx-auto flex w-full max-w-[260px] items-center justify-center gap-3 text-[#b39b62]">
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d8c89a] to-[#b39b62]" />
-                <span className="text-[11px]">✦</span>
-                <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[#d8c89a] to-[#b39b62]" />
-              </div>
-              <p className="text-[15px] leading-relaxed text-black/70">
-                2026.10.11 (일) 12:00
+              <div className="mx-auto w-full max-w-[280px] border border-black/12 bg-white/75 px-6 py-5">
+                <p className="text-[15px] leading-relaxed text-black/70">
+                  2026.10.11 (일) 12:00
                   <br />
-                JK아트컨벤션 아트리움홀
-              </p>
-              <div className="mx-auto flex w-full max-w-[260px] items-center justify-center gap-3 text-[#b39b62]">
-                <span className="h-px flex-1 bg-gradient-to-r from-transparent via-[#d8c89a] to-[#b39b62]" />
-                <span className="text-[11px]">✦</span>
-                <span className="h-px flex-1 bg-gradient-to-l from-transparent via-[#d8c89a] to-[#b39b62]" />
+                  JK아트컨벤션 아트리움홀
+                </p>
               </div>
             </section>
           </ScrollAnimationWrapper>
@@ -458,8 +447,8 @@ function App() {
           <ScrollAnimationWrapper amount={0.18} delay={0.04}>
             <section className="section-block gap-8">
               <SectionHeading title="우리의 소개" subtitle="OUR INTRODUCTION" />
-              <div className="grid grid-cols-2 gap-4">
-                <article className="overflow-hidden bg-[#fafafa]">
+              <div className="space-y-6">
+                <article className="grid grid-cols-[110px_1fr] gap-4 bg-[#fafafa] p-4">
                   <div className="aspect-square">
                     <img
                       src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[0].src}`}
@@ -467,33 +456,43 @@ function App() {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <div className="space-y-2 px-5 py-5 text-center">
+                  <div className="space-y-2 self-center">
                     <p className="text-[11px] leading-relaxed text-black/55">
                       박경수, 신정미의 장남
                     </p>
-                    <p className="text-[21px] font-medium tracking-[-0.04em] text-black">수빈</p>
+                    <p className="text-[21px] font-medium tracking-[-0.04em] text-black">
+                      <span className="mr-2 inline-block border border-black/10 px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
+                        신랑
+                      </span>
+                      수빈
+                    </p>
                     <p className="text-[11px] leading-[1.8] text-black/45">
                       #다정한사람 #유쾌한미소 #든든한짝꿍 #감성충만 #평생친구
                     </p>
                   </div>
                 </article>
 
-                <article className="overflow-hidden bg-[#fafafa]">
+                <article className="grid grid-cols-[1fr_110px] gap-4 bg-[#fafafa] p-4">
+                  <div className="space-y-2 self-center text-right">
+                    <p className="text-[11px] leading-relaxed text-black/55">
+                      김종범, 송해란의 장녀
+                    </p>
+                    <p className="text-[21px] font-medium tracking-[-0.04em] text-black">
+                      <span className="mr-2 inline-block border border-black/10 px-2 py-0.5 text-[10px] font-medium tracking-[0.16em] text-black/55">
+                        신부
+                      </span>
+                      소희
+                    </p>
+                    <p className="text-[11px] leading-[1.8] text-black/45">
+                      #따뜻한마음 #밝은에너지 #센스있는사람 #여행메이트 #영원한베프
+                    </p>
+                  </div>
                   <div className="aspect-square">
                     <img
                       src={`${import.meta.env.BASE_URL}${weddingInfo.gallery[1].src}`}
                       alt="신부 김소희"
                       className="h-full w-full object-cover"
                     />
-                  </div>
-                  <div className="space-y-2 px-5 py-5 text-center">
-                    <p className="text-[11px] leading-relaxed text-black/55">
-                      김종범, 송해란의 장녀
-                    </p>
-                    <p className="text-[21px] font-medium tracking-[-0.04em] text-black">소희</p>
-                    <p className="text-[11px] leading-[1.8] text-black/45">
-                      #따뜻한마음 #밝은에너지 #센스있는사람 #여행메이트 #영원한베프
-                    </p>
                   </div>
                 </article>
               </div>
@@ -516,9 +515,11 @@ function App() {
               <CalendarBlock />
               <div className="text-center">
                 <p className="text-[14px] text-black/55">수빈 and 소희 결혼식까지</p>
-                <p className="mt-3 text-[38px] font-semibold tracking-[-0.06em] text-black">
-                  {dDayText}
-                </p>
+                <div className="mt-3 inline-flex min-w-[132px] items-center justify-center border border-black/12 bg-white/75 px-5 py-3">
+                  <p className="text-[38px] font-semibold tracking-[-0.06em] text-black">
+                    {dDayText}
+                  </p>
+                </div>
               </div>
             </section>
           </ScrollAnimationWrapper>
@@ -605,11 +606,13 @@ function App() {
                 <br />
                 저희 두사람,
                 <br />
-                잘 먹고
+                <span className="font-semibold tracking-[0.08em] text-black">잘 먹고</span>
                 <br />
-                잘 자고,
+                <span className="font-semibold tracking-[0.08em] text-black">잘 자고</span>
                 <br />
-                잘 놀며,
+                <span className="font-semibold tracking-[0.08em] text-black">잘 놀고</span>
+                <br />
+                그리고
                 <br />
                 <br />
                 세월이 흘러도 한결같은 마음으로
