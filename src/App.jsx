@@ -28,6 +28,13 @@ function SectionTitle({ children, bold = false }) {
 function SectionHeading({ title, subtitle, bold = true }) {
   return (
     <div className="text-center">
+      <div className="mb-4 flex items-center justify-center gap-3">
+        <span className="h-px w-10 bg-black/14" />
+        <span className="inline-flex items-center justify-center">
+          <span className="h-2 w-2 rotate-45 border border-black/28 bg-white" />
+        </span>
+        <span className="h-px w-10 bg-black/14" />
+      </div>
       <SectionTitle bold={bold}>{title}</SectionTitle>
       {subtitle ? (
         <p className="mt-2 text-[11px] uppercase tracking-[0.28em] text-black/35">{subtitle}</p>
@@ -106,7 +113,7 @@ function LoveStoryTimeline({ items }) {
                 className="grid grid-cols-[1fr_34px_1fr] items-center gap-3"
               >
                 <div className={isImageLeft ? 'order-1' : 'order-3'}>
-                  <div className="overflow-hidden rounded-[14px] bg-white shadow-[0_10px_24px_rgba(35,28,20,0.08)]">
+                  <div className="overflow-hidden bg-white shadow-[0_10px_24px_rgba(35,28,20,0.08)]">
                     <img
                       src={`${import.meta.env.BASE_URL}${item.image}`}
                       alt={item.title}
@@ -665,8 +672,6 @@ function App() {
                 <span className="point-text font-semibold tracking-[0.08em]">잘 자고</span>
                 <br />
                 <span className="point-text font-semibold tracking-[0.08em]">잘 놀고</span>
-                <br />
-                그리고
                 <br />
                 <br />
                 세월이 흘러도 한결같은 마음으로
