@@ -424,11 +424,11 @@ function App() {
           onClick={() => setAttendanceModalOpen(false)}
         >
           <div
-            className="soft-card-strong w-full max-w-[min(92vw,560px)] rounded-[28px] px-5 py-6 sm:px-6 sm:py-6"
+            className="soft-card-strong w-full max-w-[min(88vw,448px)] rounded-[24px] px-4 py-5 sm:px-5 sm:py-5"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-start justify-between gap-4">
-              <h3 className="text-[24px] font-semibold tracking-[-0.05em] text-black sm:text-[28px]">
+              <h3 className="text-[22px] font-semibold tracking-[-0.05em] text-black sm:text-[24px]">
                 참석 의사 전달
               </h3>
               <button
@@ -441,17 +441,17 @@ function App() {
               </button>
             </div>
 
-            <div className="mt-5 rounded-[20px] bg-[#f4f4f2] px-4 py-5 sm:px-5">
+            <div className="mt-4 rounded-[18px] bg-[#f4f4f2] px-4 py-4">
               <div className="space-y-7">
                 <div>
-                  <p className="text-[16px] font-medium tracking-[-0.03em] text-black sm:text-[18px]">
+                  <p className="text-[15px] font-medium tracking-[-0.03em] text-black sm:text-[16px]">
                     어느 측 하객이신가요? <span className="text-[#ff4d4f]">*</span>
                   </p>
                   <div className="mt-3 grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => setAttendanceSide('groom')}
-                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                      className={`rounded-[12px] border px-4 py-3.5 text-[15px] font-medium transition ${
                         attendanceSide === 'groom'
                           ? 'border-[#4f91ff] bg-white text-[#4f91ff] shadow-[0_6px_18px_rgba(79,145,255,0.16)]'
                           : 'border-black/10 bg-white text-black'
@@ -462,7 +462,7 @@ function App() {
                     <button
                       type="button"
                       onClick={() => setAttendanceSide('bride')}
-                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                      className={`rounded-[12px] border px-4 py-3.5 text-[15px] font-medium transition ${
                         attendanceSide === 'bride'
                           ? 'border-[#4f91ff] bg-white text-[#4f91ff] shadow-[0_6px_18px_rgba(79,145,255,0.16)]'
                           : 'border-black/10 bg-white text-black'
@@ -474,14 +474,14 @@ function App() {
                 </div>
 
                 <div>
-                  <p className="text-[16px] font-medium tracking-[-0.03em] text-black sm:text-[18px]">
+                  <p className="text-[15px] font-medium tracking-[-0.03em] text-black sm:text-[16px]">
                     참석 하시나요? <span className="text-[#ff4d4f]">*</span>
                   </p>
                   <div className="mt-3 grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => setAttendanceStatus('attending')}
-                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                      className={`rounded-[12px] border px-4 py-3.5 text-[15px] font-medium transition ${
                         attendanceStatus === 'attending'
                           ? 'border-transparent bg-[#cdbdaf] text-white shadow-[0_6px_18px_rgba(161,133,108,0.22)]'
                           : 'border-black/10 bg-white text-black'
@@ -492,7 +492,7 @@ function App() {
                     <button
                       type="button"
                       onClick={() => setAttendanceStatus('absent')}
-                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                      className={`rounded-[12px] border px-4 py-3.5 text-[15px] font-medium transition ${
                         attendanceStatus === 'absent'
                           ? 'border-transparent bg-[#cdbdaf] text-white shadow-[0_6px_18px_rgba(161,133,108,0.22)]'
                           : 'border-black/10 bg-white text-black'
@@ -504,26 +504,26 @@ function App() {
                 </div>
 
                 <div>
-                  <p className="text-[16px] font-medium tracking-[-0.03em] text-black sm:text-[18px]">
+                  <p className="text-[15px] font-medium tracking-[-0.03em] text-black sm:text-[16px]">
                     성함 <span className="text-[#ff4d4f]">*</span>
                   </p>
                   <input
                     type="text"
                     value={attendanceName}
                     onChange={(event) => setAttendanceName(event.target.value)}
-                    className="soft-input mt-3 w-full rounded-[12px] px-4 py-4 text-[16px] text-black outline-none transition focus:border-black"
+                    className="soft-input mt-3 w-full rounded-[12px] px-4 py-3.5 text-[15px] text-black outline-none transition focus:border-black"
                   />
                 </div>
 
                 <div>
-                  <p className="text-[16px] font-medium tracking-[-0.03em] text-black sm:text-[18px]">
+                  <p className="text-[15px] font-medium tracking-[-0.03em] text-black sm:text-[16px]">
                     식사 하시나요?
                   </p>
                   <div className="mt-3 grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => setAttendanceMeal('yes')}
-                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                      className={`rounded-[12px] border px-4 py-3.5 text-[15px] font-medium transition ${
                         attendanceMeal === 'yes'
                           ? 'border-transparent bg-[#cdbdaf] text-white shadow-[0_6px_18px_rgba(161,133,108,0.22)]'
                           : 'border-black/10 bg-white text-black'
@@ -534,7 +534,7 @@ function App() {
                     <button
                       type="button"
                       onClick={() => setAttendanceMeal('no')}
-                      className={`rounded-[12px] border px-4 py-4 text-[16px] font-medium transition ${
+                      className={`rounded-[12px] border px-4 py-3.5 text-[15px] font-medium transition ${
                         attendanceMeal === 'no'
                           ? 'border-transparent bg-[#cdbdaf] text-white shadow-[0_6px_18px_rgba(161,133,108,0.22)]'
                           : 'border-black/10 bg-white text-black'
@@ -545,7 +545,7 @@ function App() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 text-[14px] text-black/42 sm:text-[15px]">
+                <div className="flex items-center gap-3 text-[13px] text-black/42 sm:text-[14px]">
                   <button
                     type="button"
                     onClick={() => setAttendanceConsent((prev) => !prev)}
@@ -575,7 +575,7 @@ function App() {
                 window.alert('참석 의사가 전달되었습니다.');
                 setAttendanceModalOpen(false);
               }}
-              className="mt-5 inline-flex w-full items-center justify-center rounded-[14px] bg-[#cfcfcf] px-5 py-4 text-[18px] font-semibold text-white transition enabled:bg-[#cdbdaf] enabled:shadow-[0_10px_24px_rgba(161,133,108,0.22)] disabled:cursor-not-allowed"
+              className="mt-4 inline-flex w-full items-center justify-center rounded-[14px] bg-[#cfcfcf] px-5 py-3.5 text-[17px] font-semibold text-white transition enabled:bg-[#cdbdaf] enabled:shadow-[0_10px_24px_rgba(161,133,108,0.22)] disabled:cursor-not-allowed"
             >
               전달하기
             </button>
@@ -669,6 +669,15 @@ function App() {
                 <br />
                 두 사람의 시작을 축복해 주세요.
               </p>
+              <div className="mt-6 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setAttendanceModalOpen(true)}
+                  className="soft-card-strong rounded-full px-7 py-3 text-[15px] font-medium tracking-[-0.03em] text-black transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(35,28,20,0.12)]"
+                >
+                  참석 의사 전달
+                </button>
+              </div>
             </section>
           </ScrollAnimationWrapper>
 
@@ -907,7 +916,7 @@ function App() {
           <ScrollAnimationWrapper amount={0.12}>
             <section className="section-block gap-6 text-center">
               <SectionHeading title="참석 의사 전달" subtitle="RSVP" />
-              <p className="text-[18px] leading-[1.7] tracking-[-0.03em] text-black">
+              <p className="text-[13px] leading-[1.8] text-black/55">
                 축하의 마음으로 참석해주시는
                 <br />
                 모든 분들을 귀하게 모실 수 있도록
