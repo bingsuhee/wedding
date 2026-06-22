@@ -5,11 +5,10 @@ import Map from './components/Map';
 import ScrollAnimationWrapper from './components/ScrollAnimationWrapper';
 import { weddingInfo } from './data/info';
 
-const INTRO_PRIMARY_TEXT = '박수빈&김소희';
-const INTRO_SECONDARY_TEXT = '저희의 결혼식에 초대드립니다.';
-const INTRO_TYPE_SPEED_MS = 90;
-const INTRO_SECONDARY_DELAY_MS = 250;
-const INTRO_HOLD_MS = 1000;
+const INTRO_DURATION_MS = 2000;
+const INTRO_DOT_INTERVAL_MS = INTRO_DURATION_MS / 9;
+const INTRO_IMAGE = `${import.meta.env.BASE_URL}images/illust/intro-party.png`;
+const INTRO_DOT_SEQUENCE = [1, 2, 3, 1, 2, 3, 1, 2, 3];
 const CEREMONY_DATE = new Date(2026, 9, 11, 12, 0, 0);
 const HERO_IMAGE = `${import.meta.env.BASE_URL}images/hero-top.jpg`;
 
@@ -248,8 +247,7 @@ function App() {
     seconds: '00',
   });
   const [remainingDaysText, setRemainingDaysText] = useState('000일');
-  const [introPrimaryCount, setIntroPrimaryCount] = useState(0);
-  const [introSecondaryCount, setIntroSecondaryCount] = useState(0);
+  const [introDotFrame, setIntroDotFrame] = useState(0);
   const [selectedGalleryImage, setSelectedGalleryImage] = useState(null);
 
   const loveStoryItems = weddingInfo.loveStory;
@@ -287,9 +285,7 @@ function App() {
   useEffect(() => {
     const body = document.body;
     const html = document.documentElement;
-    let primaryInterval;
-    let secondaryTimeout;
-    let secondaryInterval;
+    let dotInterval;
     let hideTimeout;
 
     if (introVisible) {
@@ -297,41 +293,26 @@ function App() {
       html.style.overflow = 'hidden';
       body.style.touchAction = 'none';
 
-      setIntroPrimaryCount(0);
-      setIntroSecondaryCount(0);
+      setIntroDotFrame(0);
 
-      primaryInterval = window.setInterval(() => {
-        setIntroPrimaryCount((prev) => {
-          if (prev >= INTRO_PRIMARY_TEXT.length) {
-            window.clearInterval(primaryInterval);
-            return prev;
-          }
-          return prev + 1;
-        });
-      }, INTRO_TYPE_SPEED_MS);
+      const introStartTime = Date.now();
+      dotInterval = window.setInterval(() => {
+        const elapsedMs = Date.now() - introStartTime;
+        const nextFrame = Math.min(
+          INTRO_DOT_SEQUENCE.length - 1,
+          Math.floor(elapsedMs / INTRO_DOT_INTERVAL_MS)
+        );
 
-      const primaryDuration = INTRO_PRIMARY_TEXT.length * INTRO_TYPE_SPEED_MS;
-      secondaryTimeout = window.setTimeout(() => {
-        secondaryInterval = window.setInterval(() => {
-          setIntroSecondaryCount((prev) => {
-            if (prev >= INTRO_SECONDARY_TEXT.length) {
-              window.clearInterval(secondaryInterval);
-              return prev;
-            }
-            return prev + 1;
-          });
-        }, INTRO_TYPE_SPEED_MS);
-      }, primaryDuration + INTRO_SECONDARY_DELAY_MS);
+        setIntroDotFrame(nextFrame);
 
-      const totalDuration =
-        primaryDuration +
-        INTRO_SECONDARY_DELAY_MS +
-        INTRO_SECONDARY_TEXT.length * INTRO_TYPE_SPEED_MS +
-        INTRO_HOLD_MS;
+        if (nextFrame >= INTRO_DOT_SEQUENCE.length - 1) {
+          window.clearInterval(dotInterval);
+        }
+      }, 50);
 
       hideTimeout = window.setTimeout(() => {
         setIntroVisible(false);
-      }, totalDuration);
+      }, INTRO_DURATION_MS);
     } else {
       body.style.overflow = '';
       html.style.overflow = '';
@@ -339,9 +320,7 @@ function App() {
     }
 
     return () => {
-      window.clearInterval(primaryInterval);
-      window.clearTimeout(secondaryTimeout);
-      window.clearInterval(secondaryInterval);
+      window.clearInterval(dotInterval);
       window.clearTimeout(hideTimeout);
       body.style.overflow = '';
       html.style.overflow = '';
@@ -376,26 +355,7 @@ function App() {
     };
   }, []);
 
-  const introPrimaryFirst = INTRO_PRIMARY_TEXT.slice(0, 3);
-  const introPrimaryAmp = INTRO_PRIMARY_TEXT.slice(3, 4);
-  const introPrimarySecond = INTRO_PRIMARY_TEXT.slice(4);
-
-  const typedPrimaryFirst = introPrimaryFirst.slice(0, Math.min(introPrimaryCount, introPrimaryFirst.length));
-  const typedPrimaryAmp =
-    introPrimaryCount > introPrimaryFirst.length
-      ? introPrimaryAmp.slice(0, Math.min(introPrimaryCount - introPrimaryFirst.length, introPrimaryAmp.length))
-      : '';
-  const typedPrimarySecond =
-    introPrimaryCount > introPrimaryFirst.length + introPrimaryAmp.length
-      ? introPrimarySecond.slice(
-          0,
-          Math.min(
-            introPrimaryCount - introPrimaryFirst.length - introPrimaryAmp.length,
-            introPrimarySecond.length
-          )
-        )
-      : '';
-  const typedSecondary = INTRO_SECONDARY_TEXT.slice(0, introSecondaryCount);
+  const introDots = '.'.repeat(INTRO_DOT_SEQUENCE[introDotFrame]);
   const canSubmitAttendance =
     attendanceSide &&
     attendanceStatus &&
@@ -611,13 +571,18 @@ function App() {
       ) : null}
       {introVisible && (
         <div className="intro-overlay">
-          <div className="intro-text">
-            <div className="intro-line intro-line-primary" aria-label={INTRO_PRIMARY_TEXT}>
-              <span className="intro-name">{typedPrimaryFirst}</span>
-              {typedPrimaryAmp ? <span className="intro-amp">{typedPrimaryAmp}</span> : null}
-              <span className="intro-name">{typedPrimarySecond}</span>
+          <div className="intro-content">
+            <img
+              className="intro-image"
+              src={INTRO_IMAGE}
+              alt="박수빈 김소희 파티 일러스트"
+            />
+            <div className="intro-text" aria-live="polite">
+              박수빈 <span className="intro-heart" role="img" aria-label="하트">♥</span> 김소희 파티 맺는 중<span className="intro-dots">{introDots}</span>
             </div>
-            <div className="intro-line intro-line-secondary">{typedSecondary}</div>
+            <div className="intro-progress" aria-hidden="true">
+              <span className="intro-progress-fill" />
+            </div>
           </div>
         </div>
       )}
